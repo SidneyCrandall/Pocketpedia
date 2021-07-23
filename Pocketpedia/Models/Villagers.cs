@@ -5,20 +5,18 @@ using System.Threading.Tasks;
 
 namespace Pocketpedia.Models
 {
-    public class Bugs
+    public class Villagers
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
-        
-        public int LocationId { get; set; }       
-
-        public int SeasonAvailabilityId { get; set; }
 
         public string ImageUrl { get; set; }
 
+        public string Birthday { get; set; }
+
         public int UserProfileId { get; set; }
-      
-        public bool Caught { get; set; }
+
+        public bool IsResiding { get; set; }
     }
 }

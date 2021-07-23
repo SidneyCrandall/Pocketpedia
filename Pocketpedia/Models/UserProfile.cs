@@ -19,8 +19,10 @@ namespace Pocketpedia.Models
         [Required]
         public string Email { get; set; }
 
+        [Required]
         public string IslandName { get; set; }
 
+        [Required]
         public string IslandPhrase { get; set; }
     }
 }
