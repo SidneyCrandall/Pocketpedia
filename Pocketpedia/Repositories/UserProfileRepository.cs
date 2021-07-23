@@ -1,267 +1,186 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using Pocketpedia.Models;
+using Pocketpedia.Utils;
 using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Pocketpedia.Repositories
 {
-    public class UserProfileRepository
+    public class UserProfileRepository : BaseRepository, IUserProfileRepository
     {
-        public class UserProfileRepository : BaseRepository, IUserProfileRepository, IUserProfileRepository
+        public UserProfileRepository(IConfiguration configuration) : base(configuration) { }
+
+        public List<UserProfile> GetAll()
         {
-            public UserProfileRepository(IConfiguration configuration) : base(configuration) { }
-
-            public List<UserProfile> GetAll()
+            using (var conn = Connection)
             {
-                using (var conn = Connection)
-                {
-                    conn.Open();
+                conn.Open();
 
-                    using (var cmd = conn.CreateCommand())
-                    {
-                        cmd.CommandText = @"SELECT Id, Name, Email, ImageURl, DateCreated
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Id, DisplayName, Email, IslandName, IslandPhrase
                                          FROM UserProfile";
 
-                        var reader = cmd.ExecuteReader();
+                    var reader = cmd.ExecuteReader();
 
-                        var userProfiles = new List<UserProfile>();
+                    var userProfiles = new List<UserProfile>();
 
-                        while (reader.Read())
+                    while (reader.Read())
+                    {
+                        userProfiles.Add(new UserProfile()
                         {
-                            userProfiles.Add(new UserProfile()
-                            {
-                                Id = DbUtils.GetInt(reader, "Id"),
-                                Name = DbUtils.GetString(reader, "Name"),
-                                Email = DbUtils.GetString(reader, "Email"),
-                                ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
-                                DateCreated = DbUtils.GetDateTime(reader, "DateCreated")
-                            });
-                        }
-
-                        reader.Close();
-
-                        return userProfiles;
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            IslandName = DbUtils.GetString(reader, "IslandName"),
+                            IslandPhrase = DbUtils.GetString(reader, "IslandPhrase")
+                        });
                     }
+
+                    reader.Close();
+
+                    return userProfiles;
                 }
             }
+        }
 
-            public UserProfile GetUserById(int id)
+        public UserProfile GetUserById(int id)
+        {
+            using (var conn = Connection)
             {
-                using (var conn = Connection)
+
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
                 {
-
-                    conn.Open();
-
-                    using (var cmd = conn.CreateCommand())
-                    {
-                        cmd.CommandText = @"SELECT Id, Name, Email, ImageUrl, DateCreated
+                    cmd.CommandText = @"SELECT Id, DisplayName, Email, IslandName, IslandPhrase
                                         FROM UserProfile
                                         WHERE Id = @Id";
 
-                        DbUtils.AddParameter(cmd, "@Id", id);
+                    DbUtils.AddParameter(cmd, "@Id", id);
 
-                        var reader = cmd.ExecuteReader();
+                    var reader = cmd.ExecuteReader();
 
-                        UserProfile userProfile = null;
+                    UserProfile userProfile = null;
 
-                        if (reader.Read())
-                        {
-                            userProfile = new UserProfile()
-                            {
-                                Id = id,
-                                Name = DbUtils.GetString(reader, "Name"),
-                                Email = DbUtils.GetString(reader, "Email"),
-                                ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
-                                DateCreated = DbUtils.GetDateTime(reader, "DateCreated")
-                            };
-                        }
-
-                        reader.Close();
-
-                        return userProfile;
-                    }
-                }
-            }
-
-            public UserProfile GetUserWithVideos(int id)
-            {
-                using (var conn = Connection)
-                {
-                    conn.Open();
-                    using (var cmd = conn.CreateCommand())
+                    if (reader.Read())
                     {
-                        cmd.CommandText = @"SELECT up.Id, up.Name, up.Email, up.ImageUrl, up.DateCreated,
-                                               v.id as VideoId, v.title, v.description, v.url, v.datecreated as videoDateCreated, v.UserProfileId, 
-                                               c.Id AS CommentId, c.Message, c.UserProfileId AS CommentUserProfileId, c.VideoId
-                                        FROM Video v
-                                        LEFT JOIN UserProfile up on up.id = v.userprofileid
-                                        LEFT JOIN Comment c on c.VideoId = v.Id
-                          
-                                        WHERE up.Id = @Id";
-
-                        DbUtils.AddParameter(cmd, "@Id", id);
-
-                        var reader = cmd.ExecuteReader();
-
-                        UserProfile userProfile = null;
-                        while (reader.Read())
+                        userProfile = new UserProfile()
                         {
-                            if (userProfile == null)
-                            {
-                                userProfile = new UserProfile()
-                                {
-                                    Id = id,
-                                    Name = DbUtils.GetString(reader, "Name"),
-                                    Email = DbUtils.GetString(reader, "Email"),
-                                    ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
-                                    DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
-                                    Videos = new List<Video>(),
-
-                                };
-                            }
-
-                            if (DbUtils.IsNotDbNull(reader, "UserProfileId"))
-                            {
-                                var videoId = DbUtils.GetInt(reader, "VideoId");
-                                var video = userProfile.Videos.FirstOrDefault(p => p.Id == videoId);
-
-                                if (video == null)
-                                {
-                                    video = new Video()
-
-                                    {
-                                        Id = DbUtils.GetInt(reader, "VideoId"),
-                                        Title = DbUtils.GetString(reader, "Title"),
-                                        Description = DbUtils.GetString(reader, "Description"),
-                                        Url = DbUtils.GetString(reader, "Url"),
-                                        DateCreated = DbUtils.GetDateTime(reader, "VideoDateCreated"),
-                                        UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
-                                        Comments = new List<Comment>()
-
-                                    };
-                                    userProfile.Videos.Add(video);
-                                }
-
-                                if (DbUtils.IsNotDbNull(reader, "CommentId"))
-                                {
-                                    video.Comments.Add(new Comment()
-                                    {
-                                        Id = DbUtils.GetInt(reader, "CommentId"),
-                                        Message = DbUtils.GetString(reader, "Message"),
-                                        VideoId = DbUtils.GetInt(reader, "VideoId"),
-                                        UserProfileId = DbUtils.GetInt(reader, "CommentUserProfileId")
-                                    });
-
-                                };
-                            }
+                            Id = id,
+                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            IslandName = DbUtils.GetString(reader, "IslandName"),
+                            IslandPhrase = DbUtils.GetString(reader, "IslandPhrase")
                         };
-
-                        reader.Close();
-
-                        return userProfile;
                     }
+
+                    reader.Close();
+
+                    return userProfile;
                 }
             }
+        }
 
-            public void Add(UserProfile userProfile)
+        public void Add(UserProfile userProfile)
+        {
+            using (var conn = Connection)
             {
-                using (var conn = Connection)
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
                 {
-                    conn.Open();
-                    using (var cmd = conn.CreateCommand())
-                    {
-                        cmd.CommandText = @"
-                        INSERT INTO UserProfile ([Name], Email, ImageUrl, DateCreated)
+                    cmd.CommandText = @"
+                        INSERT INTO UserProfile ([DisplayName], Email, IslandName, IslandPhrase)
                         OUTPUT INSERTED.ID
-                        VALUES (@Name, @Email, @ImageUrl, @DateCreated)";
+                        VALUES (@Name, @Email, @IslandName, @IslandPhrase)";
 
-                        DbUtils.AddParameter(cmd, "@Name", userProfile.Name);
-                        DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
-                        DbUtils.AddParameter(cmd, "@ImageUrl", userProfile.ImageUrl);
-                        DbUtils.AddParameter(cmd, "@DateCreated", userProfile.DateCreated);
+                    DbUtils.AddParameter(cmd, "@Name", userProfile.DisplayName);
+                    DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
+                    DbUtils.AddParameter(cmd, "@IslandName", userProfile.IslandName);
+                    DbUtils.AddParameter(cmd, "@IslandPhrase", userProfile.IslandPhrase);
 
-                        userProfile.Id = (int)cmd.ExecuteScalar();
-                    }
+                    userProfile.Id = (int)cmd.ExecuteScalar();
                 }
             }
+        }
 
-            public void Update(UserProfile userProfile)
+        public void Update(UserProfile userProfile)
+        {
+            using (var conn = Connection)
             {
-                using (var conn = Connection)
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
                 {
-                    conn.Open();
-                    using (var cmd = conn.CreateCommand())
-                    {
-                        cmd.CommandText = @"
+                    cmd.CommandText = @"
                         UPDATE UserProfile
-                            SET Name = @Name,
+                            SET DisplayName = @Name,
                                 Email = @Email,
-                                ImageUrl = @ImageUrl,
-                                DateCreated = @DateCreated
+                                IslandName = @IslandName,
+                                IslandPhrase = @IslandPhrase
                         WHERE Id = @Id";
 
-                        DbUtils.AddParameter(cmd, "@Name", userProfile.Name);
-                        DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
-                        DbUtils.AddParameter(cmd, "@ImageUrl", userProfile.ImageUrl);
-                        DbUtils.AddParameter(cmd, "@DateCreated", userProfile.DateCreated);
-                        DbUtils.AddParameter(cmd, "@Id", userProfile.Id);
+                    DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
+                    DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
+                    DbUtils.AddParameter(cmd, "@IslandName", userProfile.IslandName);
+                    DbUtils.AddParameter(cmd, "@IslandPhrase", userProfile.IslandPhrase);
+                    DbUtils.AddParameter(cmd, "@Id", userProfile.Id);
 
-                        cmd.ExecuteNonQuery();
-                    }
+                    cmd.ExecuteNonQuery();
                 }
             }
+        }
 
-            public void Delete(int id)
+        public void Delete(int id)
+        {
+            using (var conn = Connection)
             {
-                using (var conn = Connection)
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
                 {
-                    conn.Open();
-                    using (var cmd = conn.CreateCommand())
-                    {
-                        cmd.CommandText = "DELETE FROM UserProfile WHERE Id = @Id";
-                        DbUtils.AddParameter(cmd, "@id", id);
-                        cmd.ExecuteNonQuery();
-                    }
+                    cmd.CommandText = "DELETE FROM UserProfile WHERE Id = @Id";
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    cmd.ExecuteNonQuery();
                 }
             }
+        }
 
-            public UserProfile GetByFirebaseUserId(string firebaseUserId)
+        public UserProfile GetByFirebaseUserId(string firebaseUserId)
+        {
+            using (var conn = Connection)
             {
-                using (var conn = Connection)
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
                 {
-                    conn.Open();
-                    using (var cmd = conn.CreateCommand())
-                    {
-                        cmd.CommandText = @"
+                    cmd.CommandText = @"
                         SELECT up.Id, up.FirebaseUserId, up.Name AS UserProfileName, up.Email, up.DateCreated, up.ImageUrl            
                         FROM UserProfile up
                         WHERE FirebaseUserId = @FirebaseuserId";
 
-                        DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
 
-                        UserProfile userProfile = null;
+                    UserProfile userProfile = null;
 
-                        var reader = cmd.ExecuteReader();
+                    var reader = cmd.ExecuteReader();
 
-                        if (reader.Read())
+                    if (reader.Read())
+                    {
+                        userProfile = new UserProfile()
                         {
-                            userProfile = new UserProfile()
-                            {
-                                Id = DbUtils.GetInt(reader, "Id"),
-                                FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
-                                Name = DbUtils.GetString(reader, "UserProfileName"),
-                                Email = DbUtils.GetString(reader, "Email"),
-                                DateCreated = DbUtils.GetDateTime(reader, "DateCreated"),
-                                ImageUrl = DbUtils.GetString(reader, "ImageUrl")
-                            };
-                        }
-                        reader.Close();
-
-                        return userProfile;
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                            DisplayName = DbUtils.GetString(reader, "UserProfileDisplayName"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            IslandName = DbUtils.GetString(reader, "IslandName"),
+                            IslandPhrase = DbUtils.GetString(reader, "IslandPhrase")
+                        };
                     }
+                    reader.Close();
+
+                    return userProfile;
                 }
             }
         }
     }
-}
 }
