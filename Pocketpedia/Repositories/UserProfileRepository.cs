@@ -154,7 +154,7 @@ namespace Pocketpedia.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT up.Id, up.FirebaseUserId, up.Name AS UserProfileName, up.Email, up.DateCreated, up.ImageUrl            
+                        SELECT up.Id, up.FirebaseUserId, up.DisplayName AS UserProfileDisplayName, up.Email, up.IslandName. up.IslandPhrase            
                         FROM UserProfile up
                         WHERE FirebaseUserId = @FirebaseuserId";
 

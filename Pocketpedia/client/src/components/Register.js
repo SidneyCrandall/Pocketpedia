@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory } from "react-router-dom";
 import { register } from "../modules/authManager";
-import logo1 from "../images/logo1.png";
 
 
 export default function Register() {
@@ -28,7 +27,6 @@ export default function Register() {
 
   return (
     <Form onSubmit={registerClick} className="form">
-      <img className="logo1" src={logo1} alt="logo1" />
       <fieldset className="loginform">
         <FormGroup>
           <Label htmlFor="displayName">Display Name</Label>

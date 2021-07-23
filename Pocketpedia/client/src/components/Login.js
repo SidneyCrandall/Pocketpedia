@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory, Link } from "react-router-dom";
 import { login } from "../modules/authManager";
-import logo1 from "../images/logo1.png";
 
 export default function Login() {
   const history = useHistory();
@@ -19,7 +18,6 @@ export default function Login() {
 
   return (
     <Form onSubmit={loginSubmit} className="form">
-      <img className="logo1" src={logo1} alt="logo1" />
       <fieldset className="loginform">
         <h3>User Login</h3>
         <FormGroup>

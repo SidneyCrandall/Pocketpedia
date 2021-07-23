@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Spinner } from "reactstrap";
-import Header from "./components/Header";
+//import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
 import { onLoginStatusChange } from "./modules/authManager";
 
@@ -19,8 +19,8 @@ function App() {
 
   return (
     <Router>
-      <Header isLoggedIn={isLoggedIn} isAdmin={isAdmin} />
-      <ApplicationViews isLoggedIn={isLoggedIn} isAdmin={isAdmin} />
+      {/* <Header isLoggedIn={isLoggedIn} isAdmin={isAdmin} /> */}
+      <ApplicationViews isLoggedIn={isLoggedIn} />
     </Router>
   );
 }
