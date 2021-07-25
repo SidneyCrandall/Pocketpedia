@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
+using Pocketpedia.Repositories;
 
 namespace Pocketpedia.Repositories
 {
@@ -20,7 +22,7 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, DisplayName, Email, IslandName, IslandPhrase
+                    cmd.CommandText = @"SELECT Id, FirebaseUserId, DisplayName, Email, IslandName, IslandPhrase
                                          FROM UserProfile";
 
                     var reader = cmd.ExecuteReader();
@@ -32,6 +34,7 @@ namespace Pocketpedia.Repositories
                         userProfiles.Add(new UserProfile()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
+                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
                             DisplayName = DbUtils.GetString(reader, "DisplayName"),
                             Email = DbUtils.GetString(reader, "Email"),
                             IslandName = DbUtils.GetString(reader, "IslandName"),
@@ -55,7 +58,7 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, DisplayName, Email, IslandName, IslandPhrase
+                    cmd.CommandText = @"SELECT Id, FirebaseUserId, DisplayName, Email, IslandName, IslandPhrase
                                         FROM UserProfile
                                         WHERE Id = @Id";
 
@@ -70,6 +73,7 @@ namespace Pocketpedia.Repositories
                         userProfile = new UserProfile()
                         {
                             Id = id,
+                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
                             DisplayName = DbUtils.GetString(reader, "DisplayName"),
                             Email = DbUtils.GetString(reader, "Email"),
                             IslandName = DbUtils.GetString(reader, "IslandName"),
@@ -92,11 +96,12 @@ namespace Pocketpedia.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        INSERT INTO UserProfile ([DisplayName], Email, IslandName, IslandPhrase)
+                        INSERT INTO UserProfile (FirebaseUserId, [DisplayName], Email, IslandName, IslandPhrase)
                         OUTPUT INSERTED.ID
-                        VALUES (@Name, @Email, @IslandName, @IslandPhrase)";
+                        VALUES (@FirebaseUserId, @DisplayName, @Email, @IslandName, @IslandPhrase)";
 
-                    DbUtils.AddParameter(cmd, "@Name", userProfile.DisplayName);
+                    DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
                     DbUtils.AddParameter(cmd, "@IslandName", userProfile.IslandName);
                     DbUtils.AddParameter(cmd, "@IslandPhrase", userProfile.IslandPhrase);
@@ -115,12 +120,14 @@ namespace Pocketpedia.Repositories
                 {
                     cmd.CommandText = @"
                         UPDATE UserProfile
-                            SET DisplayName = @Name,
+                            SET FirebaseUserId = @FirebaseUserId,
+                                DisplayName = @Name,
                                 Email = @Email,
                                 IslandName = @IslandName,
                                 IslandPhrase = @IslandPhrase
                         WHERE Id = @Id";
 
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
                     DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
                     DbUtils.AddParameter(cmd, "@IslandName", userProfile.IslandName);
@@ -140,7 +147,9 @@ namespace Pocketpedia.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = "DELETE FROM UserProfile WHERE Id = @Id";
+
                     DbUtils.AddParameter(cmd, "@id", id);
+
                     cmd.ExecuteNonQuery();
                 }
             }

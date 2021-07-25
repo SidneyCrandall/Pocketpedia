@@ -1,5 +1,4 @@
 ﻿USE [master]
-GO
 
 IF db_id('Pocketpedia') IS NULL
 
@@ -24,13 +23,13 @@ GO
 
 CREATE TABLE [UserProfile] (
   [Id] INTEGER PRIMARY KEY IDENTITY NOT NULL,
-  [FirebaseUserId] INTEGER,
+  [FirebaseUserId] VARCHAR(50) NOT NULL,
   [Email] VARCHAR(255) NOT NULL,
   [DisplayName] VARCHAR(255) NOT NULL,
   [IslandName] VARCHAR(255) NOT NULL,
   [IslandPhrase] VARCHAR(255) NOT NULL
 
-  CONSTRAINT UQ_FirebaseUserId UNIQUE(FirebaseUserId),
+  CONSTRAINT UQ_FirebaseUserId UNIQUE(FirebaseUserId)
 )
 GO
 
