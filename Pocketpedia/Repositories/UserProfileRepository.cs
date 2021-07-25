@@ -191,42 +191,5 @@ namespace Pocketpedia.Repositories
                 }
             }
         }
-
-        //public UserProfile GetByFirebaseUserId(string firebaseUserId)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //                SELECT up.Id, up.FirebaseUserId, up.DisplayName AS UserProfileDisplayName, up.Email, up.IslandName, up.IslandPhrase            
-        //                FROM UserProfile up
-        //                WHERE FirebaseUserId = @FirebaseUserId";
-
-        //            DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
-
-        //            UserProfile userProfile = null;
-
-        //            var reader = cmd.ExecuteReader();
-
-        //            if (reader.Read())
-        //            {
-        //                userProfile = new UserProfile()
-        //                {
-        //                    Id = DbUtils.GetInt(reader, "Id"),
-        //                    FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
-        //                    DisplayName = DbUtils.GetString(reader, "UserProfileDisplayName"),
-        //                    Email = DbUtils.GetString(reader, "Email"),
-        //                    IslandName = DbUtils.GetString(reader, "IslandName"),
-        //                    IslandPhrase = DbUtils.GetString(reader, "IslandPhrase")
-        //                };
-        //            }
-        //            reader.Close();
-
-        //            return userProfile;
-        //        }
-        //    }
-        //}
     }
 }

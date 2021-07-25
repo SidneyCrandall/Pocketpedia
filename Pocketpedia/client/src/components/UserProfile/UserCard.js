@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardBody, CardHeader, CardFooter } from "reactstrap";
+import { Card, CardBody, CardHeader } from "reactstrap";
 import { useParams } from "react-router-dom";
 import { getUserById } from "../../modules/userManager";
 
@@ -11,7 +11,7 @@ const UserCard = () => {
     
     useEffect(() => {
         getUserById(id).then(setUser);
-    }, []);
+    }, [id]);
 
     if (!user) {
         return null;
@@ -25,36 +25,24 @@ const UserCard = () => {
               <CardHeader>
                 <div className="row justify-content-between">
                   <h3 className="d-flex align-items-center ml-3">
-                    <strong>{user.fullName}</strong>
+                    <strong>Hello!!! {user.displayName}</strong>
                   </h3>
-                  <img
-                    className="d-flex justify-content-end"
-                    src={`${
-                      user.imageLocation
-                        ? user.imageLocation
-                        : "https://robohash.org/d.png?size=150x150&set=set2"
-                    } `}
-                  />
                 </div>
               </CardHeader>
               <CardBody>
                 <h4 className="mb-4">
-                  DisplayName: <strong>{user.displayName}</strong>
+                 Island's Name: <strong>{user.islandName}</strong>
                 </h4>
                 <h4 className="mb-4">
-                  Email: <strong>{user.email}</strong>
+                  Catchphrase: <strong>{user.islandPhrase}</strong>
                 </h4>
-                <CardFooter>
-                  <div className="row justify-content-between">
-                    <h4>Registration Date: {`${MM}/${DD}/${YYYY} `}</h4>
-  
-                    <h4 className="mx-1">{user.userType.name}</h4>
-                  </div>
-                </CardFooter>
               </CardBody>
             </Card>
+            <img className="d-flex justify-content-end" src={'./ACNHLo-Fi.jpg'} alt="Chill Lo-fi Girl"/>
           </div>
         </div>
       </div>
     );
 };
+
+export default UserCard;

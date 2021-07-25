@@ -2,7 +2,8 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
-import Hello from "./Hello";
+//import Hello from "./Hello";
+import UserCard from "./UserProfile/UserCard";
 
 //EXACT PATH can be used when routes begin the same
 export default function ApplicationViews({ isLoggedIn }) {
@@ -20,7 +21,7 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 {/* For now this will be what users see */}
                 <Route path="/" exact>
-                    {isLoggedIn ? <Hello /> : <Redirect to="/login" />}
+                   {isLoggedIn ? <UserCard /> : <Redirect to="/login" />}
                 </Route>
 
             </Switch>

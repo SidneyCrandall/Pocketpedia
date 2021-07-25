@@ -1,7 +1,8 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 
-const _apiUrl = "/api/userprofile";
+
+const _apiUrl = "/api/userProfile";
 
 
 const _doesUserExist = (firebaseUserId) => {
@@ -10,7 +11,7 @@ const _doesUserExist = (firebaseUserId) => {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`
-      }
+      },
     }).then(resp => resp.ok));
 };
 
@@ -42,10 +43,8 @@ export const login = (email, pw) => {
     .then((signInResponse) => _doesUserExist(signInResponse.user.uid))
     .then((doesUserExist) => {
       if (!doesUserExist) {
-
         // If we couldn't find the user in our app's database, we should logout of firebase
         logout();
-
         throw new Error("Something's wrong. The user exists in firebase, but not in the application database.");
       } else {
         _onLoginStatusChangedHandler(true);
