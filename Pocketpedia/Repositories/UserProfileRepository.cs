@@ -156,7 +156,7 @@ namespace Pocketpedia.Repositories
                     cmd.CommandText = @"
                         SELECT up.Id, up.FirebaseUserId, up.DisplayName AS UserProfileDisplayName, up.Email, up.IslandName. up.IslandPhrase            
                         FROM UserProfile up
-                        WHERE FirebaseUserId = @FirebaseuserId";
+                        WHERE FirebaseUserId = @FirebaseUserId";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
 
