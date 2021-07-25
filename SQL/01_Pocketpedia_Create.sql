@@ -24,7 +24,7 @@ GO
 
 CREATE TABLE [UserProfile] (
   [Id] INTEGER PRIMARY KEY IDENTITY NOT NULL,
-  [FirebaseUserId] VARCHAR(255) NOT NULL,
+  [FirebaseUserId] INTEGER,
   [Email] VARCHAR(255) NOT NULL,
   [DisplayName] VARCHAR(255) NOT NULL,
   [IslandName] VARCHAR(255) NOT NULL,
