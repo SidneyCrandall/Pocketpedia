@@ -19,7 +19,7 @@ const Notes = ({ notes }) => {
             deleteNotes(id)
                 .then((n) => {
                     history.push(`/`);
-                })
+            })
         }
     }
 

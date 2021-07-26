@@ -1,11 +1,11 @@
 import { getToken } from "./authManager";
 
-const apiUrl = "/api/userProfile";
+const baseUrl = "/api/userProfile";
 
 // These cards  
 export const getAllUsers = () => {
     return getToken().then((token) => {
-      return fetch(apiUrl, {
+      return fetch(`${baseUrl}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -23,7 +23,7 @@ export const getAllUsers = () => {
 
 export const getUserById = (id) => {
     return getToken().then((token) => {
-      return fetch(`${apiUrl}/GetByUserId/${id}`, {
+      return fetch(`${baseUrl}/GetByUserId/${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
