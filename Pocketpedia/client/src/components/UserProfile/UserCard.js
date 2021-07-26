@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card, CardBody, CardHeader } from "reactstrap";
 import { useParams } from "react-router-dom";
 import { getUserById } from "../../modules/userManager";
+//import ACNHLoFi from './ACNHLoFi.jpg';
 
 const UserCard = () => {
 
@@ -38,7 +39,7 @@ const UserCard = () => {
                 </h4>
               </CardBody>
             </Card>
-            <img className="d-flex justify-content-end" src={'./ACNHLo-Fi.jpg'} alt="Chill Lo-fi Girl"/>
+            {/* <img className="d-flex justify-content-end" src={ACNHLoFi} alt="Chill Lo-fi Girl"/> */}
           </div>
         </div>
       </div>

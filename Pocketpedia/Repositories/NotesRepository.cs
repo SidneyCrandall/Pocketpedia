@@ -4,13 +4,14 @@ using Microsoft.Data.SqlClient;
 using Pocketpedia.Models;
 using Pocketpedia.Utils;
 
-
+// These methods connect the controller to the database, which then communicates to the controller to tell the React component to render
 namespace Pocketpedia.Repositories
 {
-    public class NotesRepository : INotesRepository
+    public class NotesRepository : BaseRepository, INotesRepository
     {
         public NotesRepository(IConfiguration configuration) : base(configuration) { }
 
+        // A user will be able to navigate thru a link to see all the notes they have written on their page 
         public List<Notes> GetAll()
         {
             using (var conn = Connection)
@@ -20,62 +21,12 @@ namespace Pocketpedia.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT n.Id, n.Title, n.Message, n.CreatDateTime, n.UserProfileId
-                         FROM Notes n
-                              LEFT JOIN UserProfile u ON n.UserProfileId = u.id
-                        ORDER BY p.CreateDateTime Desc";
+                                        FROM Notes n
+                                        ORDER BY n.CreateDateTime Desc";
 
                     var reader = cmd.ExecuteReader();
 
-                    var posts = new List<Notes>();
-
-                    while (reader.Read())
-                    {
-                        posts.Add(NewNotesFromReader(reader));
-                    }
-
-                    reader.Close();
-
-                    return posts;
-                }
-            }
-        }
-
-        private Notes NewNotesFromReader(SqlDataReader reader)
-        {
-            return new Notes()
-            {
-                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                Title = reader.GetString(reader.GetOrdinal("Title")),
-                Message = reader.GetString(reader.GetOrdinal("Message")),
-                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
-
-                UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
-            };
-        }
-
-        public List<Notes> GetUserNotes(string FirebaseUserId)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                       SELECT n.Id, n.Title, n.Message,
-                              n.CreateDateTime, n.UserProfileId,
-                              u.DisplayName, 
-                              u.Email, u.CreateDateTime
-                         FROM Notes n
-                              LEFT JOIN UserProfile u ON n.UserProfileId = u.id
-                        WHERE CreateDateTime < SYSDATETIME() AND u.FirebaseUserId = @FirebaseUserId
-                        ORDER BY CreateDateTime DESC";
-
-                    DbUtils.AddParameter(cmd, "@FirebaseUserId", FirebaseUserId);
-
-                    var reader = cmd.ExecuteReader();
-
-                    var posts = new List<Notes>();
+                    var notes = new List<Notes>();
 
                     while (reader.Read())
                     {
@@ -89,6 +40,55 @@ namespace Pocketpedia.Repositories
             }
         }
 
+        private Notes NewNotesFromReader(SqlDataReader reader)
+        {
+            return new Notes()
+            {
+                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                Title = reader.GetString(reader.GetOrdinal("Title")),
+                Message = reader.GetString(reader.GetOrdinal("Message")),
+                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
+                UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+            };
+        }
+
+        public List<Notes> GetUserNotes(string FirebaseUserId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       SELECT n.Id,  n.Title, n.Message,
+                              n.CreateDateTime, n.UserProfileId,
+                              u.DisplayName, 
+                              u.Email, u.CreateDateTime
+                         FROM Notes n
+                              LEFT JOIN UserProfile u ON n.UserProfileId = u.id
+                        WHERE CreateDateTime < SYSDATETIME() AND u.FirebaseUserId = @FirebaseUserId
+                        ORDER BY CreateDateTime DESC";
+
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", FirebaseUserId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var notes = new List<Notes>();
+
+                    while (reader.Read())
+                    {
+                        notes.Add(NewNotesFromReader(reader));
+                    }
+
+                    reader.Close();
+
+                    return notes;
+                }
+            }
+        }
+
+        // When a user would like to see the details of a note or wish to delete or edit the note, a getbyid() mnethod is needed
         public Notes GetNotesById(int id)
         {
             using (var conn = Connection)
@@ -96,26 +96,26 @@ namespace Pocketpedia.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT p.Id AS PostId, p.Title, p.Content, p.ImageLocation, p.PublishDateTime,
-                                               c.Id AS CategoryId, c.[Name],
-                                               up.Id AS UserProfileId, up.DisplayName
-                                       FROM p
-                                       LEFT JOIN Category c ON c.Id = p.CategoryId
-                                       LEFT JOIN UserProfile up ON up.Id = p.UserProfileId
+                    cmd.CommandText = @"SELECT n.Id AS NotesId, n.Title, n.Message, n.CreateDateTime, n.UserProfileId
+                                       FROM Posts p                                   
                                        WHERE p.Id = @id";
 
                     cmd.Parameters.AddWithValue("@id", id);
+
                     var reader = cmd.ExecuteReader();
 
                     if (reader.Read())
                     {
                         Notes notes = new Notes()
                         {
-                            Id = DbUtils.GetInt(reader, "NOtesId"),
+
+                            Id = DbUtils.GetInt(reader, "NotesId"),
                             Title = DbUtils.GetString(reader, "Title"),
                             Message = DbUtils.GetString(reader, "Message"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
+
                         };
+
                         reader.Close();
                         return notes;
                     }
@@ -126,6 +126,7 @@ namespace Pocketpedia.Repositories
             }
         }
 
+        // Create a note that a user can track any important detail of the game.
         public void Add(Notes notes)
         {
             using (var conn = Connection)
@@ -147,18 +148,18 @@ namespace Pocketpedia.Repositories
             }
         }
 
-        public void Update(Notes notes)
+        // Method called if I would like to edit a note do to wrong info, code changing, etc.
+        public void UpdateNotes(Notes notes)
         {
             using (var conn = Connection)
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"
-                        UPDATE Notes
-                           SET Title = @Title,
-                               Message = @Message,
-                         WHERE id = @id";
+                    cmd.CommandText = @"UPDATE Notes
+                                        SET Title = @Title,
+                                            Message = @Message,
+                                        WHERE id = @id";
 
                     DbUtils.AddParameter(cmd, "@Title", notes.Title);
                     DbUtils.AddParameter(cmd, "@Message", notes.Message);
@@ -174,9 +175,10 @@ namespace Pocketpedia.Repositories
             using (var conn = Connection)
             {
                 conn.Open();
+
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"DELETE FROM Post WHERE Id = @id;";
+                    cmd.CommandText = @"DELETE FROM Notes WHERE Id = @id;";
 
                     DbUtils.AddParameter(cmd, "@id", notesId);
 

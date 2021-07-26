@@ -25,34 +25,34 @@ namespace Pocketpedia.Controllers
             _userProfileRepository = userProfileRepository;
         }
 
-        // Get all the notess
+        // Get all the notes
         [HttpGet]
         public IActionResult Get()
         {
             return Ok(_notesRepository.GetAll());
         }
 
-        // Get a user's notes
-        [HttpGet("GetByUser")]
-        public IActionResult GetByUser()
-        {
-            var user = GetCurrentUserProfile();
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-            else
-            {
-                var notess = _notesRepository.GetUserPosts(user.FirebaseUserId);
-                return Ok(notess);
-            }
-        }
+        //// Get a user's notes
+        //[HttpGet("GetByUser")]
+        //public IActionResult GetByUser()
+        //{
+        //    var user = GetCurrentUserProfile();
+        //    if (user == null)
+        //    {
+        //        return Unauthorized();
+        //    }
+        //    else
+        //    {
+        //        var notes = _notesRepository.GetUserNotes(user.FirebaseUserId);
+        //        return Ok(notes);
+        //    }
+        //}
 
         // Get a notes by an Id
         [HttpGet("GetById/{id}")]
         public IActionResult GetById(int id)
         {
-            var notes = _notesRepository.GetPostById(id);
+            var notes = _notesRepository.GetNotesById(id);
             if (notes == null)
             {
                 return NotFound();
@@ -60,7 +60,7 @@ namespace Pocketpedia.Controllers
             return Ok(notes);
         }
 
-        // Adding a new post
+        // Adding a new note
         [HttpPost]
         public IActionResult CreateNotes(Notes notes)
         {
@@ -73,18 +73,18 @@ namespace Pocketpedia.Controllers
             return CreatedAtAction(nameof(Get), new { id = notes.Id }, notes);
         }
 
-        //// Editting a notes
-        //[HttpPut("{id}")]
-        //public IActionResult Put(int id, Post notes)
-        //{
-        //    if (id != notes.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+        // Editting a notes
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Notes notes)
+        {
+            if (id != notes.Id)
+            {
+                return BadRequest();
+            }
 
-        //    _notesRepository.Update(notes);
-        //    return NoContent();
-        //}
+            _notesRepository.UpdateNotes(notes);
+            return NoContent();
+        }
 
         // Delete an unwated notes
         [HttpDelete("delete/{notesId}")]
