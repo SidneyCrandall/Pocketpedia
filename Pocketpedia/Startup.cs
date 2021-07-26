@@ -31,8 +31,9 @@ namespace Pocketpedia
         {
             // Dependency Injection that is created each time a request is made
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+            services.AddTransient<INotesRepository, NotesRepository>();
 
-            // 
+            // Used to authenticate and authorize the Firebase user
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
             services

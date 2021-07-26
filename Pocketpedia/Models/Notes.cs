@@ -15,7 +15,7 @@ namespace Pocketpedia.Models
         public string Title { get; set; }
 
         [Required]
-        public string Content { get; set; }
+        public string Message { get; set; }
 
         [DisplayName("Creation Date")]
         [DataType(DataType.Date)]
