@@ -158,7 +158,7 @@ namespace Pocketpedia.Repositories
                 {
                     cmd.CommandText = @"UPDATE Notes
                                            SET Title = @title,
-                                               Message = @message,
+                                               Message = @message
                                          WHERE Id = @id";
 
                     DbUtils.AddParameter(cmd, "@title", notes.Title);
