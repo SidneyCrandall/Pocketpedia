@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { addNotes } from '../../modules/notesManager';
@@ -47,7 +47,7 @@ const NotesForm = () => {
         } else {
 
             addNotes(newNote).then((n) => {
-                history.push(`/notes/details/${p.id}`)
+                history.push(`/notes/details/${n.id}`)
             });
         }
     };
@@ -56,21 +56,22 @@ const NotesForm = () => {
         
         <Form className="container w-75">
             <h2>New Note</h2>
+            <br/>
             <FormGroup>
                 <Label for="title">Title</Label>
-                <Input type="text" name="title" id="title" placeholder="Title"
+                <Input type="text" name="title" id="title" placeholder="Title of note"
                     value={newNote.title}
                     onChange={handleInputChange} />
             </FormGroup>
-
-            <FormGroup>
-            <Label for="message">Message </Label>             
-                <textarea  type="text" name="message" id="message" placeholder="message"
+            <br/>
+            <FormGroup>        
+                <textarea  type="text" name="message" id="message" placeholder="Your note goes here"
                     value={newNote.message} 
                     onChange={handleInputChange} rows="10" cols="145" />                   
             </FormGroup>
 
             <Button className="btn btn-primary" onClick={handleSave}>Submit</Button>
+    
             <Button className="btn btn-primary" onClick={() => history.push(`/`)}>Cancel</Button>
 
         </Form>

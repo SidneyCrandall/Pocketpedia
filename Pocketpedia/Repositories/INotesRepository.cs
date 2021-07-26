@@ -10,6 +10,6 @@ namespace Pocketpedia.Repositories
         Notes GetNotesById(int id);
         void Add(Notes notes);
         void UpdateNotes(Notes notes);
-        void Delete(int notesId);
+        void Delete(int id);
     }
 }

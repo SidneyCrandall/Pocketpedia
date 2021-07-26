@@ -33,14 +33,14 @@ const NotesEdit = () => {
         // This is what will be edited. 
         const editedNotes = {
             id: id,
-            title: editedNotes.title,
-            message: editedNotes.message
+            title: editNotes.title,
+            message: editNotes.message
         };
         // fetch call in order to pass the edited state of the note to data 
         updateNotes(editedNotes)
             .then((n) => {
                 // Once the note has been edited and update, take the user back to the details of that note
-                history.push(`/notes/details/${editedNotes.id}`)
+                history.push(`/notes/details/${editedNotes.id}`);
             });
     };
 
@@ -58,13 +58,13 @@ const NotesEdit = () => {
             <h2 className="text-center">Edit Island Notes</h2>
             <FormGroup>
                 <Label for="title">Title</Label>
-                <Input type="text" name="title" id="title" placeholder="post title"
+                <Input type="text" name="title" id="title" placeholder="Edit Title"
                     value={editNotes.title}
                     onChange={handleInputChange} />
             </FormGroup>
+            <br/>
             <FormGroup>
-                <Label for="message">Message</Label>
-                <textarea type="text" name="message" id="message" placeholder="message"
+                <textarea type="text" name="message" id="message" placeholder="Edit the Message"
                     value={editNotes.message}
                     rows="10" cols="145"
                     onChange={handleInputChange} />

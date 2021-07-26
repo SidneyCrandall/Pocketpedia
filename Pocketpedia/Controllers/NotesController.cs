@@ -49,7 +49,7 @@ namespace Pocketpedia.Controllers
         //}
 
         // Get a notes by an Id
-        [HttpGet("GetById/{id}")]
+        [HttpGet("details/{id}")]
         public IActionResult GetById(int id)
         {
             var notes = _notesRepository.GetNotesById(id);
@@ -87,10 +87,10 @@ namespace Pocketpedia.Controllers
         }
 
         // Delete an unwated notes
-        [HttpDelete("delete/{notesId}")]
-        public IActionResult Delete(int notesId)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            _notesRepository.Delete(notesId);
+            _notesRepository.Delete(id);
             return NoContent();
         }
 

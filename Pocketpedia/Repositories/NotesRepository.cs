@@ -20,7 +20,7 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT n.Id, n.Title, n.Message, n.CreatDateTime, n.UserProfileId
+                    cmd.CommandText = @"SELECT n.Id, n.Title, n.Message, n.CreateDateTime, n.UserProfileId
                                         FROM Notes n
                                         ORDER BY n.CreateDateTime Desc";
 
@@ -97,8 +97,8 @@ namespace Pocketpedia.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT n.Id AS NotesId, n.Title, n.Message, n.CreateDateTime, n.UserProfileId
-                                       FROM Posts p                                   
-                                       WHERE p.Id = @id";
+                                       FROM Notes n                                   
+                                       WHERE n.Id = @id";
 
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -157,12 +157,12 @@ namespace Pocketpedia.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"UPDATE Notes
-                                        SET Title = @Title,
-                                            Message = @Message,
-                                        WHERE id = @id";
+                                           SET Title = @title,
+                                               Message = @message,
+                                         WHERE Id = @id";
 
-                    DbUtils.AddParameter(cmd, "@Title", notes.Title);
-                    DbUtils.AddParameter(cmd, "@Message", notes.Message);
+                    DbUtils.AddParameter(cmd, "@title", notes.Title);
+                    DbUtils.AddParameter(cmd, "@message", notes.Message);
                     DbUtils.AddParameter(cmd, "@id", notes.Id);
 
                     cmd.ExecuteNonQuery();
@@ -170,7 +170,7 @@ namespace Pocketpedia.Repositories
             }
         }
 
-        public void Delete(int notesId)
+        public void Delete(int id)
         {
             using (var conn = Connection)
             {
@@ -180,7 +180,7 @@ namespace Pocketpedia.Repositories
                 {
                     cmd.CommandText = @"DELETE FROM Notes WHERE Id = @id;";
 
-                    DbUtils.AddParameter(cmd, "@id", notesId);
+                    DbUtils.AddParameter(cmd, "@id",id);
 
                     cmd.ExecuteNonQuery();
                 }

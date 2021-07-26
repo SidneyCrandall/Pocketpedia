@@ -25,11 +25,11 @@ const NotesDetails = () => {
 
     return (
         <>
-        <h2 className="text-center">Details </h2>
+        <h2 className="text-center">Island Note Details</h2>
         <Card className="w-75 mx-auto">
             <CardBody>               
                 <p><b>Title: </b>{notesDetails.title}</p>
-                <p><b>Message: </b>{noteDetails.message}</p>
+                <p><b>Message: </b>{notesDetails.message}</p>
             </CardBody>
         </Card >
         </>
