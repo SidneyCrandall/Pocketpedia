@@ -1,4 +1,5 @@
 import React from "react";
+//import UserCard from "./UserProfile/UserCard";
 
 export default function Hello() {
   return (
@@ -9,6 +10,6 @@ export default function Hello() {
       top: "50%",
       marginTop: "-0.5rem",
       textAlign: "center",
-    }}>hello</span>
+    }}>Hello, Welcome to Pocketpedia</span>
   );
 }

@@ -53,7 +53,7 @@ namespace Pocketpedia.Controllers
 
         // Grab a single user from the id requested 
         // Parameter added to the HTTP request
-        [HttpGet("id")]
+        [HttpGet("GetUserById/{id}")]
         public IActionResult GetUserById(int id)
         {
             var userProfile = _userProfileRepository.GetUserById(id);

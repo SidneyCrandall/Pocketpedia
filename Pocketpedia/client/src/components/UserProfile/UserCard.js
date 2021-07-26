@@ -25,16 +25,16 @@ const UserCard = () => {
               <CardHeader>
                 <div className="row justify-content-between">
                   <h3 className="d-flex align-items-center ml-3">
-                    <strong>Hello!!! {user.displayName}</strong>
+                    <strong>Hello!!! {user.DisplayName}</strong>
                   </h3>
                 </div>
               </CardHeader>
               <CardBody>
                 <h4 className="mb-4">
-                 Island's Name: <strong>{user.islandName}</strong>
+                 Island's Name: <strong>{user.IslandName}</strong>
                 </h4>
                 <h4 className="mb-4">
-                  Catchphrase: <strong>{user.islandPhrase}</strong>
+                  Catchphrase: <strong>{user.IslandPhrase}</strong>
                 </h4>
               </CardBody>
             </Card>
