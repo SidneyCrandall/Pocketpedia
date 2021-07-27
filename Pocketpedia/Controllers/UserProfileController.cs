@@ -74,25 +74,25 @@ namespace Pocketpedia.Controllers
         }
 
         // Editting/Updating the user's profile
-        // We only need to edit the one we have asked to edit
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, UserProfile userProfile)
-        {
-            if (id != userProfile.Id)
-            {
-                return BadRequest();
-            }
+        //// We only need to edit the one we have asked to edit
+        //[HttpPut("{id}")]
+        //public IActionResult Put(int id, UserProfile userProfile)
+        //{
+        //    if (id != userProfile.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _userProfileRepository.Update(userProfile);
-            return NoContent();
-        }
+        //    _userProfileRepository.Update(userProfile);
+        //    return NoContent();
+        //}
 
-        // Removing/Deleting a UserProfile
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            _userProfileRepository.Delete(id);
-            return NoContent();
-        }
+        //// Removing/Deleting a UserProfile
+        //[HttpDelete("{id}")]
+        //public IActionResult Delete(int id)
+        //{
+        //    _userProfileRepository.Delete(id);
+        //    return NoContent();
+        //}
     }
 }

@@ -11,6 +11,8 @@ namespace Pocketpedia.Models
 
         public string Name { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public int LocationId { get; set; }
 
         public int SeasonAvailabiltyId { get; set; }
