@@ -31,10 +31,10 @@ namespace Pocketpedia.Repositories
             //        return null;
             //    }
             //    //Console.WriteLine(apiBugs.ContainsKey("{Pocketpedia.Models.ApiBug}"));
-            var desiredResponse = apiBugs.Values.Select(apiBug => new Bug() { 
-                AcnhApiId = apiBug.id, 
+            var desiredResponse = apiBugs.Values.Select(apiBug => new Bug() {
+                AcnhApiId = apiBug.id,
                 Name = apiBug.filename,
-                LocationId = apiBug.availability.location,}
+                LocationId = apiBug.availability.location };
 
             return null;
         }
