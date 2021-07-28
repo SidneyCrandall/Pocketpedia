@@ -3,6 +3,7 @@ using Pocketpedia.Models;
 using Pocketpedia.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -15,28 +16,30 @@ namespace Pocketpedia.Repositories
     {
         public BugsRepository(IConfiguration configuration) : base(configuration) { }
 
-        // Using HttpClient to call an external API. This will be used to get all the items 
         private static readonly HttpClient client = new HttpClient();
 
-        private static async Task<List<BugList>> BugsFromApi(object bug)
+        public async Task<List<BugFromApi>> BugsFromApi()
         {
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var bugTask = client.GetStreamAsync($"http://acnhapi.com/v1/bugs");
-            var response = await JsonSerializer.DeserializeAsync<ApiResponse>(await bugTask);
-            if (response.items == null)
-            {
-                return null;
-            }
+            var response = await client.GetStreamAsync($"http://acnhapi.com/v1/bugs");
+            var apiBugs = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiBug>>(response);
+            //    if (apiBugs == null)
+            //    {
+            //        return null;
+            //    }
+            //    //Console.WriteLine(apiBugs.ContainsKey("{Pocketpedia.Models.ApiBug}"));
+            var desiredResponse = apiBugs.Values.Select(apiBug => new Bug() { 
+                AcnhApiId = apiBug.id, 
+                Name = apiBug.filename,
+                LocationId = apiBug.availability.location,}
 
-            var desiredResponse = response.items.Select(item => new BugList(item.id, item.name, item.availability.location, item.availability.northernMonths, item.imageUrl)).ToList();
-
-            return desiredResponse;
+            return null;
         }
 
-        public List<Bugs> GetAllBugs()
+        public List<Bug> GetAllBugs()
         {
             using (var conn = Connection)
             {
@@ -49,11 +52,11 @@ namespace Pocketpedia.Repositories
 
                     var reader = cmd.ExecuteReader();
 
-                    var bugs = new List<Bugs>();
+                    var bugs = new List<Bug>();
 
                     while (reader.Read())
                     {
-                        bugs.Add(new Bugs()
+                        bugs.Add(new Bug()
                         {
                             Id = DbUtils.GetInt(reader, "BugId"),
                             AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
@@ -72,7 +75,7 @@ namespace Pocketpedia.Repositories
             }
         }
 
-        public void Add(Bugs bug)
+        public void Add(Bug bug)
         {
             using (var conn = Connection)
             {

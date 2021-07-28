@@ -13,7 +13,6 @@ export default function Hello() {
         marginTop: "-0.5rem",
         textAlign: "center",
       }}> <img className="d-flex justify-content-end" src={ACNHLoFi} alt="Chill Lo-fi Girl" /></span>
-     {/* <img className="d-flex justify-content-end" src={ACNHLoFi} alt="Chill Lo-fi Girl" />  */}
     </>
   );
 }

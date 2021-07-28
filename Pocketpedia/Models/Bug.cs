@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Pocketpedia.Models
 {
-    public class Bugs
+    public class Bug
     {
         public int Id { get; set; }
 
@@ -21,7 +21,6 @@ namespace Pocketpedia.Models
 
         public bool Caught { get; set; }
 
-        public List<Bugs> Bug { get; set; }
-        public int AcnhApiId { get; internal set; }
+        public int AcnhApiId { get; set; }
     }
 }

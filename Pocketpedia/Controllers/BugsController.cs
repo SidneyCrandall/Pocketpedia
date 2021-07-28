@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Pocketpedia.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class BugsController : ControllerBase
@@ -25,20 +25,20 @@ namespace Pocketpedia.Controllers
             _userProfileRepository = userProfileRepository;
         }
 
-        //// Get All the bugs
-        //[HttpGet("bugs")]
-        //public async Task<IActionResult> GetBugsFromApi(Bugs bugs)
-        //{
-        //    var bug = await _bugsRepository.BugsFromApi(bugs);
-        //    if (bug == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(bug);
-        //}
+        // Get All the bugs
+        [HttpGet]
+        public async Task<IActionResult> GetBugsFromApi()
+        {
+            var bug = await _bugsRepository.BugsFromApi();
+            if (bug == null)
+            {
+                return NotFound();
+            }
+            return Ok(bug);
+        }
 
         [HttpPost]
-        public IActionResult Create(Bugs bug)
+        public IActionResult Create(Bug bug)
         {
             var currentUserProfile = GetCurrentUserProfile();
             _bugsRepository.Add(bug);
