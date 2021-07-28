@@ -54,6 +54,7 @@ namespace Pocketpedia.Repositories
             using (var conn = Connection)
             {
                 conn.Open();
+
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
@@ -144,50 +145,6 @@ namespace Pocketpedia.Repositories
                     DbUtils.AddParameter(cmd, "@IslandPhrase", userProfile.IslandPhrase);
 
                     userProfile.Id = (int)cmd.ExecuteScalar();
-                }
-            }
-        }
-
-        public void Update(UserProfile userProfile)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                        UPDATE UserProfile
-                            SET FirebaseUserId = @FirebaseUserId,
-                                DisplayName = @Name,
-                                Email = @Email,
-                                IslandName = @IslandName,
-                                IslandPhrase = @IslandPhrase
-                        WHERE Id = @Id";
-
-                    DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
-                    DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
-                    DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
-                    DbUtils.AddParameter(cmd, "@IslandName", userProfile.IslandName);
-                    DbUtils.AddParameter(cmd, "@IslandPhrase", userProfile.IslandPhrase);
-                    DbUtils.AddParameter(cmd, "@Id", userProfile.Id);
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public void Delete(int id)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = "DELETE FROM UserProfile WHERE Id = @Id";
-
-                    DbUtils.AddParameter(cmd, "@id", id);
-
-                    cmd.ExecuteNonQuery();
                 }
             }
         }

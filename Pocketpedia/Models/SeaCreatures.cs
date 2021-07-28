@@ -15,7 +15,7 @@ namespace Pocketpedia.Models
 
         public int SeasonAvailability { get; set; }
 
-        public int UserPofileId { get; set; }
+        public int UserProfileId { get; set; }
 
         public bool Caught { get; set; }
     }

@@ -15,6 +15,8 @@ namespace Pocketpedia.Models
 
         public bool IsReal { get; set; }
 
+        public int UserProfileId { get; set; }
+
         public bool Obtained { get; set; }
     }
 }
