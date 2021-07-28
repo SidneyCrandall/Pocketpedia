@@ -5,6 +5,7 @@ namespace Pocketpedia.Repositories
 {
     public interface ILocationRepository
     {
-       public List<Location> GetLocations();
+        Location GetById(int id);
+        public List<Location> GetLocations();
     }
 }
