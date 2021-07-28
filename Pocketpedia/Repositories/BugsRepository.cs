@@ -31,10 +31,10 @@ namespace Pocketpedia.Repositories
             //        return null;
             //    }
             //    //Console.WriteLine(apiBugs.ContainsKey("{Pocketpedia.Models.ApiBug}"));
-            var desiredResponse = apiBugs.Values.Select(apiBug => new Bug() {
-                AcnhApiId = apiBug.id,
-                Name = apiBug.filename,
-                LocationId = apiBug.availability.location };
+            //var desiredResponse = apiBugs.Values.Select(apiBug => new Bug() {
+            //    AcnhApiId = apiBug.id,
+            //    Name = apiBug.filename,
+            //    LocationId = apiBug.availability.location };
 
             return null;
         }
@@ -47,7 +47,7 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT b.Id as BugId, b.AcnhApiId, b.Name, b.LocationId, b.SeasonAvailabilityId , b.ImageUrl, b.UserProfileId
+                    cmd.CommandText = @"SELECT b.Id as BugId, b.AcnhApiId, b.Name, b.LocationId, b.ImageUrl, b.UserProfileId
                                         FROM Bugs b";
 
                     var reader = cmd.ExecuteReader();
@@ -62,7 +62,6 @@ namespace Pocketpedia.Repositories
                             AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
                             Name = DbUtils.GetString(reader, "Name"),
                             LocationId = DbUtils.GetInt(reader, "LocationId"),
-                            SeasonAvailabilityId = DbUtils.GetInt(reader, "SeasonAvailabilityId "),
                             ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
                         });
@@ -83,15 +82,14 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Bugs (AcnhApiId, Name, ImageUrl, LocationId, SeasonAvailabilityId, UserProfileId, Caught)
+                    cmd.CommandText = @"INSERT INTO Bugs (AcnhApiId, Name, ImageUrl, LocationId, UserProfileId, Caught)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@Name, @ImageUrl, @LocationId, @SeasonAvailabilityId, @UserProfileId, 1)";
+                                        VALUES (@Name, @ImageUrl, @LocationId, @UserProfileId, 1)";
 
                     DbUtils.AddParameter(cmd, "@AcnhApiId", bug.AcnhApiId);
                     DbUtils.AddParameter(cmd, "@Name", bug.Name);
                     DbUtils.AddParameter(cmd, "@ImageUrl", bug.ImageUrl);
                     DbUtils.AddParameter(cmd, "@LocationId", bug.LocationId);
-                    DbUtils.AddParameter(cmd, "@SeasonAvailabilityId", bug.SeasonAvailabilityId);
                     DbUtils.AddParameter(cmd, "@UserProfileId", bug.UserProfileId);
 
                     bug.Id = (int)cmd.ExecuteScalar();
