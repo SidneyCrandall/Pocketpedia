@@ -1,10 +1,13 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+//import React, { useState } from "react";
 
 
 const _apiUrl = "/api/userProfile";
+//const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
+//const doesUserExist = sessionStorage.getItem("doesUserExist");
 
-
+// registering purpose to make sure each user is unique
 const _doesUserExist = (firebaseUserId) => {
   return getToken().then((token) =>
     fetch(`${_apiUrl}/DoesUserExist/${firebaseUserId}`, {
@@ -16,6 +19,7 @@ const _doesUserExist = (firebaseUserId) => {
 };
 
 
+// Keep the newly registered user for future use
 const _saveUser = (userProfile) => {
   return getToken().then((token) =>
     fetch(_apiUrl, {
@@ -38,6 +42,16 @@ export const getToken = () => {
 };
 
 
+// // Make sure the email, password match are thereto push the user into the app
+// export const login = (email, pw) => {
+//   const [isLoggedIn, setIsLoggedIn] = useState(doesUserExist != null);
+//   return firebase.auth().signInWithEmailAndPassword(email, pw)
+//     .then((signInResponse) => _doesUserExist(signInResponse.user.uid))
+//     .then((doesUserExist) => {
+//       sessionStorage.setItem("doesUserExist", JSON.stringify(doesUserExist));
+//       setIsLoggedIn(true);
+//     })
+// };
 export const login = (email, pw) => {
   return firebase.auth().signInWithEmailAndPassword(email, pw)
     .then((signInResponse) => _doesUserExist(signInResponse.user.uid))
@@ -56,16 +70,23 @@ export const login = (email, pw) => {
 };
 
 
+// Handle to end the seesion for the authenticated user
 export const logout = () => {
   firebase.auth().signOut()
 };
 
 
+// Call to register a user 
 export const register = (userProfile, password) => {
+  // Firebase needs a password and email to authenticate and authorize a user
   return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
+    // Once the user has pressed register firebase takes hold of the response to add
     .then((createResponse) => _saveUser({
+      // create the new array with the new user
       ...userProfile,
+      // Give the newly registered user a firebase id
       firebaseUserId: createResponse.user.uid
+      // tell the database that the user is logged in
     }).then(() => _onLoginStatusChangedHandler(true)));
 };
 
@@ -106,4 +127,37 @@ export const onLoginStatusChange = (onLoginStatusChangedHandler) => {
 
   // Save the callback so we can call it in the `login` and `register` functions.
   _onLoginStatusChangedHandler = onLoginStatusChangedHandler;
+};
+
+
+// // A way to hold on to the logged in the user
+// export const getUserProfile = (firebaseUserId) => {
+//   return getToken().then((token) => {
+//     fetch(`${_apiUrl}/login/${firebaseUserId}`, {
+//       method: "GET",
+//       headers: {
+//         Authorization: `Bearer ${token}`
+//       }
+//     }).then(resp => resp.json())
+//   })
+// };
+
+
+export const getUserById = (id) => {
+  return getToken().then((token) => {
+    return fetch(`${_apiUrl}/GetByUserId/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((resp) => {
+      if (resp.ok) {
+        return resp.json();
+      } else {
+        throw new Error(
+          "An unknown error occurred while trying to get User Profile."
+        );
+      }
+    });
+  });
 };

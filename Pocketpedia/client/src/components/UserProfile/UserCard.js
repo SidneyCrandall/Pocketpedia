@@ -1,22 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Card, CardBody, CardHeader } from "reactstrap";
-import { useParams } from "react-router-dom";
-import { getUserById } from "../../modules/userManager";
 //import ACNHLoFi from './ACNHLoFi.jpg';
 
 const UserCard = () => {
 
-    const [ user, setUser ] = useState();
-
-    const { id } = useParams();
-    
-    useEffect(() => {
-        getUserById(id).then(setUser);
-    }, [id]);
-
-    if (!user) {
-        return null;
-    }
+ const currentUser = JSON.parse(sessionStorage.getItem("doesUserExist"));
 
     return (
         <div className="container">
@@ -26,20 +14,20 @@ const UserCard = () => {
               <CardHeader>
                 <div className="row justify-content-between">
                   <h3 className="d-flex align-items-center ml-3">
-                    <strong>Hello!!! {user.DisplayName}</strong>
+                    <strong>Hello!!! {currentUser.DisplayName}</strong>
                   </h3>
                 </div>
               </CardHeader>
               <CardBody>
                 <h4 className="mb-4">
-                 Island's Name: <strong>{user.IslandName}</strong>
+                 Island's Name: <strong>{currentUser.IslandName}</strong>
                 </h4>
                 <h4 className="mb-4">
-                  Catchphrase: <strong>{user.IslandPhrase}</strong>
+                  Catchphrase: <strong>{currentUser.IslandPhrase}</strong>
                 </h4>
               </CardBody>
             </Card>
-            {/* <img className="d-flex justify-content-end" src={ACNHLoFi} alt="Chill Lo-fi Girl"/> */}
+            {/* <img className="d-flex justify-content-end" src={ACNHLoFi} alt="Chill Lo-fi Girl"/>  */}
           </div>
         </div>
       </div>

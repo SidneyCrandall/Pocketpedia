@@ -25,9 +25,11 @@ namespace Pocketpedia.Repositories
                                         VALUES (@Name, @ImageUrl, @UserProfileId, @Discvored)";
 
                     DbUtils.AddParameter(cmd, "@Name", fossils.Name);
-                    DbUtils.AddParameter(cmd, "@Content", fossils.ImageUrl);
+                    DbUtils.AddParameter(cmd, "@ImageUrl", fossils.ImageUrl);
                     DbUtils.AddParameter(cmd, "@UserProfileId", fossils.UserProfileId);
-                    DbUtils.AddParameter(cmd, "@PublishDateTime", fossils.Discovered);
+                    DbUtils.AddParameter(cmd, "@Discovered", fossils.Discovered);
+
+                    fossils.Id = (int)cmd.ExecuteScalar();
                 }
             }
         }

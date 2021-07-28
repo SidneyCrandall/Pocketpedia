@@ -22,6 +22,7 @@ namespace Pocketpedia.Controllers
             _userProfileRepository = userProfileRepository;
         }
 
+        // Firebase Authentication. 
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetByFirebaseUserId(string firebaseUserId)
         {
@@ -33,6 +34,8 @@ namespace Pocketpedia.Controllers
             return Ok(userProfile);
         }
 
+        // For a user to log in, we need to check to make sure they exist in the database
+        // This will use a method in the UserProfileRepo to check the server
         [HttpGet("DoesUserExist/{firebaseUserId}")]
         public IActionResult DoesUserExist(string firebaseUserId)
         {
@@ -44,7 +47,7 @@ namespace Pocketpedia.Controllers
             return Ok();
         }
 
-        // Get a list of all the users
+        // Get all the users
         [HttpGet]
         public IActionResult Get()
         {
