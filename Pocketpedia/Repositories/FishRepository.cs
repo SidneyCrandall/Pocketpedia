@@ -13,27 +13,33 @@ namespace Pocketpedia.Repositories
 {
     public class FishRepository : BaseRepository, IFishRepository
     {
-        public FishRepository(IConfiguration configuration) : base(configuration) { }
+        public FishRepository(IConfiguration configuration, ILocationRepository locationRepository) : base(configuration) { }
 
-        //private static readonly HttpClient client = new HttpClient();
+        private static readonly HttpClient client = new HttpClient();
 
-        //public async Task<List<Fish>> FishesFromAPi()
-        //{
-        //    client.DefaultRequestHeaders.Accept.Clear();
-        //    client.DefaultRequestHeaders.Accept.Add(
-        //        new MediaTypeWithQualityHeaderValue("application/json"));
+        //private readonly ILocationRepository locationRepository;
 
-        //    var response = await client.GetStreamAsync($"http://acnhapi.com/v1/fossils");
-        //    var apiFishes = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiFish>>(response);
+        public async Task<List<Fish>> FishesFromAPi()
+        {
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
 
-        //    var desiredResponse = apiFishes.Values.Select(apiFish => new Fish()
-        //    {
-        //        AcnhApiId = apiFish.id,
-        //        Name = apiFish.filename,
-        //        LocationId = locations.FirstOrDefault(location => apiBug.availability.location == location.Name).Id,
-        //        ImageUrl = apiFish.image_uri
-        //    });
-        //}
+            var response = await client.GetStreamAsync($"http://acnhapi.com/v1/fish");
+            var apiFishes = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiFish>>(response);
+
+            //var locations = locationRepository.GetLocations();
+
+            var desiredResponse = apiFishes.Values.Select(apiFish => new Fish()
+            {
+                AcnhApiId = apiFish.id,
+                Name = apiFish.filename,
+                //LocationId = locations.FirstOrDefault(location => apiFish.availability.location == location.Name).Id,
+                ImageUrl = apiFish.image_uri
+            }).ToList();
+
+            return desiredResponse;
+        }
 
         public List<Fish> GetAllFish()
         {

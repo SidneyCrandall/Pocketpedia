@@ -6,7 +6,7 @@ namespace Pocketpedia.Repositories
 {
     public interface IFossilsRepository
     {
-        //Task<List<FossilFromApi>> FossilsFromAPi();
+        Task<List<Fossil>> FossilsFromApi();
         void Add(Fossil fossils);
     }
 }

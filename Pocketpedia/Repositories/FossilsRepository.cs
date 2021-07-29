@@ -16,22 +16,25 @@ namespace Pocketpedia.Repositories
         public FossilsRepository(IConfiguration configuration) : base(configuration) { }
 
 
-        //private static readonly HttpClient client = new HttpClient();
+        private static readonly HttpClient client = new HttpClient();
 
-        //public async Task<List<FossilFromApi>> FossilsFromAPi()
-        //{
-        //    client.DefaultRequestHeaders.Accept.Clear();
-        //    client.DefaultRequestHeaders.Accept.Add(
-        //        new MediaTypeWithQualityHeaderValue("application/json"));
+        public async Task<List<Fossil>> FossilsFromApi()
+        {
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
 
-        //    var response = await client.GetStreamAsync($"http://acnhapi.com/v1/fossils");
-        //    var apiFossils = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiFossil>>(response);
-        //    var desiredResponse = apiFossils.Values.Select(apiFossil => new Fossil()
-        //    {
-        //        Name = apiFossil.filename,
-        //        ImageUrl = apiFossil.image_uri
-        //    });
-        //}
+            var response = await client.GetStreamAsync($"http://acnhapi.com/v1/fossils");
+            var apiFossils = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiFossil>>(response);
+            var desiredResponse = apiFossils.Values.Select(apiFossil => new Fossil()
+            {
+                Name = apiFossil.filename,
+                ImageUrl = apiFossil.image_uri
+
+            }).ToList();
+
+            return desiredResponse;
+        }
 
         public void Add(Fossil fossils)
         {

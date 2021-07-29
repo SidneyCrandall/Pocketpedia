@@ -15,26 +15,61 @@ namespace Pocketpedia.Repositories
     {
         public ArtRepository(IConfiguration configuration) : base(configuration) { }
 
-        //private static readonly HttpClient client = new HttpClient();
+        private static readonly HttpClient client = new HttpClient();
 
-        //public async Task<List<Art>> ArtsFromApi()
-        //{
-        //    client.DefaultRequestHeaders.Accept.Clear();
-        //    client.DefaultRequestHeaders.Accept.Add(
-        //        new MediaTypeWithQualityHeaderValue("application/json"));
+        public async Task<List<Art>> ArtsFromApi()
+        {
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
 
-        //    var response = await client.GetStreamAsync($"http://acnhapi.com/v1/art");
-        //    var apiArts = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiArt>>(response);
+            var response = await client.GetStreamAsync($"http://acnhapi.com/v1/art");
+            var apiArts = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiArt>>(response);
 
-        //    var desiredResponse = apiArts.Values.Select(apiArt => new Art()
-        //    {
-        //        AcnhApiId = apiArt.id,
-        //        Name = apiArt.filename,
-        //        ImageUrl = apiArt.image_uri,
-        //        HasFake = apiArt.hasFake
-        //    });
-        //    return desiredResponse;
-        //}
+            var desiredResponse = apiArts.Values.Select(apiArt => new Art()
+            {
+                AcnhApiId = apiArt.id,
+                Name = apiArt.filename,
+                ImageUrl = apiArt.image_uri,
+                HasFake = apiArt.hasFake
+            }).ToList();
+
+            return desiredResponse;
+        }
+
+        public List<Art> GetAllArt()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT a.Id as ArtId, a.AcnhApiId, a.Name, a.ImageUrl, a.hasFake, a.UserProfileId
+                                        FROM Art a";
+
+                    var reader = cmd.ExecuteReader();
+
+                    var arts = new List<Art>();
+
+                    while (reader.Read())
+                    {
+                        arts.Add(new Art()
+                        {
+                            Id = DbUtils.GetInt(reader, "ArtId"),
+                            AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            //HasFake = DbUtils.GetNull(reader, "HasFake"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
+                        });
+                    }
+
+                    reader.Close();
+                    return arts;
+                }
+            }
+        }
 
         public void Add(Art art)
         {
