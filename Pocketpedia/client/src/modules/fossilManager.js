@@ -1,8 +1,8 @@
 import { getToken } from "./authManager";
 
-const baseUrl = '/api/art';
+const baseUrl = '/api/fossils';
 
-export const getArtFromApi = () => {
+export const getFossilsFromApi = () => {
     return getToken().then((token) =>
         fetch(`${baseUrl}`, {
             method: "GET",
@@ -14,7 +14,7 @@ export const getArtFromApi = () => {
             if (resp.ok) {
                 return resp.json();
             } else {
-                throw new Error("An unknown error occured while trying to get art.")
+                throw new Error("An unknown error occured while trying to get fossils.")
             }
         }))
 }

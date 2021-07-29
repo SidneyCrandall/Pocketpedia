@@ -45,7 +45,7 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT a.Id as ArtId, a.AcnhApiId, a.Name, a.ImageUrl, a.UserProfileId
+                    cmd.CommandText = @"SELECT a.Id as ArtId, a.AcnhApiId, a.Name, a.ImageUrl, a.hasFake, a.UserProfileId
                                         FROM Art a";
 
                     var reader = cmd.ExecuteReader();
@@ -56,9 +56,11 @@ namespace Pocketpedia.Repositories
                     {
                         arts.Add(new Art()
                         {
-                            Id = DbUtils.GetInt(reader, "FishId"),
+                            Id = DbUtils.GetInt(reader, "ArtId"),
                             AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
                             Name = DbUtils.GetString(reader, "Name"),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            //HasFake = DbUtils.GetNull(reader, "HasFake"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
                         });
                     }

@@ -11,6 +11,7 @@ import NotesEdit from "./Notes/NotesEdit";
 import BugList from "./Bugs/BugList";
 import FishList from "./Fish/FishList";
 import ArtList from "./Art/ArtList";
+import FossilList from "./Fossils/FossilList";
 
 
 //EXACT PATH can be used when routes begin the same
@@ -59,6 +60,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/art" exact>
                     {isLoggedIn ? <ArtList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/fossils" exact>
+                    {isLoggedIn ? <FossilList /> : <Redirect to="/login" />}
                 </Route>
 
             </Switch>

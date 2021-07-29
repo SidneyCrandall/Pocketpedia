@@ -13,23 +13,23 @@ namespace Pocketpedia.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ArtController : ControllerBase
+    public class FossilsController : ControllerBase
     {
-        private readonly IArtRepository _artRepository;
+        private readonly IFossilsRepository _fossilsRepository;
         private readonly IUserProfileRepository _userProfileRepository;
 
-        public ArtController(IArtRepository artRepository, IUserProfileRepository userProfileRepository)
+        public FossilsController(IFossilsRepository fossilsRepository, IUserProfileRepository userProfileRepository)
         {
-            _artRepository = artRepository;
+            _fossilsRepository = fossilsRepository;
             _userProfileRepository = userProfileRepository;
         }
 
-        // Get All the art
+        // Get All the fossils
         [HttpGet]
-        public async Task<IActionResult> GetArtFromApi()
+        public async Task<IActionResult> GetBugsFromApi()
         {
-            var art = await _artRepository.ArtsFromApi();  
-            return Ok(art);
+            var fossil = await _fossilsRepository.FossilsFromApi();
+            return Ok(fossil);
         }
     }
 }
