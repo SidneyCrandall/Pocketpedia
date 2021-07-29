@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Pocketpedia.Models
 {
-    public class Villagers
+    public class Fossil
     {
         public int Id { get; set; }
 
@@ -13,10 +13,8 @@ namespace Pocketpedia.Models
 
         public string ImageUrl { get; set; }
 
-        public string Birthday { get; set; }
-
         public int UserProfileId { get; set; }
 
-        public bool IsResiding { get; set; }
+        public bool Discovered { get; set; }
     }
 }

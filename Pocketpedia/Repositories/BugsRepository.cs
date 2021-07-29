@@ -53,7 +53,7 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT b.Id as BugId, b.AcnhApiId, b.Name, b.LocationId, b.ImageUrl, b.UserProfileId
+                    cmd.CommandText = @"SELECT b.Id as BugId, b.AcnhApiId, b.Name, b.LocationId, b.ImageUrl, b.UserProfileId, b.Caught
                                         FROM Bugs b";
 
                     var reader = cmd.ExecuteReader();
@@ -67,8 +67,8 @@ namespace Pocketpedia.Repositories
                             Id = DbUtils.GetInt(reader, "BugId"),
                             AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
                             Name = DbUtils.GetString(reader, "Name"),
-                            LocationId = DbUtils.GetInt(reader, "LocationId"),
                             ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            LocationId = DbUtils.GetInt(reader, "LocationId"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
                         });
                     }

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Pocketpedia.Models
 {
-
     public class ApiArt
     {
         public int id { get; set; }
@@ -41,5 +40,4 @@ namespace Pocketpedia.Models
         public string nameKRko { get; set; }
         public string nameEUru { get; set; }
     }
-
 }
