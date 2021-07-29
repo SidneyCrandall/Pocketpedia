@@ -15,26 +15,27 @@ namespace Pocketpedia.Repositories
     {
         public ArtRepository(IConfiguration configuration) : base(configuration) { }
 
-        //private static readonly HttpClient client = new HttpClient();
+        private static readonly HttpClient client = new HttpClient();
 
-        //public async Task<List<Art>> ArtsFromApi()
-        //{
-        //    client.DefaultRequestHeaders.Accept.Clear();
-        //    client.DefaultRequestHeaders.Accept.Add(
-        //        new MediaTypeWithQualityHeaderValue("application/json"));
+        public async Task<List<Art>> ArtsFromApi()
+        {
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
 
-        //    var response = await client.GetStreamAsync($"http://acnhapi.com/v1/art");
-        //    var apiArts = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiArt>>(response);
+            var response = await client.GetStreamAsync($"http://acnhapi.com/v1/art");
+            var apiArts = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiArt>>(response);
 
-        //    var desiredResponse = apiArts.Values.Select(apiArt => new Art()
-        //    {
-        //        AcnhApiId = apiArt.id,
-        //        Name = apiArt.filename,
-        //        ImageUrl = apiArt.image_uri,
-        //        HasFake = apiArt.hasFake
-        //    });
-        //    return desiredResponse;
-        //}
+            var desiredResponse = apiArts.Values.Select(apiArt => new Art()
+            {
+                AcnhApiId = apiArt.id,
+                Name = apiArt.filename,
+                ImageUrl = apiArt.image_uri,
+                HasFake = apiArt.hasFake
+            }).ToList();
+
+            return desiredResponse;
+        }
 
         public void Add(Art art)
         {
