@@ -15,23 +15,23 @@ namespace Pocketpedia.Repositories
     {
         public SeaCreaturesRepository(IConfiguration configuration) : base(configuration) { }
 
-        private static readonly HttpClient client = new HttpClient();
+        //private static readonly HttpClient client = new HttpClient();
 
-        public async Task<List<SeaCreatureFromApi>> SeaCreaturesFromAPi()
-        {
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+        //public async Task<List<SeaCreatureFromApi>> SeaCreaturesFromAPi()
+        //{
+        //    client.DefaultRequestHeaders.Accept.Clear();
+        //    client.DefaultRequestHeaders.Accept.Add(
+        //        new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var response = await client.GetStreamAsync($"http://acnhapi.com/v1/sea");
-            var apiSeaCreatures = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiSeaCreature>>(response);
-            var desiredResponse = apiSeaCreatures.Values.Select(apiSeaCreature => new SeaCreature()
-            {
-                AcnhApiId = apiSeaCreature.id,
-                Name = apiSeaCreature.filename,
-                ImageUrl = apiSeaCreature.image_uri,
-            });
-        }
+        //    var response = await client.GetStreamAsync($"http://acnhapi.com/v1/sea");
+        //    var apiSeaCreatures = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiSeaCreature>>(response);
+        //    var desiredResponse = apiSeaCreatures.Values.Select(apiSeaCreature => new SeaCreature()
+        //    {
+        //        AcnhApiId = apiSeaCreature.id,
+        //        Name = apiSeaCreature.filename,
+        //        ImageUrl = apiSeaCreature.image_uri,
+        //    });
+        //}
 
         public void Add(SeaCreature seaCreatures)
         {

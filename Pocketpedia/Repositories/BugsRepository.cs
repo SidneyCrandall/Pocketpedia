@@ -14,11 +14,15 @@ namespace Pocketpedia.Repositories
 {
     public class BugsRepository : BaseRepository, IBugsRepository
     {
-        public BugsRepository(IConfiguration configuration) : base(configuration) { }
+        public BugsRepository(IConfiguration configuration, ILocationRepository locationRepository) : base(configuration)
+        {
+            this.locationRepository = locationRepository;
+        }
 
         private static readonly HttpClient client = new HttpClient();
+        private readonly ILocationRepository locationRepository;
 
-        public async Task<List<BugFromApi>> BugsFromApi()
+        public async Task<List<Bug>> BugsFromApi()
         {
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
@@ -26,23 +30,24 @@ namespace Pocketpedia.Repositories
 
             var response = await client.GetStreamAsync($"http://acnhapi.com/v1/bugs");
             var apiBugs = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiBug>>(response);
-            //    if (apiBugs == null)
-            //    {
-            //        return null;
-            //    }
-            //    //Console.WriteLine(apiBugs.ContainsKey("{Pocketpedia.Models.ApiBug}"));
 
-            var locationRepo = new LocationRepository();
+            //if (apiBugs.Values == null)
+            //{
+            //    return null;
+            //}
+
+            var locations = locationRepository.GetLocations();
+            
 
             var desiredResponse = apiBugs.Values.Select(apiBug => new Bug()
             {
                 AcnhApiId = apiBug.id,
                 Name = apiBug.filename,
-                LocationId = apiBug.availability.location,
-                ImageUrl = apiBug.image_uri,
-            });
+                LocationId = locations.FirstOrDefault(location => apiBug.availability.location == location.Name).Id,
+                ImageUrl = apiBug.image_uri
+            }).ToList();
 
-            return null;
+            return desiredResponse;
         }
 
         public List<Bug> GetAllBugs()

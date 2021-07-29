@@ -5,8 +5,9 @@ SET IDENTITY_INSERT [UserProfile] ON
 INSERT INTO [UserProfile] 
 	(Id, FirebaseUserId, Email, DisplayName, IslandName, IslandPhrase) 
 VALUES 
-	(4, 'xjkgvP8WYNPmd5HC1xGMsm6xg082', 'sc@sc.com', 'Squidney', 'Gallifrey', 'Down and Out Island Dweller'),
-	(5, 'UPn2xL58Q0Q9TDKNdnuMNEppG3U2', 'miko@mc.com', 'Mikosa', 'Carcosa', 'Festive Island Hopper');
+	(1, 'xjkgvP8WYNPmd5HC1xGMsm6xg082', 'sc@sc.com', 'Squidney', 'Gallifrey', 'Down and Out Island Dweller'),
+	(2, 'UPn2xL58Q0Q9TDKNdnuMNEppG3U2', 'mc@mc.com', 'Mikosa', 'Carcosa', 'Festive Island Hopper'),
+	(3, 'qwFIwrwJ1CUgFemzvnFXS3EAmF53', 'rc@rc.com', 'Robox', 'Jeju', 'Weak-Lad');
 SET IDENTITY_INSERT [UserProfile] OFF
 
 SET IDENTITY_INSERT [Notes] ON
@@ -33,7 +34,7 @@ VALUES
 	(10, 'Underground'),
 	(11, 'On ponds and rivers'),
 	(12, 'On tree stumps'),
-	(13, 'On palm tress'),
+	(13, 'On palm trees'),
 	(14, 'On rotten food'),
 	(15, 'On the beach'),
 	(16, 'On beach rocks'),

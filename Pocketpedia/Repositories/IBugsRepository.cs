@@ -7,7 +7,7 @@ namespace Pocketpedia.Repositories
     public interface IBugsRepository
     {
         List<Bug> GetAllBugs();
-        Task<List<BugFromApi>> BugsFromApi();
+        Task<List<Bug>> BugsFromApi();
         void Add(Bug bug);     
     }
 }

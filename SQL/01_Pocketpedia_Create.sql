@@ -19,7 +19,6 @@ DROP TABLE IF EXISTS [Location];
 DROP TABLE IF EXISTS [UserProfile];
 GO
 
-
 CREATE TABLE [UserProfile] (
   [Id] INTEGER PRIMARY KEY IDENTITY NOT NULL,
   [FirebaseUserId] VARCHAR(50) NOT NULL,
@@ -132,7 +131,6 @@ GO
 
 ALTER TABLE [Art] ADD FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id])
 GO
-
 
 ALTER TABLE [Bugs] ADD FOREIGN KEY ([LocationId]) REFERENCES [Location] ([Id])
 GO

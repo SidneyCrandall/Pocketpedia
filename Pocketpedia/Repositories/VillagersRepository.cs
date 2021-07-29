@@ -15,24 +15,24 @@ namespace Pocketpedia.Repositories
         public VillagersRepository(IConfiguration configuration) : base(configuration) { }
 
 
-        private static readonly HttpClient client = new HttpClient();
+        //private static readonly HttpClient client = new HttpClient();
 
-        public async Task<List<VillagerFromApi>> VillagersFromAPi()
-        {
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+        //public async Task<List<VillagerFromApi>> VillagersFromAPi()
+        //{
+        //    client.DefaultRequestHeaders.Accept.Clear();
+        //    client.DefaultRequestHeaders.Accept.Add(
+        //        new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var response = await client.GetStreamAsync($"http://acnhapi.com/v1/villagers");
-            var apiVillagers = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiVillager>>(response);
-            var desiredResponse = apiVillagers.Values.Select(apiVillager => new Villager()
-            {
-                AcnhApiId = apiVillager.id,
-                Name = apiVillager.filename,
-                Birthday = apiVillager.birthday,
-                ImageUrl = apiVillager.image_uri,
-            });
-        }
+        //    var response = await client.GetStreamAsync($"http://acnhapi.com/v1/villagers");
+        //    var apiVillagers = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiVillager>>(response);
+        //    var desiredResponse = apiVillagers.Values.Select(apiVillager => new Villager()
+        //    {
+        //        AcnhApiId = apiVillager.id,
+        //        Name = apiVillager.filename,
+        //        Birthday = apiVillager.birthday,
+        //        ImageUrl = apiVillager.image_uri,
+        //    });
+        //}
 
         public void Add(Villager villager)
         {

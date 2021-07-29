@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Pocketpedia.Models
 {
-
     public class ApiBug
     {
         public int id { get; set; }
