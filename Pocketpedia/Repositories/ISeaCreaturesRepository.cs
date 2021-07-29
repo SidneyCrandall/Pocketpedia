@@ -6,7 +6,7 @@ namespace Pocketpedia.Repositories
 {
     public interface ISeaCreaturesRepository
     {
-        //Task<List<SeaCreatureFromApi>> SeaCreaturesFromAPi();
+        Task<List<SeaCreature>> SeaCreaturesFromApi();
         void Add(SeaCreature seaCreatures);
     }
 }

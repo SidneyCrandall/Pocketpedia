@@ -30,6 +30,7 @@ namespace Pocketpedia.Repositories
             {
                 Name = apiFossil.filename,
                 ImageUrl = apiFossil.image_uri
+
             }).ToList();
 
             return desiredResponse;

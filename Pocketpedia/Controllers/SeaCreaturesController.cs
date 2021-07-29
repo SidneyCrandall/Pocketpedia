@@ -8,28 +8,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-
 namespace Pocketpedia.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FossilsController : ControllerBase
+    public class SeaCreaturesController : ControllerBase
     {
-        private readonly IFossilsRepository _fossilsRepository;
+        private readonly ISeaCreaturesRepository _seaCreaturesRepository;
         private readonly IUserProfileRepository _userProfileRepository;
 
-        public FossilsController(IFossilsRepository fossilsRepository, IUserProfileRepository userProfileRepository)
+        public SeaCreaturesController(ISeaCreaturesRepository seaCreaturesRepository, IUserProfileRepository userProfileRepository)
         {
-            _fossilsRepository = fossilsRepository;
+            _seaCreaturesRepository = seaCreaturesRepository;
             _userProfileRepository = userProfileRepository;
         }
 
-        // Get All the fossils
+        // Get All the bugs
         [HttpGet]
         public async Task<IActionResult> GetBugsFromApi()
         {
-            var fossil = await _fossilsRepository.FossilsFromApi();
-            return Ok(fossil);
+            var seaCreature = await _seaCreaturesRepository.SeaCreaturesFromApi();
+
+            return Ok(seaCreature);
         }
 
         // Get the current user

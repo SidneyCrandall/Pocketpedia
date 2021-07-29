@@ -8,7 +8,7 @@ namespace Pocketpedia.Repositories
 {
     public interface IVillagersRepository
     {
-        //Task<List<VillagerFromApi>> VillagersFromAPi()
+        Task<List<Villager>> VillagersFromApi();
 
         void Add(Villager villager);
     }

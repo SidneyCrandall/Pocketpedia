@@ -44,7 +44,7 @@ export default function Header({ isLoggedIn }) {
                   <NavLink tag={RRNavLink} to="/fossils">Fossils</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/seaCreatures">Sea Creatures</NavLink>
+                  <NavLink tag={RRNavLink} to="/seaCreature">Sea Creatures</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/villager">Villagers</NavLink>
