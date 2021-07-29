@@ -1,8 +1,8 @@
-  import { getToken } from "./authManager";
+import { getToken } from "./authManager";
 
-const baseUrl = '/api/seaCreatures';
+const baseUrl = '/api/villagers';
 
-export const getSeaCreaturesFromApi = () => {
+export const getVillagersFromApi = () => {
     return getToken().then((token) =>
         fetch(`${baseUrl}`, {
             method: "GET",
@@ -14,6 +14,7 @@ export const getSeaCreaturesFromApi = () => {
             if (resp.ok) {
                 return resp.json();
             } else {
-                throw new Error("An unknown error occured while trying to get sea creatures.")
+                throw new Error("An unknown error occured while trying to get villagers.")
             }
-        }))}
+        }))
+}

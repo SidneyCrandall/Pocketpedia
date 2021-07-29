@@ -8,11 +8,13 @@ import NotesList from "./Notes/NotesList";
 import NotesDetails from "./Notes/NotesDetails";
 import NotesForm from "./Notes/NotesForm";
 import NotesEdit from "./Notes/NotesEdit";
+
 import BugList from "./Bugs/BugList";
 import FishList from "./Fish/FishList";
 import ArtList from "./Art/ArtList";
 import FossilList from "./Fossils/FossilList";
 import SeaCreatureList from "./SeaCreatures/SeaCreatureList";
+import VillagerList from "./Villagers/VillagerList";
 
 
 //EXACT PATH can be used when routes begin the same
@@ -67,8 +69,12 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <FossilList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/seaCreature" exact>
-                {isLoggedIn ? <SeaCreatureList /> : <Redirect to="/login" />}
+                <Route path="/seaCreatures" exact>
+                    {isLoggedIn ? <SeaCreatureList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/villagers" exact>
+                    {isLoggedIn ? <VillagerList /> : <Redirect to="/login" />}
                 </Route>
 
             </Switch>
