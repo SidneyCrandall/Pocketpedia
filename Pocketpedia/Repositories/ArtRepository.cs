@@ -17,7 +17,7 @@ namespace Pocketpedia.Repositories
 
         //private static readonly HttpClient client = new HttpClient();
 
-        //public async Task<List<ArtFromApi>> ArtsFromApi()
+        //public async Task<List<Art>> ArtsFromApi()
         //{
         //    client.DefaultRequestHeaders.Accept.Clear();
         //    client.DefaultRequestHeaders.Accept.Add(
@@ -33,6 +33,7 @@ namespace Pocketpedia.Repositories
         //        ImageUrl = apiArt.image_uri,
         //        HasFake = apiArt.hasFake
         //    });
+        //    return desiredResponse;
         //}
 
         public void Add(Art art)

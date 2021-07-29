@@ -6,7 +6,7 @@ namespace Pocketpedia.Repositories
 {
     public interface IArtRepository
     {
-        //Task<List<ArtFromApi>> ArtsFromApi();
+        //Task<List<Art>> ArtsFromApi();
         void Add(Art art);
     }
 }

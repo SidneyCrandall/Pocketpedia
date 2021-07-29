@@ -15,10 +15,9 @@ namespace Pocketpedia.Repositories
     {
         public FishRepository(IConfiguration configuration) : base(configuration) { }
 
+        //private static readonly HttpClient client = new HttpClient();
 
-        private static readonly HttpClient client = new HttpClient();
-
-        //public async Task<List<FishFromApi>> FishesFromAPi()
+        //public async Task<List<Fish>> FishesFromAPi()
         //{
         //    client.DefaultRequestHeaders.Accept.Clear();
         //    client.DefaultRequestHeaders.Accept.Add(
@@ -31,38 +30,43 @@ namespace Pocketpedia.Repositories
         //    {
         //        AcnhApiId = apiFish.id,
         //        Name = apiFish.filename,
-        //        LocationId = apiFish.availability.location,
+        //        LocationId = locations.FirstOrDefault(location => apiBug.availability.location == location.Name).Id,
         //        ImageUrl = apiFish.image_uri
         //    });
         //}
 
-        //public List<Fish> GetAllFish()
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
+        public List<Fish> GetAllFish()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
 
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"SELECT f.Id as FishId, f.AcnhApiId, f.Name, f.ImageUrl, f.LocationId, f.UserProfileId
-        //                                FROM Fish f";
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT f.Id as FishId, f.AcnhApiId, f.Name, f.ImageUrl, f.LocationId, f.UserProfileId
+                                        FROM Fish f";
 
-        //            var reader = cmd.ExecuteReader();
+                    var reader = cmd.ExecuteReader();
 
-        //            var fishes = new List<Fish>();
+                    var fishes = new List<Fish>();
 
-        //            while (reader.Read())
-        //            {
-        //                fishes.Add(new Fish()
-        //                {
-        //                    Id = DbUtils.GetInt(reader, "FishId"),
-        //                    AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
+                    while (reader.Read())
+                    {
+                        fishes.Add(new Fish()
+                        {
+                            Id = DbUtils.GetInt(reader, "FishId"),
+                            AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            LocationId = DbUtils.GetInt(reader, "LocationId"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
+                        });
+                    }
 
-        //                });
-        //            }
-        //        }
-        //    }
-        //}
+                    reader.Close();
+                    return fishes;
+                }
+            }
+        }
 
         public void Add(Fish fish)
         {
