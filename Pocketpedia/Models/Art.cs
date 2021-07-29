@@ -9,13 +9,15 @@ namespace Pocketpedia.Models
     {
         public int Id { get; set; }
 
+        public int AcnhApiId { get; set; }
+
         public string Name { get; set; }
         
         public string ImageUrl { get; set; }
 
-        public bool IsReal { get; set; }
-
         public int UserProfileId { get; set; }
+
+        public bool HasFake { get; set; }
 
         public bool Obtained { get; set; }
     }

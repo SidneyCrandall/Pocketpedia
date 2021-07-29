@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 
 namespace Pocketpedia.Models
 {
-    public class SeaCreatures
+    public class SeaCreature
     {
         public int Id { get; set; }
+
+        public int AcnhApiId { get; set; }
 
         public string Name { get; set; }
 
         public string ImageUrl { get; set; }
-
-        public int SeasonAvailability { get; set; }
 
         public int UserProfileId { get; set; }
 

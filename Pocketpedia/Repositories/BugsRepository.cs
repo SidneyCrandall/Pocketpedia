@@ -14,11 +14,15 @@ namespace Pocketpedia.Repositories
 {
     public class BugsRepository : BaseRepository, IBugsRepository
     {
-        public BugsRepository(IConfiguration configuration) : base(configuration) { }
+        public BugsRepository(IConfiguration configuration, ILocationRepository locationRepository) : base(configuration)
+        {
+            this.locationRepository = locationRepository;
+        }
 
         private static readonly HttpClient client = new HttpClient();
+        private readonly ILocationRepository locationRepository;
 
-        public async Task<List<BugFromApi>> BugsFromApi()
+        public async Task<List<Bug>> BugsFromApi()
         {
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
@@ -26,17 +30,24 @@ namespace Pocketpedia.Repositories
 
             var response = await client.GetStreamAsync($"http://acnhapi.com/v1/bugs");
             var apiBugs = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiBug>>(response);
-            //    if (apiBugs == null)
-            //    {
-            //        return null;
-            //    }
-            //    //Console.WriteLine(apiBugs.ContainsKey("{Pocketpedia.Models.ApiBug}"));
-            var desiredResponse = apiBugs.Values.Select(apiBug => new Bug() {
+
+            //if (apiBugs.Values == null)
+            //{
+            //    return null;
+            //}
+
+            var locations = locationRepository.GetLocations();
+            
+
+            var desiredResponse = apiBugs.Values.Select(apiBug => new Bug()
+            {
                 AcnhApiId = apiBug.id,
                 Name = apiBug.filename,
-                LocationId = apiBug.availability.location };
+                LocationId = locations.FirstOrDefault(location => apiBug.availability.location == location.Name).Id,
+                ImageUrl = apiBug.image_uri
+            }).ToList();
 
-            return null;
+            return desiredResponse;
         }
 
         public List<Bug> GetAllBugs()
@@ -47,7 +58,7 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT b.Id as BugId, b.AcnhApiId, b.Name, b.LocationId, b.SeasonAvailabilityId , b.ImageUrl, b.UserProfileId
+                    cmd.CommandText = @"SELECT b.Id as BugId, b.AcnhApiId, b.Name, b.LocationId, b.ImageUrl, b.UserProfileId, b.Caught
                                         FROM Bugs b";
 
                     var reader = cmd.ExecuteReader();
@@ -61,9 +72,8 @@ namespace Pocketpedia.Repositories
                             Id = DbUtils.GetInt(reader, "BugId"),
                             AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
                             Name = DbUtils.GetString(reader, "Name"),
-                            LocationId = DbUtils.GetInt(reader, "LocationId"),
-                            SeasonAvailabilityId = DbUtils.GetInt(reader, "SeasonAvailabilityId "),
                             ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            LocationId = DbUtils.GetInt(reader, "LocationId"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
                         });
                     }
@@ -83,15 +93,14 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Bugs (AcnhApiId, Name, ImageUrl, LocationId, SeasonAvailabilityId, UserProfileId, Caught)
+                    cmd.CommandText = @"INSERT INTO Bugs (AcnhApiId, Name, ImageUrl, LocationId, UserProfileId, Caught)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@Name, @ImageUrl, @LocationId, @SeasonAvailabilityId, @UserProfileId, 1)";
+                                        VALUES (@Name, @ImageUrl, @LocationId, @UserProfileId, 1)";
 
                     DbUtils.AddParameter(cmd, "@AcnhApiId", bug.AcnhApiId);
                     DbUtils.AddParameter(cmd, "@Name", bug.Name);
                     DbUtils.AddParameter(cmd, "@ImageUrl", bug.ImageUrl);
                     DbUtils.AddParameter(cmd, "@LocationId", bug.LocationId);
-                    DbUtils.AddParameter(cmd, "@SeasonAvailabilityId", bug.SeasonAvailabilityId);
                     DbUtils.AddParameter(cmd, "@UserProfileId", bug.UserProfileId);
 
                     bug.Id = (int)cmd.ExecuteScalar();

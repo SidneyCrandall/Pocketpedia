@@ -33,6 +33,12 @@ namespace Pocketpedia
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<INotesRepository, NotesRepository>();
             services.AddTransient<IBugsRepository, BugsRepository>();
+            services.AddTransient<ILocationRepository, LocationRepository>();
+            // services.AddTransient<IFishRepository, FishRepository>();
+            // services.AddTransient<IArtRepository, ArtRepository>();
+            // services.AddTransient<IVillagersRepository, VillagerRepository>();
+            // services.AddTransient<ISeaCreaturesRepository, SeaCreaturesRepository>();
+            // services.AddTransient<IFossilsRepository, FossilsRepository>();
 
             // Used to authenticate and authorize the Firebase user
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
