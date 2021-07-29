@@ -8,6 +8,7 @@ const FishCard = ({ fish }) => {
             <CardBody className="m-3">
 
                 <img src={fish.imageUrl} alt={fish.name} />
+                
                 <p><b>Title: </b>{fish.name}</p>
                 <p><b>Location: </b>{fish.location}</p>
 

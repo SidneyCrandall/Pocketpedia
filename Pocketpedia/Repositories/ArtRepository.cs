@@ -37,6 +37,38 @@ namespace Pocketpedia.Repositories
             return desiredResponse;
         }
 
+        public List<Art> GetAllArt()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT a.Id as ArtId, a.AcnhApiId, a.Name, a.ImageUrl, a.UserProfileId
+                                        FROM Art a";
+
+                    var reader = cmd.ExecuteReader();
+
+                    var arts = new List<Art>();
+
+                    while (reader.Read())
+                    {
+                        arts.Add(new Art()
+                        {
+                            Id = DbUtils.GetInt(reader, "FishId"),
+                            AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
+                        });
+                    }
+
+                    reader.Close();
+                    return arts;
+                }
+            }
+        }
+
         public void Add(Art art)
         {
             using (var conn = Connection)
