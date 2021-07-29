@@ -14,6 +14,7 @@ namespace Pocketpedia.Controllers
     
     [Route("api/[controller]")]
     [ApiController]
+
     public class BugsController : ControllerBase
     {
         private readonly IBugsRepository _bugsRepository;

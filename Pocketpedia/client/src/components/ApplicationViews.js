@@ -8,6 +8,7 @@ import NotesList from "./Notes/NotesList";
 import NotesDetails from "./Notes/NotesDetails";
 import NotesForm from "./Notes/NotesForm";
 import NotesEdit from "./Notes/NotesEdit";
+import BugList from "./Bugs/BugList";
 
 
 //EXACT PATH can be used when routes begin the same
@@ -44,6 +45,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/notes/edit/:id" exact>
                     {isLoggedIn ? <NotesEdit /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/bugs" exact>
+                    {isLoggedIn ? <BugList /> : <Redirect to="/login" />}
                 </Route>
 
             </Switch>

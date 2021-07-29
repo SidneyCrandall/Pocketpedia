@@ -31,11 +31,6 @@ namespace Pocketpedia.Repositories
             var response = await client.GetStreamAsync($"http://acnhapi.com/v1/bugs");
             var apiBugs = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiBug>>(response);
 
-            //if (apiBugs.Values == null)
-            //{
-            //    return null;
-            //}
-
             var locations = locationRepository.GetLocations();
             
 
