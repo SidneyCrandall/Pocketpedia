@@ -9,7 +9,7 @@ const VillagerCard = ({ villagers }) => {
 
                 <img src={villagers.imageUrl} alt={villagers.name} />
                 <p><b>Name: </b>{villagers.name}</p>
-                <p><b>Birthday: </b>{villagers.location}</p>
+                <p><b>Birthday: </b>{villagers.birthday}</p>
 
             </CardBody>
         </Card>

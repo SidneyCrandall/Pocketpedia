@@ -9,7 +9,7 @@ const BugCard = ({ bug }) => {
 
                 <img src={bug.imageUrl} alt={bug.name} />
                 <p><b>Title: </b>{bug.name}</p>
-                <p><b>Location: </b>{bug.location}</p>
+                <p><b>Location: </b>{bug.locationId}</p>
 
             </CardBody>
         </Card>

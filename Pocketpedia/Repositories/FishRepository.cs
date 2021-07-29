@@ -17,9 +17,9 @@ namespace Pocketpedia.Repositories
 
         private static readonly HttpClient client = new HttpClient();
 
-        //private readonly ILocationRepository locationRepository;
+       // private readonly ILocationRepository locationRepository;
 
-        public async Task<List<Fish>> FishesFromAPi()
+        public async Task<List<Fish>> FishesFromApi()
         {
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
@@ -34,7 +34,7 @@ namespace Pocketpedia.Repositories
             {
                 AcnhApiId = apiFish.id,
                 Name = apiFish.filename,
-                //LocationId = locations.FirstOrDefault(location => apiFish.availability.location == location.Name).Id,
+               // LocationId = locations.FirstOrDefault(location => apiFish.availability.location == location.Name).Id,
                 ImageUrl = apiFish.image_uri
             }).ToList();
 
