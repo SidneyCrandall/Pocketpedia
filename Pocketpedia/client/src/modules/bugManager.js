@@ -16,5 +16,14 @@ export const getBugsFromApi = () => {
             } else {
                 throw new Error("An unknown error occured while trying to get bugs.")
             }
-        }))
-}
+        }))};
+
+
+// export const addBug = (bug) => {
+//     return getToken().then((token) => {
+//         return fetch(`${baseUrl}`, {
+//             method: 
+//         })
+//     })
+// };
+

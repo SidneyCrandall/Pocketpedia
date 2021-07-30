@@ -9,7 +9,7 @@ const ArtCard = ({ art }) => {
 
                 <img src={art.imageUrl} alt={art.name} />
                 <p><b>Title: </b>{art.name}</p>
-                <p><b>Has a Fake: </b>{art.hasFake}</p>
+                <p><b>Has a Fake: </b>{art.hasFake.toString()}</p>
 
             </CardBody>
         </Card>

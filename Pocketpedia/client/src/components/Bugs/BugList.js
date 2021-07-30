@@ -6,6 +6,8 @@ const BugList = () => {
 
     const [ bugs, setBugs ] = useState([]);
 
+
+
     const getBugs = () => {
         getBugsFromApi().then(bugs => setBugs(bugs));
     }
