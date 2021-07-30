@@ -13,13 +13,16 @@ namespace Pocketpedia.Repositories
 {
     public class FishRepository : BaseRepository, IFishRepository
     {
-        public FishRepository(IConfiguration configuration, ILocationRepository locationRepository) : base(configuration) { }
+        public FishRepository(IConfiguration configuration, ILocationRepository locationRepository) : base(configuration)
+        {
+            this.locationRepository = locationRepository;
+        }
 
-        private static readonly HttpClient client = new HttpClient();
+    private static readonly HttpClient client = new HttpClient();
 
-        //private readonly ILocationRepository locationRepository;
+        private readonly ILocationRepository locationRepository;
 
-        public async Task<List<Fish>> FishesFromAPi()
+        public async Task<List<Fish>> FishesFromApi()
         {
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
@@ -28,14 +31,15 @@ namespace Pocketpedia.Repositories
             var response = await client.GetStreamAsync($"http://acnhapi.com/v1/fish");
             var apiFishes = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiFish>>(response);
 
-            //var locations = locationRepository.GetLocations();
+            var locations = locationRepository.GetLocations();
+
 
             var desiredResponse = apiFishes.Values.Select(apiFish => new Fish()
             {
                 AcnhApiId = apiFish.id,
                 Name = apiFish.filename,
-                //LocationId = locations.FirstOrDefault(location => apiFish.availability.location == location.Name).Id,
-                ImageUrl = apiFish.image_uri
+                LocationId = locations.FirstOrDefault(location => apiFish.availability.location == location.Name).Id,
+                ImageUrl = apiFish.icon_uri
             }).ToList();
 
             return desiredResponse;
@@ -63,6 +67,7 @@ namespace Pocketpedia.Repositories
                             Id = DbUtils.GetInt(reader, "FishId"),
                             AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
                             Name = DbUtils.GetString(reader, "Name"),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                             LocationId = DbUtils.GetInt(reader, "LocationId"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
                         });

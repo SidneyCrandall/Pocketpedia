@@ -13,6 +13,6 @@ export const getFishFromApi = () => {
             if (resp.ok) {
                 return resp.json();
             } else {
-                throw new Error("An unknown error occured while trying to get bugs.")
+                throw new Error("An unknown error occured while trying to get fish.")
             }
         }))}

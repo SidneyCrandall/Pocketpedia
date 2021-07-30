@@ -90,13 +90,14 @@ namespace Pocketpedia.Repositories
                 {
                     cmd.CommandText = @"INSERT INTO Bugs (AcnhApiId, Name, ImageUrl, LocationId, UserProfileId, Caught)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@Name, @ImageUrl, @LocationId, @UserProfileId, 1)";
+                                        VALUES (@AcnhApiId, @Name, @ImageUrl, @LocationId, @UserProfileId, @Caught)";
 
                     DbUtils.AddParameter(cmd, "@AcnhApiId", bug.AcnhApiId);
                     DbUtils.AddParameter(cmd, "@Name", bug.Name);
                     DbUtils.AddParameter(cmd, "@ImageUrl", bug.ImageUrl);
                     DbUtils.AddParameter(cmd, "@LocationId", bug.LocationId);
                     DbUtils.AddParameter(cmd, "@UserProfileId", bug.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@Caught", bug.Caught);
 
                     bug.Id = (int)cmd.ExecuteScalar();
                 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Pocketpedia.Models;
+using Pocketpedia.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,11 +30,47 @@ namespace Pocketpedia.Repositories
             {
                 AcnhApiId = apiVillager.id,
                 Name = apiVillager.name.nameUSen,
-                Birthday = apiVillager.birthday,
+                Birthday = apiVillager.birthdaystring,
                 ImageUrl = apiVillager.image_uri,
             }).ToList();
 
             return desiredResponse;
+        }
+
+        public List<Villager> GetVillagers()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT v.Id as VillagerId, v.AcnhApiId, v.Name, 
+                                               v.ImagUrl, v.Birthday, v.UserPRofileId
+                                        FROM Villager v";
+
+                    var reader = cmd.ExecuteReader();
+
+                    var villagers = new List<Villager>();
+
+                    while (reader.Read())
+                    {
+                        villagers.Add(new Villager()
+                        {
+                            Id = DbUtils.GetInt(reader, "VillagerId"),
+                            AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            Birthday = DbUtils.GetString(reader, "Birthday"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
+                        });
+                    }
+
+                    reader.Close();
+
+                    return villagers;
+                }
+            }
         }
 
         public void Add(Villager villager)

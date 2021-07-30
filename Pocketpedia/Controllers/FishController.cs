@@ -31,9 +31,11 @@ namespace Pocketpedia.Controllers
         [HttpGet]
         public async Task<IActionResult> GetFishFromApi()
         {
-            var fish = await _fishRepository.FishesFromAPi();
+            var fish = await _fishRepository.FishesFromApi();
             return Ok(fish);
         }
+
+
 
         // Get the current user
         private UserProfile GetCurrentUserProfile()

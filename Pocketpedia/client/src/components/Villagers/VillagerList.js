@@ -6,6 +6,7 @@ const VillagerList = () => {
 
     const [ villagers, setVillagers ] = useState([]);
 
+
     const getVillagers = () => {
         getVillagersFromApi().then(villagers => setVillagers(villagers));
     }

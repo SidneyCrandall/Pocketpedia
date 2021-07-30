@@ -10,7 +10,7 @@ const FishCard = ({ fish }) => {
                 <img src={fish.imageUrl} alt={fish.name} />
                 
                 <p><b>Title: </b>{fish.name}</p>
-                <p><b>Location: </b>{fish.location}</p>
+                <p><b>Location: </b>{fish.locationId}</p>
 
             </CardBody>
         </Card>
