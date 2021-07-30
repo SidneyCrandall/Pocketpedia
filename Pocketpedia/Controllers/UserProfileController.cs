@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Pocketpedia.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserProfileController : ControllerBase
@@ -22,11 +21,31 @@ namespace Pocketpedia.Controllers
             _userProfileRepository = userProfileRepository;
         }
 
+        // Get all the users
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_userProfileRepository.GetAll());
+        }
+
         // Firebase Authentication. 
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetByFirebaseUserId(string firebaseUserId)
         {
             var userProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            if (userProfile == null)
+            {
+                return NotFound();
+            }
+            return Ok(userProfile);
+        }
+
+        // Grab a single user from the id requested 
+        // Parameter added to the HTTP request
+        [HttpGet("GetUserById/{id}")]
+        public IActionResult GetUserById(int id)
+        {
+            var userProfile = _userProfileRepository.GetUserById(id);
             if (userProfile == null)
             {
                 return NotFound();
@@ -47,25 +66,6 @@ namespace Pocketpedia.Controllers
             return Ok();
         }
 
-        // Get all the users
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok(_userProfileRepository.GetAll());
-        }
-
-        // Grab a single user from the id requested 
-        // Parameter added to the HTTP request
-        [HttpGet("GetUserById/{id}")]
-        public IActionResult GetUserById(int id)
-        {
-            var userProfile = _userProfileRepository.GetUserById(id);
-            if (userProfile == null)
-            {
-                return NotFound();
-            }
-            return Ok(userProfile);
-        }
 
         // Adding a new user
         [HttpPost]
@@ -75,27 +75,5 @@ namespace Pocketpedia.Controllers
 
             return CreatedAtAction("Get", new { id = userProfile.Id }, userProfile);
         }
-
-        // Editting/Updating the user's profile
-        //// We only need to edit the one we have asked to edit
-        //[HttpPut("{id}")]
-        //public IActionResult Put(int id, UserProfile userProfile)
-        //{
-        //    if (id != userProfile.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    _userProfileRepository.Update(userProfile);
-        //    return NoContent();
-        //}
-
-        //// Removing/Deleting a UserProfile
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(int id)
-        //{
-        //    _userProfileRepository.Delete(id);
-        //    return NoContent();
-        //}
     }
 }

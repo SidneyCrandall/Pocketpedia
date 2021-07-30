@@ -67,6 +67,7 @@ namespace Pocketpedia.Repositories
                             Id = DbUtils.GetInt(reader, "FishId"),
                             AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
                             Name = DbUtils.GetString(reader, "Name"),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                             LocationId = DbUtils.GetInt(reader, "LocationId"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
                         });
