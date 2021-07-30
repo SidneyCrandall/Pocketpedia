@@ -62,7 +62,7 @@ namespace Pocketpedia.Repositories
                             Name = DbUtils.GetString(reader, "Name"),
                             ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                             Birthday = DbUtils.GetString(reader, "Birthday"),
-                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")                      
                         });
                     }
 
@@ -81,15 +81,16 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Villagers (AcnhApiId, Name, ImageUrl, Birthday, UserProfileId)
+                    cmd.CommandText = @"INSERT INTO Villagers (AcnhApiId, Name, ImageUrl, Birthday, UserProfileId, IsResdiing)
                                     OUTPUT INSERTED.ID 
-                                    VALUES (@AcnhApiId, @Name, ImageUrl @Birthday, @UserProfileId)";
+                                    VALUES (@AcnhApiId, @Name, @ImageUrl, @Birthday, @UserProfileId)";
 
                     cmd.Parameters.AddWithValue("@AcnhApiId", villager.AcnhApiId);
                     cmd.Parameters.AddWithValue("@Name", villager.Name);
                     cmd.Parameters.AddWithValue("@ImageUrl", villager.ImageUrl);
                     cmd.Parameters.AddWithValue("@Birthday", villager.Birthday);
                     cmd.Parameters.AddWithValue("@UserProfileId", villager.UserProfileId);
+                    cmd.Parameters.AddWithValue("@IsResiding", villager.IsResiding);
 
                     villager.Id = (int)cmd.ExecuteScalar();
                 }
