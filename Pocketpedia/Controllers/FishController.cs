@@ -38,7 +38,7 @@ namespace Pocketpedia.Controllers
         [HttpGet("GetAllFish")]
         public IActionResult GetAllFish()
         {
-            return Ok(_fishRepository.FishesFromApi());
+            return Ok(_fishRepository.GetAllFish());
         }
 
         [HttpPost]

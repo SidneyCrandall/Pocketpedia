@@ -29,7 +29,7 @@ namespace Pocketpedia.Controllers
         [HttpGet]
         public async Task<IActionResult> GetArtFromApi()
         {
-            var art = await _artRepository.ArtsFromApi();  
+            var art = await _artRepository.ArtsFromApi();
             return Ok(art);
         }
 

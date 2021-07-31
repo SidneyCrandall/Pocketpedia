@@ -26,7 +26,7 @@ namespace Pocketpedia.Controllers
             _userProfileRepository = userProfileRepository;
         }
 
-        // Get All the bugs
+        // Get All the bugs from the API
         [HttpGet]
         public async Task<IActionResult> GetBugsFromApi()
         {
@@ -35,12 +35,14 @@ namespace Pocketpedia.Controllers
             return Ok(bug);
         }
 
+        // GetAllBugs from the local database
         [HttpGet("GetAllBugs")]
         public IActionResult GetAllBugs()
         {
             return Ok(_bugsRepository.GetAllBugs());
         }
 
+        // Add a bug to the Bug local database
         [HttpPost]
         public IActionResult Create(Bug bug)
         {

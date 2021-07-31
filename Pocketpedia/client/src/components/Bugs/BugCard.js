@@ -16,7 +16,6 @@ const BugCard = ({ bug }) => {
 
     const [locations, setLocations] = useState([]);
 
-
     useEffect(() => {
         getAllLocations()
             .then(locationsFromApi => {
@@ -37,17 +36,15 @@ const BugCard = ({ bug }) => {
             userProfileId: newBug.userProfileId
         })
             .then(() => { getBugsFromApi() })
-    }
+    };
 
     return (
         <Card className="m-2 p-2 w-50 mx-auto">
             <CardBody className="m-3">
 
                 <img src={bug.imageUrl} alt={bug.name} />
-                <p><b>Title: </b>{bug.name}</p>
-              
-                <p><b>Location: </b>{bug.locationId.name}</p>
-                
+                <p><b>Name: </b>{bug.name}</p>              
+                <p><b>Location: </b>{bug.locationId}</p>                
                 <button onClick={handleSaveBug} disabled={handleSaveBug ? false : true}>Caught!</button>
 
             </CardBody>
