@@ -8,5 +8,6 @@ namespace Pocketpedia.Repositories
     {
         Task<List<SeaCreature>> SeaCreaturesFromApi();
         void Add(SeaCreature seaCreatures);
+        List<SeaCreature> GetSeaCreatures();
     }
 }
