@@ -39,7 +39,7 @@ namespace Pocketpedia.Repositories
                 AcnhApiId = apiBug.id,
                 Name = apiBug.filename,
                 LocationId = locations.FirstOrDefault(location => apiBug.availability.location == location.Name).Id,
-                ImageUrl = apiBug.image_uri
+                ImageUrl = apiBug.icon_uri
             }).ToList();
 
             return desiredResponse;

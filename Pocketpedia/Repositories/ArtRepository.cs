@@ -60,9 +60,8 @@ namespace Pocketpedia.Repositories
                             AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
                             Name = DbUtils.GetString(reader, "Name"),
                             ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
-                            //HasFake = DbUtils.GetNull(reader, "HasFake"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
-                        });
+                        }); ; ;
                     }
 
                     reader.Close();
