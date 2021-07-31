@@ -9,7 +9,7 @@ const VillagerCard = ({ villagers }) => {
         acnhApiId: villagers.acnhApiId,
         name: villagers.name,
         imageUrl: villagers.imageUrl,
-        birthday: villagers.birthday.birthday,
+        birthday: villagers.birthday,
         isResiding: false
     });
 
@@ -20,7 +20,7 @@ const VillagerCard = ({ villagers }) => {
             acnhApiId: villager.acnhApiId,
             name: villager.name,
             imageUrl: villager.imageUrl,
-            locationId: villager.locationId,
+            birthday: villager.birthday,
             isResiding: true,
             userProfileId: villager.userProfileId
         })

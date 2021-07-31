@@ -32,8 +32,8 @@ namespace Pocketpedia.Controllers
             return Ok(fossil);
         }
 
-        [HttpGet("Get")]
-        public IActionResult Get
+        //[HttpGet("Get")]
+        //public IActionResult Get
 
         // Get the current user
         private UserProfile GetCurrentUserProfile()
