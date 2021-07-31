@@ -4,10 +4,10 @@ import SeaCreatureCard from "./SeaCreatureCard";
 
 const SeaCreatureList = () => {
 
-    const [ seacreatures, setSeaCreatures ] = useState([]);
+    const [ seaCreatures, setSeaCreatures ] = useState([]);
 
     const getSeaCreatures = () => {
-        getSeaCreaturesFromApi().then(seacreatures => setSeaCreatures(seacreatures));
+        getSeaCreaturesFromApi().then(seaCreatures => setSeaCreatures(seaCreatures));
     }
 
     useEffect(() => {
@@ -18,8 +18,8 @@ const SeaCreatureList = () => {
         <>
             <div className="container">
                 <div className="row justify-content-center">
-                    {seacreatures.map((seacreatures) => (
-                        <SeaCreatureCard seacreatures={seacreatures} key={seacreatures.acnhApiId} />
+                    {seaCreatures.map((seaCreature) => (
+                        <SeaCreatureCard seacreatures={seaCreature} key={seaCreature.acnhApiId} />
                     ))}
                 </div>
             </div>

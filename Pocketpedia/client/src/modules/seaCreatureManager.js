@@ -1,4 +1,4 @@
-  import { getToken } from "./authManager";
+import { getToken } from "./authManager";
 
 const baseUrl = '/api/seaCreatures';
 
@@ -10,10 +10,30 @@ export const getSeaCreaturesFromApi = () => {
                 Authorization: `Bearer ${token}`
             }
         }).then(resp => {
-           
+
             if (resp.ok) {
                 return resp.json();
             } else {
                 throw new Error("An unknown error occured while trying to get sea creatures.")
             }
-        }))}
+        }))
+};
+
+export const addSeaCreature = (seaCreature) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(seaCreature)
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("An unknown error occured while trying to adding a Sea Creature.")
+            }
+        });
+    });
+}
