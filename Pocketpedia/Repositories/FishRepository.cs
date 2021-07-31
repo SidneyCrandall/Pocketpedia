@@ -40,6 +40,7 @@ namespace Pocketpedia.Repositories
                 Name = apiFish.filename,
                 LocationId = locations.FirstOrDefault(location => apiFish.availability.location == location.Name).Id,
                 ImageUrl = apiFish.icon_uri
+
             }).ToList();
 
             return desiredResponse;

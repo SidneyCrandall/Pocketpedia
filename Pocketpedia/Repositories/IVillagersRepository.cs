@@ -11,5 +11,7 @@ namespace Pocketpedia.Repositories
         Task<List<Villager>> VillagersFromApi();
 
         void Add(Villager villager);
+
+        List<Villager> GetVillagers();
     }
 }

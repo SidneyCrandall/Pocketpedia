@@ -15,4 +15,24 @@ export const getFishFromApi = () => {
             } else {
                 throw new Error("An unknown error occured while trying to get fish.")
             }
-        }))}
+        }))
+}
+
+export const addFish = (fish) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(fish)
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("An unknown error occured while trying to add a Fish.")
+            }
+        });
+    });
+};

@@ -1,30 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardBody } from "reactstrap";
 import { getBugsFromApi, addBug } from "../../modules/bugManager";
+import { getAllLocations } from "../../modules/locationManager";
 
 const BugCard = ({ bug }) => {
 
-    const [ newBug, setNewBug ] = useState({
-        id: bug.id, 
+    const [newBug, setNewBug] = useState({
+        id: bug.id,
         acnhApiId: bug.acnhApiId,
-        name : bug.name,
+        name: bug.name,
         imageUrl: bug.imageUrl,
         locationId: bug.locationId,
         caught: false
     });
 
+    const [locations, setLocations] = useState([]);
+
+
+    useEffect(() => {
+        getAllLocations()
+            .then(locationsFromApi => {
+                setLocations(locationsFromApi)
+            });
+    }, []);
+
+
     const handleSaveBug = (evt) => {
-       evt.preventDefault()
+        evt.preventDefault()
         addBug({
             id: newBug.id,
             acnhApiId: newBug.acnhApiId,
-            name : newBug.name,
+            name: newBug.name,
             imageUrl: newBug.imageUrl,
             locationId: newBug.locationId,
             caught: true,
             userProfileId: newBug.userProfileId
         })
-           .then(() => { getBugsFromApi()})
+            .then(() => { getBugsFromApi() })
     }
 
     return (
@@ -33,8 +45,10 @@ const BugCard = ({ bug }) => {
 
                 <img src={bug.imageUrl} alt={bug.name} />
                 <p><b>Title: </b>{bug.name}</p>
-                <p><b>Location: </b>{bug.locationId}</p>
-                <button onClick={handleSaveBug} >Caught!</button>
+              
+                <p><b>Location: </b>{bug.locationId.name}</p>
+                
+                <button onClick={handleSaveBug} disabled={handleSaveBug ? false : true}>Caught!</button>
 
             </CardBody>
         </Card>

@@ -32,6 +32,21 @@ namespace Pocketpedia.Controllers
             return Ok(villager);
         }
 
+        [HttpGet("GetVillagers")]
+        public IActionResult GetAllVillagers()
+        {
+            return Ok(_villagersRepository.VillagersFromApi());
+        }
+
+        [HttpPost]
+        public IActionResult Create(Villager villager)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+            villager.UserProfileId = currentUserProfile.Id;
+            _villagersRepository.Add(villager);
+            return CreatedAtAction(nameof(GetAllVillagers), new { id = villager.Id }, villager);
+        }
+
         // Get the current user
         private UserProfile GetCurrentUserProfile()
         {

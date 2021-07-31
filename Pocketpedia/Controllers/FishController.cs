@@ -35,7 +35,23 @@ namespace Pocketpedia.Controllers
             return Ok(fish);
         }
 
+        [HttpGet("GetAllFish")]
+        public IActionResult GetAllFish()
+        {
+            return Ok(_fishRepository.FishesFromApi());
+        }
 
+        [HttpPost]
+        public IActionResult Create(Fish fish)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+
+           fish.UserProfileId = currentUserProfile.Id;
+
+            _fishRepository.Add(fish);
+
+            return CreatedAtAction(nameof(GetAllFish), new { id = fish.Id }, fish);
+        }
 
         // Get the current user
         private UserProfile GetCurrentUserProfile()

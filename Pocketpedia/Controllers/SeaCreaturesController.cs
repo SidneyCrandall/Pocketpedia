@@ -32,6 +32,24 @@ namespace Pocketpedia.Controllers
             return Ok(seaCreature);
         }
 
+        [HttpGet("GetAll")]
+        public IActionResult GetSeaCreatures()
+        {
+            return Ok(_seaCreaturesRepository.GetSeaCreatures());
+        }
+
+        [HttpPost]
+        public IActionResult Create(SeaCreature seaCreature)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+
+            seaCreature.UserProfileId = currentUserProfile.Id;
+
+            _seaCreaturesRepository.Add(seaCreature);
+
+            return CreatedAtAction(nameof(GetSeaCreatures), new { id = seaCreature.Id }, seaCreature);
+        }
+
         // Get the current user
         private UserProfile GetCurrentUserProfile()
         {

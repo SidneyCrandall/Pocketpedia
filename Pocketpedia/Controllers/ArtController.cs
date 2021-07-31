@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Pocketpedia.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ArtController : ControllerBase
@@ -30,6 +31,38 @@ namespace Pocketpedia.Controllers
         {
             var art = await _artRepository.ArtsFromApi();  
             return Ok(art);
+        }
+
+        [HttpPost]
+        public IActionResult Create(Art art)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+
+            art.UserProfileId = currentUserProfile.Id;
+
+            _artRepository.Add(art);
+
+            return CreatedAtAction(nameof(GetAllArt), new { id = art.Id }, art);
+        }
+
+        [HttpGet("GetAllArt")]
+        public IActionResult GetAllArt()
+        {
+            return Ok(_artRepository.GetAllArt());
+        }
+
+        // Get the current user
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (firebaseUserId != null)
+            {
+                return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

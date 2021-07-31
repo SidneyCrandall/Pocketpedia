@@ -30,8 +30,9 @@ namespace Pocketpedia.Repositories
             {
                 AcnhApiId = apiVillager.id,
                 Name = apiVillager.name.nameUSen,
-                Birthday = apiVillager.birthdaystring,
+                Birthday = apiVillager.birthday,
                 ImageUrl = apiVillager.image_uri,
+
             }).ToList();
 
             return desiredResponse;
@@ -46,7 +47,7 @@ namespace Pocketpedia.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT v.Id as VillagerId, v.AcnhApiId, v.Name, 
-                                               v.ImagUrl, v.Birthday, v.UserPRofileId
+                                               v.ImageUrl, v.Birthday, v.UserProfileId
                                         FROM Villager v";
 
                     var reader = cmd.ExecuteReader();
@@ -62,7 +63,7 @@ namespace Pocketpedia.Repositories
                             Name = DbUtils.GetString(reader, "Name"),
                             ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                             Birthday = DbUtils.GetString(reader, "Birthday"),
-                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")                      
                         });
                     }
 
@@ -81,15 +82,16 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Villagers (AcnhApiId, Name, ImageUrl, Birthday, UserProfileId)
+                    cmd.CommandText = @"INSERT INTO Villagers (AcnhApiId, Name, ImageUrl, Birthday, UserProfileId, IsResiding)
                                     OUTPUT INSERTED.ID 
-                                    VALUES (@AcnhApiId, @Name, ImageUrl @Birthday, @UserProfileId)";
+                                    VALUES (@AcnhApiId, @Name, @ImageUrl, @Birthday, @UserProfileId, @IsResiding)";
 
-                    cmd.Parameters.AddWithValue("@AcnhApiId", villager.AcnhApiId);
-                    cmd.Parameters.AddWithValue("@Name", villager.Name);
-                    cmd.Parameters.AddWithValue("@ImageUrl", villager.ImageUrl);
-                    cmd.Parameters.AddWithValue("@Birthday", villager.Birthday);
-                    cmd.Parameters.AddWithValue("@UserProfileId", villager.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@AcnhApiId", villager.AcnhApiId);
+                    DbUtils.AddParameter(cmd,"@Name", villager.Name);
+                    DbUtils.AddParameter(cmd, "@ImageUrl", villager.ImageUrl);
+                    DbUtils.AddParameter(cmd, "@Birthday", villager.Birthday);
+                    DbUtils.AddParameter(cmd, "@UserProfileId", villager.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@IsResiding", villager.IsResiding);
 
                     villager.Id = (int)cmd.ExecuteScalar();
                 }
