@@ -25,7 +25,7 @@ namespace Pocketpedia.Controllers
 
         // Get All the bugs
         [HttpGet]
-        public async Task<IActionResult> GetBugsFromApi()
+        public async Task<IActionResult> GetSeaCreaturesFromApi()
         {
             var seaCreature = await _seaCreaturesRepository.SeaCreaturesFromApi();
 

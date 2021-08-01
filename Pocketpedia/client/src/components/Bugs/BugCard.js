@@ -14,14 +14,16 @@ const BugCard = ({ bug }) => {
         caught: false
     });
 
-    const [locations, setLocations] = useState([]);
+    // const name = location.map((locationName => {
+    //     return`${locationName.name}`
+    // }))
 
-    useEffect(() => {
-        getAllLocations()
-            .then(locationsFromApi => {
-                setLocations(locationsFromApi)
-            });
-    }, []);
+    // useEffect(() => {
+    //     getAllLocations()
+    //         .then(locationsFromApi => {
+    //             setLocations(locationsFromApi)
+    //         });
+    // }, []);
 
 
     const handleSaveBug = (evt) => {
@@ -44,7 +46,7 @@ const BugCard = ({ bug }) => {
 
                 <img src={bug.imageUrl} alt={bug.name} />
                 <p><b>Name: </b>{bug.name}</p>              
-                <p><b>Location: </b>{bug.locationId}</p>                
+                <p><b>Location: </b>{bug.locationId.name}</p>                
                 <button onClick={handleSaveBug} disabled={handleSaveBug ? false : true}>Caught!</button>
 
             </CardBody>

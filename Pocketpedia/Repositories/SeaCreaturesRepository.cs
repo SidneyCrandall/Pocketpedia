@@ -73,7 +73,7 @@ namespace Pocketpedia.Repositories
             }
         }
 
-        public void Add(SeaCreature seaCreatures)
+        public void Add(SeaCreature seaCreature)
         {
             using (var conn = Connection)
             {
@@ -85,13 +85,13 @@ namespace Pocketpedia.Repositories
                                         OUTPUT INSERTED.ID
                                         VALUES (@Name, @AcnhApiId, @ImageUrl, @UserProfileId, @Caught)";
 
-                    DbUtils.AddParameter(cmd, "@Name", seaCreatures.Name);
-                    DbUtils.AddParameter(cmd, "@AcnhApiId", seaCreatures.AcnhApiId);
-                    DbUtils.AddParameter(cmd, "@ImageUrl", seaCreatures.ImageUrl);
-                    DbUtils.AddParameter(cmd, "@UserProfileId", seaCreatures.UserProfileId);
-                    DbUtils.AddParameter(cmd, "@Caught", seaCreatures.Caught);
+                    DbUtils.AddParameter(cmd, "@Name", seaCreature.Name);
+                    DbUtils.AddParameter(cmd, "@AcnhApiId", seaCreature.AcnhApiId);
+                    DbUtils.AddParameter(cmd, "@ImageUrl", seaCreature.ImageUrl);
+                    DbUtils.AddParameter(cmd, "@UserProfileId", seaCreature.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@Caught", seaCreature.Caught);
 
-                    seaCreatures.Id = (int)cmd.ExecuteScalar();
+                    seaCreature.Id = (int)cmd.ExecuteScalar();
                 }
             }
         }
