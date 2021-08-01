@@ -33,7 +33,6 @@ namespace Pocketpedia.Repositories
 
             var locations = locationRepository.GetLocations();
 
-
             var desiredResponse = apiFishes.Values.Select(apiFish => new Fish()
             {
                 AcnhApiId = apiFish.id,
@@ -54,7 +53,7 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT f.Id as FishId, f.AcnhApiId, f.Name, f.ImageUrl, f.LocationId, f.UserProfileId
+                    cmd.CommandText = @"SELECT f.Id as FishId, f.AcnhApiId, f.Name, f.ImageUrl, f.LocationId, f.UserProfileId, f.Caught
                                         FROM Fish f";
 
                     var reader = cmd.ExecuteReader();
@@ -88,12 +87,12 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Fish (Name, AcnhApiId, ImageUrl, LocationId, UserProfileId, Caught)
+                    cmd.CommandText = @"INSERT INTO Fish (AcnhApiId, Name, ImageUrl, LocationId, UserProfileId, Caught)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@Name, @AcnhApiId, @ImageUrl, @LocationId, @UserProfileId, @Caught)";
+                                        VALUES (@AcnhApiId, @Name, @ImageUrl, @LocationId, @UserProfileId, @Caught)";
 
-                    DbUtils.AddParameter(cmd, "@Name", fish.Name);
                     DbUtils.AddParameter(cmd, "@AcnhApiId", fish.AcnhApiId);
+                    DbUtils.AddParameter(cmd, "@Name", fish.Name);
                     DbUtils.AddParameter(cmd, "@ImageUrl", fish.ImageUrl);
                     DbUtils.AddParameter(cmd, "@LocationId", fish.LocationId);
                     DbUtils.AddParameter(cmd, "@UserProfileId", fish.UserProfileId);

@@ -32,8 +32,23 @@ namespace Pocketpedia.Controllers
             return Ok(fossil);
         }
 
-        //[HttpGet("Get")]
-        //public IActionResult Get
+        [HttpGet("Get")]
+        public IActionResult GetFossils()
+        {
+            return Ok(_fossilsRepository.GetFossils());
+        }
+
+        [HttpPost]
+        public IActionResult Create(Fossil fossil)
+        {
+            var currentUserProfile = GetCurrentUserProfile();
+
+            fossil.UserProfileId = currentUserProfile.Id;
+
+            _fossilsRepository.Add(fossil);
+
+            return CreatedAtAction(nameof(GetFossils), new { id = fossil.Id }, fossil);
+        }
 
         // Get the current user
         private UserProfile GetCurrentUserProfile()

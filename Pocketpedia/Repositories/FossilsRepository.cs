@@ -36,7 +36,7 @@ namespace Pocketpedia.Repositories
             return desiredResponse;
         }
 
-        public List<Fossil> GetFossila()
+        public List<Fossil> GetFossils()
         {
             using (var conn = Connection)
             {
@@ -78,9 +78,9 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Fossils (Name, ImageUrl, UserProfileId, Discvored)
+                    cmd.CommandText = @"INSERT INTO Fossils (Name, ImageUrl, UserProfileId, Discovered)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@Name, @ImageUrl, @UserProfileId, @Discvored)";
+                                        VALUES (@Name, @ImageUrl, @UserProfileId, @Discovered)";
 
                     DbUtils.AddParameter(cmd, "@Name", fossils.Name);
                     DbUtils.AddParameter(cmd, "@ImageUrl", fossils.ImageUrl);

@@ -6,8 +6,8 @@ namespace Pocketpedia.Repositories
 {
     public interface IFishRepository
     {
+        List<Fish> GetAllFish();
         Task<List<Fish>> FishesFromApi();
         void Add(Fish fish);
-        List<Fish> GetAllFish();
     }
 }

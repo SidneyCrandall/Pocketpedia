@@ -19,7 +19,7 @@ const FossilList = () => {
             <div className="container">
                 <div className="row justify-content-center">
                     {fossils.map((fossil) => (
-                        <FossilCard fossil={fossil} key={fossil.acnhApiId} />
+                        <FossilCard fossils={fossil} key={fossil.name} />
                     ))}
                 </div>
             </div>

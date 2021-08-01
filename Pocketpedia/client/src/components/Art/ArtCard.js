@@ -10,6 +10,7 @@ const ArtCard = ({ art }) => {
         name: art.name,
         imageUrl: art.imageUrl,
         hasFake: art.hasFake,
+        obtained: false
     });
 
     const handleSaveArt = (evt) => {
@@ -20,19 +21,19 @@ const ArtCard = ({ art }) => {
             name: newArt.name,
             imageUrl: newArt.imageUrl,
             hasFake: newArt.hasFake,
+            obtained: true,
             userProfileId: newArt.userProfileId
         })
             .then(() => { getArtFromApi() })
-    }
+    };
 
     return (
         <Card className="m-2 p-2 w-50 mx-auto">
             <CardBody className="m-3">
 
                 <img src={art.imageUrl} alt={art.name} />
-                <p><b>Title: </b>{art.name}</p>
-                <p><b>Has a Fake: </b>{art.hasFake.toString()}</p>
-
+                <p><b>Name: </b>{art.name}</p>
+                <p><b>There is a fake: </b>{art.hasFake.toString()}</p>
                 <button onClick={handleSaveArt}>Purchased!</button>
 
             </CardBody>
