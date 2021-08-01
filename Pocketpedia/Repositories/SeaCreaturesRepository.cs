@@ -47,6 +47,7 @@ namespace Pocketpedia.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT s.Id, s.AcnhApiId, s.Name, s.ImageUrl, s.UserProfileId, s.Caught
+                                        
                                         FROM SeaCreatures s";
 
                     var reader = cmd.ExecuteReader();
@@ -61,8 +62,8 @@ namespace Pocketpedia.Repositories
                             AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
                             Name = DbUtils.GetString(reader, "Name"),
                             ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
-                            Caught = DbUtils.IsDbNull(reader, "Caught"),
-                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                            Caught = DbUtils.IsDbNull(reader, "Caught")
                         });
                     }
 
@@ -81,12 +82,12 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Fossils (Name, AcnhApiId, ImageUrl, UserProfileId, Caught)
+                    cmd.CommandText = @"INSERT INTO SeaCreatures (AcnhApiId, Name, ImageUrl, UserProfileId, Caught)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@Name, @AcnhApiId, @ImageUrl, @UserProfileId, @Caught)";
+                                        VALUES (@AcnhApiId, @Name, @ImageUrl, @UserProfileId, @Caught)";
 
-                    DbUtils.AddParameter(cmd, "@Name", seaCreature.Name);
                     DbUtils.AddParameter(cmd, "@AcnhApiId", seaCreature.AcnhApiId);
+                    DbUtils.AddParameter(cmd, "@Name", seaCreature.Name);
                     DbUtils.AddParameter(cmd, "@ImageUrl", seaCreature.ImageUrl);
                     DbUtils.AddParameter(cmd, "@UserProfileId", seaCreature.UserProfileId);
                     DbUtils.AddParameter(cmd, "@Caught", seaCreature.Caught);

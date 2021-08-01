@@ -35,7 +35,7 @@ namespace Pocketpedia.Controllers
         [HttpGet("GetVillagers")]
         public IActionResult GetAllVillagers()
         {
-            return Ok(_villagersRepository.VillagersFromApi());
+            return Ok(_villagersRepository.GetVillagers());
         }
 
         [HttpPost]
