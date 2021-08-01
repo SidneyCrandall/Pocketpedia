@@ -14,14 +14,16 @@ const BugCard = ({ bug }) => {
         caught: false
     });
 
-    const [locations, setLocations] = useState([]);
+    // const name = location.map((locationName => {
+    //     return`${locationName.name}`
+    // }))
 
-    useEffect(() => {
-        getAllLocations()
-            .then(locationsFromApi => {
-                setLocations(locationsFromApi)
-            });
-    }, []);
+    // useEffect(() => {
+    //     getAllLocations()
+    //         .then(locationsFromApi => {
+    //             setLocations(locationsFromApi)
+    //         });
+    // }, []);
 
 
     const handleSaveBug = (evt) => {

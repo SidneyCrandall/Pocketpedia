@@ -36,7 +36,7 @@ namespace Pocketpedia.Repositories
             var desiredResponse = apiFishes.Values.Select(apiFish => new Fish()
             {
                 AcnhApiId = apiFish.id,
-                Name = apiFish.filename,
+                Name = apiFish.name.nameUSen,
                 LocationId = locations.FirstOrDefault(location => apiFish.availability.location == location.Name).Id,
                 ImageUrl = apiFish.icon_uri
 
@@ -53,7 +53,7 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT f.Id as FishId, f.AcnhApiId, f.Name, f.ImageUrl, f.LocationId, f.UserProfileId, f.Caught
+                    cmd.CommandText = @"SELECT f.Id as FishId, f.AcnhApiId, f.Name, f.ImageUrl, f.LocationId, f.UserProfileId, f.Caught)
                                         FROM Fish f";
 
                     var reader = cmd.ExecuteReader();
@@ -97,6 +97,8 @@ namespace Pocketpedia.Repositories
                     DbUtils.AddParameter(cmd, "@LocationId", fish.LocationId);
                     DbUtils.AddParameter(cmd, "@UserProfileId", fish.UserProfileId);
                     DbUtils.AddParameter(cmd, "@Caught", fish.Caught);
+
+                    fish.Id = (int)cmd.ExecuteScalar();
                 }
             }
         }

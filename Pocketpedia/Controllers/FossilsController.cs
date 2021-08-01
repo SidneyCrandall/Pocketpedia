@@ -26,7 +26,7 @@ namespace Pocketpedia.Controllers
 
         // Get All the fossils
         [HttpGet]
-        public async Task<IActionResult> GetBugsFromApi()
+        public async Task<IActionResult> GetFossilsFromApi()
         {
             var fossil = await _fossilsRepository.FossilsFromApi();
             return Ok(fossil);

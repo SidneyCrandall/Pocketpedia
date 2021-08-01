@@ -16,7 +16,7 @@ export const getFishFromApi = () => {
                 throw new Error("An unknown error occured while trying to get fish.")
             }
         }))
-}
+};
 
 export const addFish = (fish) => {
     return getToken().then((token) => {
@@ -29,6 +29,7 @@ export const addFish = (fish) => {
             body: JSON.stringify(fish)
         }).then((res) => {
             if (res.ok) {
+                console.log(fish);
                 return res.json();
             } else {
                 throw new Error("An unknown error occured while trying to add a Fish.")

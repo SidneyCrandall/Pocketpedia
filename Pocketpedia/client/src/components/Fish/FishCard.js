@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import { Card, CardBody } from "reactstrap";
-import { getFishFromApi, addFish } from "../../modules/fishManager";
+import { addFish, getFishFromApi } from "../../modules/fishManager";
 
 const FishCard = ({ fish }) => {
 
@@ -10,9 +10,12 @@ const FishCard = ({ fish }) => {
         name: fish.name,
         imageUrl: fish.imageUrl,
         locationId: fish.locationId,
-        caught: false
+        Caught: false
     });
+    const [locations, setLocations] = useState([]);
 
+
+   
     const handleSaveFish = (evt) => {
         evt.preventDefault()
         addFish({
@@ -20,25 +23,25 @@ const FishCard = ({ fish }) => {
             acnhApiId: newFish.acnhApiId,
             name: newFish.name,
             imageUrl: newFish.imageUrl,
+            userProfileId: newFish.userProfileId,
             locationId: newFish.locationId,
-            caught: true,
-            userProfileId: newFish.userProfileId
+            caught: true
         })
             .then(() => { getFishFromApi() })
-    }
+    };
 
     return (
         <Card className="m-2 p-2 w-50 mx-auto">
             <CardBody className="m-3">
 
-                <img src={fish.imageUrl} alt={fish.name} /> 
-                <p><b>Title: </b>{fish.name}</p>
+                <img src={fish.imageUrl} alt={fish.name} />
+                <p><b>Name: </b>{fish.name}</p>
                 <p><b>Location: </b>{fish.locationId}</p>
-                <button onClick={handleSaveFish}>Caught!</button>
+
+                <button onClick={handleSaveFish}>Caught</button>
 
             </CardBody>
         </Card>
     )
 };
-
 export default FishCard;

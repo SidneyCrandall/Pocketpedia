@@ -4,10 +4,11 @@ import FishCard from "./FishCard";
 
 const FishList = () => {
 
-    const [ fish, setFish ] = useState([]);
+    const [ fishs, setFishs ] = useState([]);
+
 
     const getFish = () => {
-        getFishFromApi().then(fish => setFish(fish));
+        getFishFromApi().then(fishs => setFishs(fishs));
     }
 
     useEffect(() => {
@@ -18,7 +19,7 @@ const FishList = () => {
         <>
             <div className="container">
                 <div className="row justify-content-center">
-                    {fish.map((fish) => (
+                    {fishs.map((fish) => (
                         <FishCard fish={fish} key={fish.acnhApiId} />
                     ))}
                 </div>
@@ -26,5 +27,4 @@ const FishList = () => {
         </>
     )
 };
-
 export default FishList;

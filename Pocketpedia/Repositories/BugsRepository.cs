@@ -37,7 +37,7 @@ namespace Pocketpedia.Repositories
             var desiredResponse = apiBugs.Values.Select(apiBug => new Bug()
             {
                 AcnhApiId = apiBug.id,
-                Name = apiBug.filename,
+                Name = apiBug.name.nameUSen,
                 LocationId = locations.FirstOrDefault(location => apiBug.availability.location == location.Name).Id,
                 ImageUrl = apiBug.icon_uri
 
