@@ -15,6 +15,7 @@ const FishCard = ({ fish }) => {
 
     const handleSaveFish = (evt) => {
         evt.preventDefault()
+        
         addFish({
             id: newFish.id,
             acnhApiId: newFish.acnhApiId,
@@ -23,16 +24,17 @@ const FishCard = ({ fish }) => {
             locationId: newFish.locationId,
             caught: true,
             userProfileId: newFish.userProfileId
+           
         })
-            .then(() => { getFishFromApi() })
-    }
+            .then(() => { getFishFromApi() })        
+    };
 
     return (
         <Card className="m-2 p-2 w-50 mx-auto">
             <CardBody className="m-3">
 
                 <img src={fish.imageUrl} alt={fish.name} /> 
-                <p><b>Title: </b>{fish.name}</p>
+                <p><b>Name: </b>{fish.name}</p>
                 <p><b>Location: </b>{fish.locationId}</p>
                 <button onClick={handleSaveFish}>Caught!</button>
 

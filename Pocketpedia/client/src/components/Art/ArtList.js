@@ -4,10 +4,11 @@ import ArtCard from "./ArtCard";
 
 const ArtList = () => {
 
-    const [ art, setArt ] = useState([]);
+    const [ arts, setArts ] = useState([]);
+
 
     const getArt = () => {
-        getArtFromApi().then(art => setArt(art));
+        getArtFromApi().then(arts => setArts(arts));
     }
 
     useEffect(() => {
@@ -18,8 +19,8 @@ const ArtList = () => {
         <>
             <div className="container">
                 <div className="row justify-content-center">
-                    {art.map((art) => (
-                        <ArtCard art={art} key={art.acnhApiId} />
+                    {arts.map((art) => (
+                        <ArtCard arts={art} key={art.acnhApiId} />
                     ))}
                 </div>
             </div>

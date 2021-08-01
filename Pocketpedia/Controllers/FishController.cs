@@ -46,7 +46,7 @@ namespace Pocketpedia.Controllers
         {
             var currentUserProfile = GetCurrentUserProfile();
 
-           fish.UserProfileId = currentUserProfile.Id;
+            fish.UserProfileId = currentUserProfile.Id;
 
             _fishRepository.Add(fish);
 

@@ -10,8 +10,10 @@ using System.Threading.Tasks;
 
 namespace Pocketpedia.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
+
     public class UserProfileController : ControllerBase
     {
         private readonly IUserProfileRepository _userProfileRepository;

@@ -28,10 +28,12 @@ namespace Pocketpedia.Repositories
 
             var desiredResponse = apiArts.Values.Select(apiArt => new Art()
             {
+
                 AcnhApiId = apiArt.id,
-                Name = apiArt.filename,
+                Name = apiArt.name.nameUSen,
                 ImageUrl = apiArt.image_uri,
                 HasFake = apiArt.hasFake
+
             }).ToList();
 
             return desiredResponse;
@@ -78,16 +80,16 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Art ( AcnhApiId, Name, ImageUrl, UserProfileId, HasFake, Obtained)
+                    cmd.CommandText = @"INSERT INTO Art ( AcnhApiId, [Name], ImageUrl, UserProfileId, HasFake, Obtained)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@AcnhApiId, @Name, @ImageUrl, @HasFake, @UserProfileId, @Obtained)";
+                                        VALUES (@AcnhApiId, @Name, @ImageUrl, @UserProfileId, @HasFake, @Obtained)";
 
-                    DbUtils.AddParameter(cmd, "@AcnhApiId", art.Name);
+                    DbUtils.AddParameter(cmd, "@AcnhApiId", art.AcnhApiId);
                     DbUtils.AddParameter(cmd, "@Name", art.Name);
                     DbUtils.AddParameter(cmd, "@ImageUrl", art.ImageUrl);
                     DbUtils.AddParameter(cmd, "@UserProfileId", art.UserProfileId);
                     DbUtils.AddParameter(cmd, "@HasFake", art.HasFake);
-                    DbUtils.AddParameter(cmd, "@oBtained", art.Obtained);
+                    DbUtils.AddParameter(cmd, "@Obtained", art.Obtained);
 
 
                     art.Id = (int)cmd.ExecuteScalar();

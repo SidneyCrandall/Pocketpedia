@@ -28,7 +28,7 @@ namespace Pocketpedia.Repositories
             var apiFossils = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiFossil>>(response);
             var desiredResponse = apiFossils.Values.Select(apiFossil => new Fossil()
             {
-                Name = apiFossil.filename,
+                Name = apiFossil.name.nameUSen,
                 ImageUrl = apiFossil.image_uri
 
             }).ToList();

@@ -46,7 +46,7 @@ const BugCard = ({ bug }) => {
 
                 <img src={bug.imageUrl} alt={bug.name} />
                 <p><b>Name: </b>{bug.name}</p>              
-                <p><b>Location: </b>{bug.locationId.name}</p>                
+                <p><b>Location: </b>{bug.locationId}</p>                
                 <button onClick={handleSaveBug} disabled={handleSaveBug ? false : true}>Caught!</button>
 
             </CardBody>

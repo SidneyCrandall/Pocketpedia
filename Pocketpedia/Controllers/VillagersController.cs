@@ -33,7 +33,7 @@ namespace Pocketpedia.Controllers
         }
 
         [HttpGet("GetVillagers")]
-        public IActionResult GetAllVillagers()
+        public IActionResult GetVillagers()
         {
             return Ok(_villagersRepository.GetVillagers());
         }
@@ -44,7 +44,7 @@ namespace Pocketpedia.Controllers
             var currentUserProfile = GetCurrentUserProfile();
             villager.UserProfileId = currentUserProfile.Id;
             _villagersRepository.Add(villager);
-            return CreatedAtAction(nameof(GetAllVillagers), new { id = villager.Id }, villager);
+            return CreatedAtAction(nameof(GetVillagers), new { id = villager.Id }, villager);
         }
 
         // Get the current user

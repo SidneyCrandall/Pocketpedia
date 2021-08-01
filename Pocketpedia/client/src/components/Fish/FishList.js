@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getFishFromApi } from "../../modules/fishManager";
 import FishCard from "./FishCard";
 
 const FishList = () => {
 
-    const [ fish, setFish ] = useState([]);
+    const [ fishes, setFishes ] = useState([]);
 
     const getFish = () => {
-        getFishFromApi().then(fish => setFish(fish));
+        getFishFromApi().then(fishes => setFishes(fishes));
     }
 
     useEffect(() => {
@@ -18,7 +18,7 @@ const FishList = () => {
         <>
             <div className="container">
                 <div className="row justify-content-center">
-                    {fish.map((fish) => (
+                    {fishes.map((fish) => (
                         <FishCard fish={fish} key={fish.acnhApiId} />
                     ))}
                 </div>

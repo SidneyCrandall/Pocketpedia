@@ -30,7 +30,7 @@ namespace Pocketpedia.Repositories
             {
 
                 AcnhApiId = apiSeaCreature.id,
-                Name = apiSeaCreature.filename,
+                Name = apiSeaCreature.name.nameUSen,
                 ImageUrl = apiSeaCreature.icon_uri,
 
             }).ToList();
