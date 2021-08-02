@@ -15,7 +15,8 @@ import ArtList from "./Art/ArtList";
 import FossilList from "./Fossils/FossilList";
 import SeaCreatureList from "./SeaCreatures/SeaCreatureList";
 import VillagerList from "./Villagers/VillagerList";
-import {IslanderWelcome} from "./Hello";
+import { IslanderWelcome } from "./Hello";
+import AllBugList from "./Bugs/AllBugList";
 
 
 //EXACT PATH can be used when routes begin the same
@@ -76,6 +77,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/villagers" exact>
                     {isLoggedIn ? <VillagerList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/bugs/GetBugsByUser">
+                    {isLoggedIn ? <AllBugList /> : <Redirect to="/login" />}
                 </Route>
 
             </Switch>

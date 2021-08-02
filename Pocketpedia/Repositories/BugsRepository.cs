@@ -39,6 +39,7 @@ namespace Pocketpedia.Repositories
                 AcnhApiId = apiBug.id,
                 Name = apiBug.name.nameUSen,
                 LocationId = locations.FirstOrDefault(location => apiBug.availability.location == location.Name).Id,
+                LocationName = apiBug.availability.location,
                 ImageUrl = apiBug.icon_uri
 
             }).ToList();
@@ -54,9 +55,9 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT b.Id as BugId, b.AcnhApiId, b.Name, b.LocationId, b.ImageUrl, b.UserProfileId, b.Caught
+                    cmd.CommandText = @"SELECT b.Id as BugId, b.AcnhApiId, b.Name, b.LocationId, l.Name AS LocationName, b.ImageUrl, b.UserProfileId, b.Caught
                                         FROM Bugs b
-                                        LEFT JOIN Location l ON b/LocationId = l.id";
+                                        LEFT JOIN Location l ON b.LocationId = l.id";
 
                     var reader = cmd.ExecuteReader();
 
@@ -71,6 +72,12 @@ namespace Pocketpedia.Repositories
                             Name = DbUtils.GetString(reader, "Name"),
                             ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                             LocationId = DbUtils.GetInt(reader, "LocationId"),
+                            Location = new Location()
+                            {
+                                Id = DbUtils.GetInt(reader, "LocationId"),
+                                Name = DbUtils.GetString(reader, "LocationName")
+                            },
+                          
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
                         });
                     }
