@@ -68,6 +68,16 @@ namespace Pocketpedia.Controllers
             return Ok();
         }
 
+        [HttpGet("DisplayName/{firebaseUserId}")]
+        public IActionResult DisplayName(string firebaseUserId)
+        {
+            var userProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            if (userProfile == null)
+            {
+                return NotFound();
+            }
+            return Ok(userProfile);
+        }
 
         // Adding a new user
         [HttpPost]

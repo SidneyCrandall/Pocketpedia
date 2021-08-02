@@ -53,8 +53,12 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT f.Id as FishId, f.AcnhApiId, f.Name, f.ImageUrl, f.LocationId, f.UserProfileId, f.Caught)
-                                        FROM Fish f";
+                    cmd.CommandText = @"SELECT f.Id as FishId, f.AcnhApiId, f.Name, f.ImageUrl, f.LocationId, f.UserProfileId, f.Caught
+                                        up.DisplayName, up.IslandName, up.IslandPhrase, up.FirebaseUserId,
+                                        l.Name
+                                        FROM Fish f
+                                        LEFT JOIN UserProfile up ON f.UserProfileId = up.Id
+                                        LEFT JOIN Location l ON f.LocationId = l.Id";
 
                     var reader = cmd.ExecuteReader();
 

@@ -10,7 +10,5 @@ namespace Pocketpedia.Repositories
         UserProfile GetUserById(int id);   
         void Add(UserProfile userProfile);
 
-        //void Update(UserProfile userProfile);
-        //void Delete(int id);
     }
 }
