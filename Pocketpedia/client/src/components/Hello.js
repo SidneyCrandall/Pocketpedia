@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import ACNHLoFi from '../Images/ACNHLoFi.jpg';
-import { _doesUserExist } from "../modules/authManager";
+import { getbyDisplayName } from "../modules/userManager";
 import firebase from "firebase/app";
 import "firebase/auth";
 
 export const IslanderWelcome = () => {
   const [currentUser, setCurrentUser] = useState({ DisplayName: "" });
 
-  const user = firebase.auth().currentUser;
+  //const user = firebase.auth().currentUser;
 
   const getIslander = () => {
     if (firebase.auth().currentUser !== null) {
-      _doesUserExist(firebase.auth().currentUser.id)
+      getbyDisplayName (firebase.auth().currentUser.id)
         .then(user => {
           setCurrentUser(user);
         })

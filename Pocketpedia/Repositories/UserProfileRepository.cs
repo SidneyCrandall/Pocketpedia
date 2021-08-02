@@ -87,7 +87,7 @@ namespace Pocketpedia.Repositories
             }
         }
 
-        public UserProfile GetUserByDisplayName(string displayName)
+        public UserProfile GetByDisplayName(string displayName)
         {
             using (SqlConnection conn = Connection)
             {
@@ -96,7 +96,7 @@ namespace Pocketpedia.Repositories
                 {
                     cmd.CommandText = @"SELECT Id, FirebaseUserId, DisplayName, Email, IslandName, IslandPhrase
                                         FROM UserProfile
-                                        WHERE Id = @Id";
+                                        WHERE DisplayName = @DisplayName";
 
                     DbUtils.AddParameter(cmd, "@DisplayName", displayName);
 
@@ -169,9 +169,10 @@ namespace Pocketpedia.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, [DisplayName], Email, IslandName, IslandPhrase)
-                                        OUTPUT INSERTED.ID
-                                        VALUES (@FirebaseUserId, @DisplayName, @Email, @IslandName, @IslandPhrase)";
+                    cmd.CommandText = @"
+                        INSERT INTO UserProfile (FirebaseUserId, [DisplayName], Email, IslandName, IslandPhrase)
+                        OUTPUT INSERTED.ID
+                        VALUES (@FirebaseUserId, @DisplayName, @Email, @IslandName, @IslandPhrase)";
 
                     DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
