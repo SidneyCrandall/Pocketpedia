@@ -10,6 +10,7 @@ const FishCard = ({ fish }) => {
         name: fish.name,
         imageUrl: fish.imageUrl,
         locationId: fish.locationId,
+        location: fish.locationName,
         Caught: false
     });
     const [locations, setLocations] = useState([]);
@@ -36,7 +37,7 @@ const FishCard = ({ fish }) => {
 
                 <img src={fish.imageUrl} alt={fish.name} />
                 <p><b>Name: </b>{fish.name}</p>
-                <p><b>Location: </b>{fish.locationId}</p>
+                <p><b>Location: </b>{fish.locationName}</p>
 
                 <button onClick={handleSaveFish}>Caught</button>
 

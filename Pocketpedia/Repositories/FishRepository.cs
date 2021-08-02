@@ -38,6 +38,7 @@ namespace Pocketpedia.Repositories
                 AcnhApiId = apiFish.id,
                 Name = apiFish.name.nameUSen,
                 LocationId = locations.FirstOrDefault(location => apiFish.availability.location == location.Name).Id,
+                LocationName = apiFish.availability.location,
                 ImageUrl = apiFish.icon_uri
 
             }).ToList();
@@ -55,10 +56,10 @@ namespace Pocketpedia.Repositories
                 {
                     cmd.CommandText = @"SELECT f.Id as FishId, f.AcnhApiId, f.Name, f.ImageUrl, f.LocationId, f.UserProfileId, f.Caught
                                         up.DisplayName, up.IslandName, up.IslandPhrase, up.FirebaseUserId,
-                                        l.Name
-                                        FROM Fish f
+                                        l.Name AS LocationName
                                         LEFT JOIN UserProfile up ON f.UserProfileId = up.Id
-                                        LEFT JOIN Location l ON f.LocationId = l.Id";
+                                        LEFT JOIN Location l ON f.LocationId = l.Id
+                                        FROM Fish f";
 
                     var reader = cmd.ExecuteReader();
 
