@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Pocketpedia.Controllers
 {
-
+    
     [Route("api/[controller]")]
     [ApiController]
 
@@ -30,16 +30,16 @@ namespace Pocketpedia.Controllers
             return Ok(_userProfileRepository.GetAll());
         }
 
-        [HttpGet("displayName/{displayName}")]
-        public IActionResult GetByDisplayName(string displayName)
-        {
-            var userProfile = _userProfileRepository.GetByDisplayName(displayName);
-            if (userProfile == null)
-            {
-                return NotFound();
-            }
-            return Ok(userProfile);
-        }
+        //[HttpGet("displayName/{displayName}")]
+        //public IActionResult GetByDisplayName(string displayName)
+        //{
+        //    var userProfile = _userProfileRepository.GetByDisplayName(displayName);
+        //    if (userProfile == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(userProfile);
+        //}
 
         // Firebase Authentication. 
         [HttpGet("{firebaseUserId}")]

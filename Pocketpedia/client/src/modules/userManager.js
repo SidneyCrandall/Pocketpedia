@@ -1,6 +1,8 @@
 import { getToken } from "./authManager";
 
+
 const baseUrl = "api/userProfile";
+
 
 export const getbyDisplayName = displayName => {
     return getToken().then(token =>
@@ -10,7 +12,8 @@ export const getbyDisplayName = displayName => {
                 Authorization: `Bearer ${token}`
             }
         }).then(res => res.json()));
-}
+};
+
 
 // These cards
 export const getAllUsers = () => {

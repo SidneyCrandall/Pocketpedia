@@ -14,18 +14,6 @@ const BugCard = ({ bug }) => {
         caught: false
     });
 
-    // const name = location.map((locationName => {
-    //     return`${locationName.name}`
-    // }))
-
-    // useEffect(() => {
-    //     getAllLocations()
-    //         .then(locationsFromApi => {
-    //             setLocations(locationsFromApi)
-    //         });
-    // }, []);
-
-
     const handleSaveBug = (evt) => {
         evt.preventDefault()
         addBug({
@@ -40,6 +28,7 @@ const BugCard = ({ bug }) => {
             .then(() => { getBugsFromApi() })
     };
 
+
     return (
         <Card className="m-2 p-2 w-50 mx-auto">
             <CardBody className="m-3">
@@ -47,7 +36,7 @@ const BugCard = ({ bug }) => {
                 <img src={bug.imageUrl} alt={bug.name} />
                 <p><b>Name: </b>{bug.name}</p>              
                 <p><b>Location: </b>{bug.locationId}</p>                
-                <button onClick={handleSaveBug} disabled={handleSaveBug ? false : true}>Caught!</button>
+                <button onClick={handleSaveBug}>Caught!</button>
 
             </CardBody>
         </Card>
