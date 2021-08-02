@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory, Link } from "react-router-dom";
 import { login } from "../modules/authManager";
+import { getAllUsers, getUserById } from "../modules/authManager";
 
 export default function Login() {
   const history = useHistory();
@@ -9,8 +10,8 @@ export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const loginSubmit = (e) => {
-    e.preventDefault();
+  const loginSubmit = (evt) => {
+    evt.preventDefault();
     login(email, password)
       .then(() => history.push("/"))
       .catch(() => alert("Invalid email or password"));
@@ -22,11 +23,11 @@ export default function Login() {
         <h3>User Login</h3>
         <FormGroup>
           <Label for="email">Email</Label>
-          <Input id="email" type="text" autoFocus onChange={e => setEmail(e.target.value)} />
+          <Input id="email" type="text" autoFocus onChange={evt => setEmail(evt.target.value)} />
         </FormGroup>
         <FormGroup>
           <Label for="password">Password</Label>
-          <Input id="password" type="password" onChange={e => setPassword(e.target.value)} />
+          <Input id="password" type="password" onChange={evt => setPassword(evt.target.value)} />
         </FormGroup>
         <br></br>
         <FormGroup>

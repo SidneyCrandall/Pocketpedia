@@ -55,6 +55,21 @@ namespace Pocketpedia.Controllers
             return CreatedAtAction(nameof(GetAllBugs), new { id = bug.Id }, bug);
         }
 
+        [HttpGet("GetBugsByUser")]
+        public IActionResult GetBugsByUserId(string firebase)
+        {
+            var userProfile = GetCurrentUserProfile();
+            if (userProfile == null)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                var bug = _bugsRepository.GetBugsByUserId(userProfile.FirebaseUserId);
+                return Ok(bug);
+            }
+        }
+
         // Get the current user
         private UserProfile GetCurrentUserProfile()
         {

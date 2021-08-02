@@ -20,5 +20,9 @@ namespace Pocketpedia.Models
         public int AcnhApiId { get; set; }
 
         public bool Caught { get; set; }
+
+        public Location Location { get; set; }
+
+        public string LocationName { get; set; }
     }
 }

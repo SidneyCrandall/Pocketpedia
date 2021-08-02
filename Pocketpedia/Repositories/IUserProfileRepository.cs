@@ -9,8 +9,6 @@ namespace Pocketpedia.Repositories
         UserProfile GetByFirebaseUserId(string firebaseUserId);
         UserProfile GetUserById(int id);   
         void Add(UserProfile userProfile);
-
-        //void Update(UserProfile userProfile);
-        //void Delete(int id);
+        UserProfile GetByDisplayName(string displayName);
     }
 }

@@ -8,6 +8,7 @@ namespace Pocketpedia.Repositories
     {
         List<Bug> GetAllBugs();
         Task<List<Bug>> BugsFromApi();
-        void Add(Bug bug);     
+        void Add(Bug bug);
+        List<Bug> GetBugsByUserId(string firebaseUserId);
     }
 }

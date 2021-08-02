@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import Hello from "./Hello";
+//import Hello from "./Hello";
 import Login from "./Login";
 import Register from "./Register";
 
@@ -15,6 +15,8 @@ import ArtList from "./Art/ArtList";
 import FossilList from "./Fossils/FossilList";
 import SeaCreatureList from "./SeaCreatures/SeaCreatureList";
 import VillagerList from "./Villagers/VillagerList";
+import { IslanderWelcome } from "./Hello";
+import AllBugList from "./Bugs/AllBugList";
 
 
 //EXACT PATH can be used when routes begin the same
@@ -33,7 +35,7 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 {/* For now this will be what users see */}
                 <Route path="/" exact>
-                    {isLoggedIn ? <Hello /> : <Redirect to="/login" />}
+                    {isLoggedIn ? <IslanderWelcome /> : <Redirect to="/login" />}
                 </Route>
 
                 {/* Notes route */}
@@ -75,6 +77,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/villagers" exact>
                     {isLoggedIn ? <VillagerList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/bugs/GetBugsByUser">
+                    {isLoggedIn ? <AllBugList /> : <Redirect to="/login" />}
                 </Route>
 
             </Switch>

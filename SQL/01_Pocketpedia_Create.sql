@@ -105,7 +105,7 @@ CREATE TABLE [Art] (
   [Name] VARCHAR(255) NOT NULL,
   [ImageUrl] VARCHAR(255) NOT NULL,
   [UserProfileId] INTEGER NOT NULL,
-  [IsReal] bit NOT NULL,
+  [HasFake] bit NOT NULL,
   [Obtained] bit NOT NULL
 )
 GO

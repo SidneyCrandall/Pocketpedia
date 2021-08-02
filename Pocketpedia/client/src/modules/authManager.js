@@ -1,11 +1,9 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-//import React, { useState } from "react";
+
 
 
 const _apiUrl = "/api/userProfile";
-//const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
-//const doesUserExist = sessionStorage.getItem("doesUserExist");
 
 // registering purpose to make sure each user is unique
 const _doesUserExist = (firebaseUserId) => {
@@ -42,16 +40,6 @@ export const getToken = () => {
 };
 
 
-// // Make sure the email, password match are thereto push the user into the app
-// export const login = (email, pw) => {
-//   const [isLoggedIn, setIsLoggedIn] = useState(doesUserExist != null);
-//   return firebase.auth().signInWithEmailAndPassword(email, pw)
-//     .then((signInResponse) => _doesUserExist(signInResponse.user.uid))
-//     .then((doesUserExist) => {
-//       sessionStorage.setItem("doesUserExist", JSON.stringify(doesUserExist));
-//       setIsLoggedIn(true);
-//     })
-// };
 export const login = (email, pw) => {
   return firebase.auth().signInWithEmailAndPassword(email, pw)
     .then((signInResponse) => _doesUserExist(signInResponse.user.uid))
@@ -130,17 +118,17 @@ export const onLoginStatusChange = (onLoginStatusChangedHandler) => {
 };
 
 
-// // A way to hold on to the logged in the user
-// export const getUserProfile = (firebaseUserId) => {
-//   return getToken().then((token) => {
-//     fetch(`${_apiUrl}/login/${firebaseUserId}`, {
-//       method: "GET",
-//       headers: {
-//         Authorization: `Bearer ${token}`
-//       }
-//     }).then(resp => resp.json())
-//   })
-// };
+// A way to hold on to the logged in the user
+export const getUserProfile = (firebaseUserId) => {
+  return getToken().then((token) => {
+    fetch(`${_apiUrl}/login/${firebaseUserId}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(resp => resp.json())
+  })
+};
 
 
 export const getUserById = (id) => {

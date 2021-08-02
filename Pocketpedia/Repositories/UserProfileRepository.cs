@@ -87,6 +87,42 @@ namespace Pocketpedia.Repositories
             }
         }
 
+        public UserProfile GetByDisplayName(string displayName)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Id, FirebaseUserId, DisplayName, Email, IslandName, IslandPhrase
+                                        FROM UserProfile
+                                        WHERE DisplayName = @DisplayName";
+
+                    DbUtils.AddParameter(cmd, "@DisplayName", displayName);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    UserProfile userProfile = null;
+
+                    if (reader.Read())
+                    {
+                        userProfile = new UserProfile()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                            Email = DbUtils.GetString(reader, "Email"),
+                            IslandName = DbUtils.GetString(reader, "IslandName"),
+                            IslandPhrase = DbUtils.GetString(reader, "IslandPhrase")
+
+                        };
+                    }
+                    reader.Close();
+                    return userProfile;
+                }
+            }
+        }
+
         public UserProfile GetUserById(int id)
         {
             using (var conn = Connection)

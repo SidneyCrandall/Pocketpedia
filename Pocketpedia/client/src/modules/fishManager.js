@@ -29,11 +29,27 @@ export const addFish = (fish) => {
             body: JSON.stringify(fish)
         }).then((res) => {
             if (res.ok) {
-                console.log(fish);
                 return res.json();
             } else {
                 throw new Error("An unknown error occured while trying to add a Fish.")
             }
         });
     });
+};
+
+export const getAllFish = () => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/GetAllFish`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(res => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("Something happened while attempting to fetch your fish")
+            }
+        })
+    })
 };
