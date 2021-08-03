@@ -49,14 +49,6 @@ namespace Pocketpedia.Repositories
                 Message = reader.GetString(reader.GetOrdinal("Message")),
                 CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
                 UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
-                UserProfile = new UserProfile()
-                {
-                    Id = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
-                    IslandName = reader.GetString(reader.GetOrdinal("FirstName")),
-                    IslandPhrase = reader.GetString(reader.GetOrdinal("LastName")),
-                    DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
-                    Email = reader.GetString(reader.GetOrdinal("Email")),
-                }
             };
         }
 
