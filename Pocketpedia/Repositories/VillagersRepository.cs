@@ -48,7 +48,8 @@ namespace Pocketpedia.Repositories
                 {
                     cmd.CommandText = @"SELECT v.Id as VillagerId, v.AcnhApiId, v.Name, 
                                                v.ImageUrl, v.Birthday, v.UserProfileId
-                                        FROM Villager v";
+                                        FROM Villager v
+                                        ORDER BY v.Birthday DESC";
 
                     var reader = cmd.ExecuteReader();
 
@@ -87,7 +88,8 @@ namespace Pocketpedia.Repositories
                                                up.DisplayName, up.Email
                                         FROM Villagers v
                                               LEFT JOIN UserProfile up ON v.UserProfileId = up.Id
-                                        WHERE up.FirebaseUserId = @FirebaseUserId";
+                                        WHERE up.FirebaseUserId = @FirebaseUserId
+                                        ORDER BY v.Birthday Desc";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", FirebaseUserId);
 

@@ -23,6 +23,7 @@ const NotesDetails = () => {
         getNotesDetails();
     }, []);
 
+    
     return (
         <>
         <h2 className="text-center">Island Note Details</h2>

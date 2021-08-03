@@ -4,7 +4,7 @@ import { addArt, getArtFromApi } from "../../modules/artManager";
 
 const ArtCard = ({ arts }) => {
 
-    const [art, setArt] = useState({
+    const [ art, setArt ] = useState({
         id: arts.id,
         acnhApiId: arts.acnhApiId,
         name: arts.name,
@@ -32,7 +32,7 @@ const ArtCard = ({ arts }) => {
             <CardBody className="m-3">
 
                 <img src={arts.imageUrl} alt={arts.name} />
-                <p><b>Name: </b>{arts.name}</p>
+                <p><b>Name: </b>{arts.name.toUpperCase()}</p>
                 <p><b>There is a fake: </b>{arts.hasFake.toString()}</p>
                 <br/>
                 <button onClick={handleSaveArt}>Purchased</button>

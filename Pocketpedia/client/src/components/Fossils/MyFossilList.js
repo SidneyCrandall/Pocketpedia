@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import MyFossilsCard from "./MyFossilCard";
 import { getUserFossils } from "../../modules/fossilManager";
 
+
+// This page controls the render of a list of user specific info. 
 const MyFossilList = () => {
 
     const [fossils, setFossils] = useState([]);
