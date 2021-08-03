@@ -61,10 +61,10 @@ namespace Pocketpedia.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT n.Id,  n.Title, n.Message,
+                       SELECT n.Id, n.Title, n.Message,
                               n.CreateDateTime, n.UserProfileId,
                               u.DisplayName, 
-                              u.Email, u.CreateDateTime
+                              u.Email
                          FROM Notes n
                               LEFT JOIN UserProfile u ON n.UserProfileId = u.id
                         WHERE CreateDateTime < SYSDATETIME() AND u.FirebaseUserId = @FirebaseUserId

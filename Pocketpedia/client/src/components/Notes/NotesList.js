@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Notes from './Notes';
-import { getAllNotes } from "../../modules/notesManager";
+import { getByUser } from "../../modules/notesManager";
 import { Link } from 'react-router-dom';
 
 
@@ -9,7 +9,7 @@ const NotesList = () => {
     const [notes, setNotes] = useState([]);
 
     const getNotes = () => {
-        getAllNotes().then(notes => setNotes(notes));
+        getByUser().then(notes => setNotes(notes));
     };
 
     useEffect(() => {

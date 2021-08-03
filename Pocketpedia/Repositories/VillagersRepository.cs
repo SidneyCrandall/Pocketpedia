@@ -31,7 +31,7 @@ namespace Pocketpedia.Repositories
                 AcnhApiId = apiVillager.id,
                 Name = apiVillager.name.nameUSen,
                 Birthday = apiVillager.birthday,
-                ImageUrl = apiVillager.image_uri,
+                ImageUrl = apiVillager.icon_uri,
 
             }).ToList();
 
