@@ -15,7 +15,8 @@ export const getFishFromApi = () => {
             } else {
                 throw new Error("An unknown error occured while trying to get fish.")
             }
-        }))
+        })
+    )
 };
 
 export const addFish = (fish) => {
@@ -53,3 +54,20 @@ export const getAllFish = () => {
         })
     })
 };
+
+export const getUserFish = () => {
+    return getToken().then((token) => {
+      return fetch(`${baseUrl}/GetUserFish`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error("An unknown error occorred while trying to fetch your posts");
+        }
+      });
+    });
+  };

@@ -9,5 +9,6 @@ namespace Pocketpedia.Repositories
         List<Art> GetAllArt();
         Task<List<Art>> ArtsFromApi();
         void Add(Art art);
+        List<Art> GetArtByUser(string firebaseUserId);
     }
 }

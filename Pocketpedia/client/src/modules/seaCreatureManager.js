@@ -37,3 +37,21 @@ export const addSeaCreature = (seaCreature) => {
         });
     });
 }
+
+
+export const getUserSeaCreatures = () => {
+    return getToken().then((token) => {
+      return fetch(`${baseUrl}/GetUserSeaCreatures`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error("An unknown error occorred while trying to fetch your posts");
+        }
+      });
+    });
+  };

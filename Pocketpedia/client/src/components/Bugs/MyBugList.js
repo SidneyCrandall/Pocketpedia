@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MyBugCard from "./MyBugCard";
 import { getUserBugs } from "../../modules/bugManager";
 
-const MyBugList = ({ bug }) => {
+const MyBugList = () => {
 
     const [bugs, setBugs] = useState([]);
 
@@ -30,5 +30,6 @@ const MyBugList = ({ bug }) => {
             </>
             );
         };
+        
 
 export default MyBugList;

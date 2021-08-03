@@ -4,7 +4,7 @@ import { getbyDisplayName } from "../modules/userManager";
 import firebase from "firebase/app";
 import "firebase/auth";
 
-export const IslanderWelcome = ({ userProfile }) => {
+const IslanderWelcome = ({ userProfile }) => {
 
   // const [currentUser, setCurrentUser] = useState({ DisplayName: "" });
 
@@ -31,3 +31,5 @@ export const IslanderWelcome = ({ userProfile }) => {
     </div>
   );
 };
+
+export default IslanderWelcome;

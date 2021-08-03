@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import { getBugsFromApi } from "../../modules/bugManager";
 import BugCard from "./BugCard";
 
