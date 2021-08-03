@@ -17,8 +17,8 @@ const BugList = () => {
 
     return (
         <>
-            <Link to={`/bugs/GetBugByUser`}>
-                <button>Bug</button>
+            <Link to={`/bugs/GetUserBugs`}>
+                <button className="btn btn-light  m-2">My Bugs</button>
             </Link>
             <div className="container">
                 <div className="row justify-content-center">

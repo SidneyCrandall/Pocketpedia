@@ -39,9 +39,9 @@ export const addBug = (bug) => {
 };
 
 
-export const getBugsByUser = (id) => {
+export const getUserBugs = () => {
     return getToken().then((token) => {
-      return fetch(`${baseUrl}/GetBugsByUser`, {
+      return fetch(`${baseUrl}/GetUserBugs`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Pocketpedia.Controllers
 {
 
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
 

@@ -97,8 +97,13 @@ namespace Pocketpedia.Repositories
 
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT b.Id as BugId, b.AcnhApiId, b.Name, b.LocationId, b.ImageUrl, b.UserProfileId, b.Caught
-                                        FROM Bugs b";
+                    cmd.CommandText = @"SELECT b.Id as BugId, b.AcnhApiId, b.Name, b.LocationId, b.ImageUrl, 
+                                               b.UserProfileId, b.Caught, up.DisplayName, up.Email
+                                        FROM Bugs b
+                                             LEFT JOIN UserProfile up ON b.UserProfileId = up.Id
+                                        WHERE up.FirebaseUserId = @FirebaseUserId";
+
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
 
                     var reader = cmd.ExecuteReader();
 

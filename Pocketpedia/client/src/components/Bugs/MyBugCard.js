@@ -1,36 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardBody } from "reactstrap";
-import { getBugsByUser } from "../../modules/bugManager";
-import AllBugList from "./AllBugList";
 
-
-
-const MyBugCard = () => {
-
-    const [bugs, setBugs] = useState([]);
-
-    const getAllMyBugs = () => {
-        return getBugsByUser()
-            .then(bugs => setBugs(bugs))
-    }
-
-
-    useEffect(() => {
-        getAllMyBugs();
-    }, []);
+const MyBugCard = ({ bug }) => {
 
 
     return (
-        <>
-            <h1>My Bugs</h1>
-            <div className="container">
-                <div className="row justify-content-center">
-                    {bugs.map((bug) => (
-                        <AllBugList bug={bug} key={bug.id} />
-                    ))}
-                </div>
-            </div>
-        </>
+        <Card className="m-2 p-2 w-50 mx-auto">
+            <CardBody className="m-3">
+
+                <img src={bug.imageUrl} alt={bug.name} />
+                <p><b>Name: </b>{bug.name}</p>
+
+            </CardBody>
+        </Card>
+
     );
 };
 

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Pocketpedia.Controllers
 {
-
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 
@@ -55,17 +55,17 @@ namespace Pocketpedia.Controllers
             return CreatedAtAction(nameof(GetAllBugs), new { id = bug.Id }, bug);
         }
 
-        [HttpGet("GetBugsByUser")]
-        public IActionResult GetBugsByUserId(string firebase)
+        [HttpGet("GetUserBugs")]
+        public IActionResult GetUserBugs()
         {
-            var userProfile = GetCurrentUserProfile();
-            if (userProfile == null)
+            var user = GetCurrentUserProfile();
+            if (user == null)
             {
                 return Unauthorized();
             }
             else
             {
-                var bug = _bugsRepository.GetBugsByUserId(userProfile.FirebaseUserId);
+                var bug = _bugsRepository.GetBugsByUserId(user.FirebaseUserId);
                 return Ok(bug);
             }
         }
