@@ -21,7 +21,7 @@ export const getAllNotes = () => {
     });
 };
 
-export const getByUser = (id) => {
+export const getByUser = () => {
     return getToken().then((token) => {
       return fetch(`${baseUrl}/GetByUser`, {
         method: "GET",

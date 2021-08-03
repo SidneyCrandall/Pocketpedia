@@ -13,5 +13,6 @@ namespace Pocketpedia.Repositories
         void Add(Villager villager);
 
         List<Villager> GetVillagers();
+        List<Villager> GetVillagersByUser(string firebaseUserId);
     }
 }

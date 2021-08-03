@@ -16,7 +16,7 @@ import FossilList from "./Fossils/FossilList";
 import SeaCreatureList from "./SeaCreatures/SeaCreatureList";
 import VillagerList from "./Villagers/VillagerList";
 import { IslanderWelcome } from "./Hello";
-import AllBugList from "./Bugs/AllBugList";
+import MyVillagerList from "./Villagers/MyVillagerList";
 
 
 //EXACT PATH can be used when routes begin the same
@@ -79,8 +79,8 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <VillagerList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/bugs/GetBugsByUser">
-                    {isLoggedIn ? <AllBugList /> : <Redirect to="/login" />}
+                <Route path="/villagers/GetUserVillagers">
+                    {isLoggedIn ? <MyVillagerList /> : <Redirect to="/login" />}
                 </Route>
 
             </Switch>

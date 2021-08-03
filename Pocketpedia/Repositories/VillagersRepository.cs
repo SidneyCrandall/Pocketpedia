@@ -30,7 +30,7 @@ namespace Pocketpedia.Repositories
             {
                 AcnhApiId = apiVillager.id,
                 Name = apiVillager.name.nameUSen,
-                Birthday = apiVillager.birthday,
+                Birthday = apiVillager.birthdaystring,
                 ImageUrl = apiVillager.icon_uri,
 
             }).ToList();
@@ -64,6 +64,47 @@ namespace Pocketpedia.Repositories
                             ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                             Birthday = DbUtils.GetString(reader, "Birthday"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId")                      
+                        });
+                    }
+
+                    reader.Close();
+
+                    return villagers;
+                }
+            }
+        }
+
+        public List<Villager> GetVillagersByUser(string FirebaseUserId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT v.Id, v.AcnhApiId, v.Name, v.ImageUrl,
+                                               v.Birthday, v.UserProfileId,
+                                               up.DisplayName, up.Email
+                                        FROM Villagers v
+                                              LEFT JOIN UserProfile up ON v.UserProfileId = up.Id
+                                        WHERE up.FirebaseUserId = @FirebaseUserId";
+
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", FirebaseUserId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var villagers = new List<Villager>();
+
+                    while (reader.Read())
+                    {
+                        villagers.Add(new Villager()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            Birthday = DbUtils.GetString(reader, "Birthday"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
                         });
                     }
 
