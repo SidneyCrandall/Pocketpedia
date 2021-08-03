@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MyFishCard from "./MyFishCard";
 import { getUserFish } from "../../modules/fishManager";
 
-const MyFishList = ({ fish }) => {
+const MyFishList = () => {
 
     const [fishs, setFishs] = useState([]);
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { useHistory, Link } from "react-router-dom";
 import { login } from "../modules/authManager";
-import { getAllUsers, getUserById } from "../modules/authManager";
+
 
 export default function Login() {
   const history = useHistory();

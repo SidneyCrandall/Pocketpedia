@@ -13,10 +13,8 @@ const FishCard = ({ fish }) => {
         location: fish.locationName,
         Caught: false
     });
-    const [locations, setLocations] = useState([]);
 
 
-   
     const handleSaveFish = (evt) => {
         evt.preventDefault()
         addFish({

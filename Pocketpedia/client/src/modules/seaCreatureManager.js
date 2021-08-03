@@ -39,9 +39,9 @@ export const addSeaCreature = (seaCreature) => {
 }
 
 
-export const getUserSeaCreatures = () => {
+export const getUserSeaCreature = () => {
     return getToken().then((token) => {
-      return fetch(`${baseUrl}/GetUserSeaCreatures`, {
+      return fetch(`${baseUrl}/GetUserSeaCreature`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`

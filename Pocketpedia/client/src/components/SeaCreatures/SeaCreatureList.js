@@ -17,8 +17,8 @@ const SeaCreatureList = () => {
 
     return (
         <>
-            <Link to={`/seaCreatures/GetUserSeaCreatures`}>
-                <button className="btn btn-light  m-2">My Bugs</button>
+            <Link to={`/seaCreatures/GetUserSeaCreature`}>
+                <button className="btn btn-light  m-2">My Sea Creatures</button>
             </Link>
 
             <div className="container">

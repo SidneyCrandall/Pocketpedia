@@ -18,7 +18,7 @@ const FossilList = () => {
     return (
         <>
 
-            <Link to={`/fossils/GetUserFossils`}>
+            <Link to={`/fossils/GetUserFossil`}>
                 <button className="btn btn-light  m-2">My Fossils</button>
             </Link>
 

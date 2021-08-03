@@ -74,6 +74,46 @@ namespace Pocketpedia.Repositories
             }
         }
 
+        public List<SeaCreature> GetSeaCreatureByUserId(string firebaseUserId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT s.Id, s.AcnhApiId, s.Name, s.ImageUrl, s.UserProfileId, s.Caught,
+                                               up.DisplayName, up.Email
+                                        FROM SeaCreatures s
+                                             LEFT JOIN UserProfile up ON s.UserProfileId = up.Id
+                                        WHERE up.FirebaseUserId = @FirebaseUserId";
+
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var seaCreatures = new List<SeaCreature>();
+
+                    while (reader.Read())
+                    {
+                        seaCreatures.Add(new SeaCreature()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            Caught = DbUtils.IsDbNull(reader, "Caught"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
+                        });
+                    }
+
+                    reader.Close();
+
+                    return seaCreatures;
+                }
+            }
+        }
+
         public void Add(SeaCreature seaCreature)
         {
             using (var conn = Connection)

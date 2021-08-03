@@ -1,0 +1,34 @@
+import React, { useEffect, useState } from "react";
+import MyFossilsCard from "./MyFossilCard";
+import { getUserFossils } from "../../modules/fossilManager";
+
+const MyFossilList = () => {
+
+    const [fossils, setFossils] = useState([]);
+
+    const getAllMyFossils = () => {
+         getUserFossils().then(fossils => setFossils(fossils))
+    };
+
+
+    useEffect(() => {
+        getAllMyFossils();
+    }, []);
+
+
+        return (
+            <>
+                <h1>My Fossils</h1>
+                <div className="container">
+                    <div className="row justify-content-center">
+                        {fossils.map((fossil) => (
+                            <MyFossilsCard fossil={fossil} key={fossil.id} />
+                        ))}
+                    </div>
+                </div>
+            </>
+            );
+        };
+        
+
+export default MyFossilList;

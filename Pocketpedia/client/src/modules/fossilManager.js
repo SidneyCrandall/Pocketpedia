@@ -40,7 +40,7 @@ export const addFossil = (fossil) => {
 
 export const getUserFossils = () => {
     return getToken().then((token) => {
-      return fetch(`${baseUrl}/GetUserFossils`, {
+      return fetch(`${baseUrl}/GetUserFossil`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
