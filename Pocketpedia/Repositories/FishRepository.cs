@@ -84,6 +84,48 @@ namespace Pocketpedia.Repositories
             }
         }
 
+        public List<Fish> GetFishByUserId(string firebaseUserId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT f.Id as FishId, f.AcnhApiId, f.Name, f.LocationId, f.ImageUrl,
+                                               f.UserProfileId, f.Caught, up.DisplayName, up.Email
+                                        FROM Fish f
+                                             LEFT JOIN UserProfile up ON f.UserProfileId = up.Id
+                                        WHERE up.FirebaseUserId = @FirebaseUserId";
+
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var fishes = new List<Fish>();
+
+                    while (reader.Read())
+                    {
+                        fishes.Add(new Fish()
+                        {
+                            Id = DbUtils.GetInt(reader, "FishId"),
+                            AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            LocationId = DbUtils.GetInt(reader, "LocationId"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
+                        });
+                    }
+
+                    reader.Close();
+
+                    return fishes;
+                }
+            }
+        }
+
+
+
         public void Add(Fish fish)
         {
             using (var conn = Connection)

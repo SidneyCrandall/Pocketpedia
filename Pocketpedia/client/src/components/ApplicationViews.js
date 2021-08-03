@@ -1,8 +1,8 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-//import Hello from "./Hello";
 import Login from "./Login";
 import Register from "./Register";
+import IslanderWelcome  from "./Hello";
 
 import NotesList from "./Notes/NotesList";
 import NotesDetails from "./Notes/NotesDetails";
@@ -15,8 +15,13 @@ import ArtList from "./Art/ArtList";
 import FossilList from "./Fossils/FossilList";
 import SeaCreatureList from "./SeaCreatures/SeaCreatureList";
 import VillagerList from "./Villagers/VillagerList";
-import { IslanderWelcome } from "./Hello";
-import AllBugList from "./Bugs/AllBugList";
+
+import MyVillagerList from "./Villagers/MyVillagerList";
+import MyBugList from "./Bugs/MyBugList";
+import MyArtList from "./Art/MyArtList";
+import MyFishList from "./Fish/MyFishList";
+import MySeaCreatureList from "./SeaCreatures/MySeaCreatureList";
+import MyFossilList from "./Fossils/MyFossilList";
 
 
 //EXACT PATH can be used when routes begin the same
@@ -79,8 +84,28 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <VillagerList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/bugs/GetBugsByUser">
-                    {isLoggedIn ? <AllBugList /> : <Redirect to="/login" />}
+                <Route path="/villagers/GetUserVillagers">
+                    {isLoggedIn ? <MyVillagerList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/bugs/GetUserBugs">
+                    {isLoggedIn ? <MyBugList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/art/GetUserArt">
+                    {isLoggedIn ? <MyArtList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/fish/GetUserFish">
+                    {isLoggedIn ? <MyFishList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/seaCreatures/GetUserSeaCreature">
+                    {isLoggedIn ? <MySeaCreatureList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/fossils/GetUserFossil">
+                    {isLoggedIn ? <MyFossilList /> : <Redirect to="/login" />}
                 </Route>
 
             </Switch>

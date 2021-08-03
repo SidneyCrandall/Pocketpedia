@@ -9,5 +9,6 @@ namespace Pocketpedia.Repositories
         List<Fossil> GetFossils();
         Task<List<Fossil>> FossilsFromApi();
         void Add(Fossil fossils);
+        List<Fossil> GetFossilsByUserId(string firebaseUserId);
     }
 }

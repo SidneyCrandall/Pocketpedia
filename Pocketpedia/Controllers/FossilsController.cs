@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Pocketpedia.Controllers
 {
 
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
 
@@ -51,6 +51,21 @@ namespace Pocketpedia.Controllers
             _fossilsRepository.Add(fossil);
 
             return CreatedAtAction(nameof(GetFossils), new { id = fossil.Id }, fossil);
+        }
+
+        [HttpGet("GetUserFossil")]
+        public IActionResult GetUserFossil()
+        {
+            var user = GetCurrentUserProfile();
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                var fossil = _fossilsRepository.GetFossilsByUserId(user.FirebaseUserId);
+                return Ok(fossil);
+            }
         }
 
         // Get the current user

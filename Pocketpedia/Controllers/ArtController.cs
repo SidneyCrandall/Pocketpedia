@@ -51,6 +51,21 @@ namespace Pocketpedia.Controllers
             return Ok(_artRepository.GetAllArt());
         }
 
+        [HttpGet("GetUserArt")]
+        public IActionResult GetUserArt()
+        {
+            var user = GetCurrentUserProfile();
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                var bug = _artRepository.GetArtByUser(user.FirebaseUserId);
+                return Ok(bug);
+            }
+        }
+
         // Get the current user
         private UserProfile GetCurrentUserProfile()
         {

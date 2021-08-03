@@ -32,21 +32,21 @@ namespace Pocketpedia.Controllers
             return Ok(_notesRepository.GetAll());
         }
 
-        //// Get a user's notes
-        //[HttpGet("GetByUser")]
-        //public IActionResult GetByUser()
-        //{
-        //    var user = GetCurrentUserProfile();
-        //    if (user == null)
-        //    {
-        //        return Unauthorized();
-        //    }
-        //    else
-        //    {
-        //        var notes = _notesRepository.GetUserNotes(user.FirebaseUserId);
-        //        return Ok(notes);
-        //    }
-        //}
+        // Get a user's notes
+        [HttpGet("GetByUser")]
+        public IActionResult GetByUser()
+        {
+            var user = GetCurrentUserProfile();
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                var notes = _notesRepository.GetUserNotes(user.FirebaseUserId);
+                return Ok(notes);
+            }
+        }
 
         // Get a notes by an Id
         [HttpGet("details/{id}")]

@@ -48,6 +48,21 @@ namespace Pocketpedia.Controllers
             return CreatedAtAction(nameof(GetVillagers), new { id = villager.Id }, villager);
         }
 
+        [HttpGet("GetUserVillagers")]
+        public IActionResult GetUserVillagers()
+        {
+            var user = GetCurrentUserProfile();
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            else 
+            {
+                var villagers = _villagersRepository.GetVillagersByUser(user.FirebaseUserId);
+                return Ok(villagers);
+            }
+        }
+
         // Get the current user
         private UserProfile GetCurrentUserProfile()
         {

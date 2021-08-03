@@ -9,5 +9,6 @@ namespace Pocketpedia.Repositories
         Task<List<SeaCreature>> SeaCreaturesFromApi();
         void Add(SeaCreature SeaCreature);
         List<SeaCreature> GetSeaCreatures();
+        List<SeaCreature> GetSeaCreatureByUserId(string firebaseUserId);
     }
 }

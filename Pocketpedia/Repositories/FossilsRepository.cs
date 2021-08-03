@@ -70,6 +70,45 @@ namespace Pocketpedia.Repositories
             }
         }
 
+
+        public List<Fossil> GetFossilsByUserId(string firebaseUserId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT f.Id, f.Name, f.ImageUrl,
+                                               f.UserProfileId, up.DisplayName, up.Email
+                                        FROM Fossils f
+                                             LEFT JOIN UserProfile up ON f.UserProfileId = up.Id
+                                        WHERE up.FirebaseUserId = @FirebaseUserId";
+
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var fossils = new List<Fossil>();
+
+                    while (reader.Read())
+                    {
+                        fossils.Add(new Fossil()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Name = DbUtils.GetString(reader, "Name"),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
+                        });
+                    }
+
+                    reader.Close();
+
+                    return fossils;
+                }
+            }
+        }
+
         public void Add(Fossil fossils)
         {
             using (var conn = Connection)

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getFishFromApi } from "../../modules/fishManager";
 import FishCard from "./FishCard";
+import { Link } from "react-router-dom";
 
 const FishList = () => {
 
-    const [ fishs, setFishs ] = useState([]);
+    const [fishs, setFishs] = useState([]);
 
 
     const getFish = () => {
@@ -17,6 +18,11 @@ const FishList = () => {
 
     return (
         <>
+
+            <Link to={`/fish/GetUserFish`}>
+                <button className="btn btn-light  m-2">My Fish</button>
+            </Link>
+
             <div className="container">
                 <div className="row justify-content-center">
                     {fishs.map((fish) => (

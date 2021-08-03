@@ -49,6 +49,14 @@ namespace Pocketpedia.Repositories
                 Message = reader.GetString(reader.GetOrdinal("Message")),
                 CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
                 UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                UserProfile = new UserProfile()
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                    IslandName = reader.GetString(reader.GetOrdinal("FirstName")),
+                    IslandPhrase = reader.GetString(reader.GetOrdinal("LastName")),
+                    DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
+                    Email = reader.GetString(reader.GetOrdinal("Email")),
+                }
             };
         }
 
@@ -61,10 +69,10 @@ namespace Pocketpedia.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT n.Id,  n.Title, n.Message,
+                       SELECT n.Id, n.Title, n.Message,
                               n.CreateDateTime, n.UserProfileId,
                               u.DisplayName, 
-                              u.Email, u.CreateDateTime
+                              u.Email
                          FROM Notes n
                               LEFT JOIN UserProfile u ON n.UserProfileId = u.id
                         WHERE CreateDateTime < SYSDATETIME() AND u.FirebaseUserId = @FirebaseUserId

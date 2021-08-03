@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Pocketpedia.Controllers
 {
-    [Authorize]
+   
     [Route("api/[controller]")]
     [ApiController]
     public class FishController : ControllerBase
@@ -52,6 +52,21 @@ namespace Pocketpedia.Controllers
             _fishRepository.Add(fish);
 
             return CreatedAtAction(nameof(GetAllFish), new { id = fish.Id }, fish);
+        }
+
+        [HttpGet("GetUserFish")]
+        public IActionResult GetUserFish()
+        {
+            var user = GetCurrentUserProfile();
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                var fish = _fishRepository.GetFishByUserId(user.FirebaseUserId);
+                return Ok(fish);
+            }
         }
 
         // Get the current user
