@@ -2,7 +2,10 @@ import React, {useState} from "react";
 import { Card, CardBody } from "reactstrap";
 import { addFish, getFishFromApi } from "../../modules/fishManager";
 
+
+// Passing the prop of fish that carries properties of that fish.
 const FishCard = ({ fish }) => {
+
 
     const [newFish, setNewFish] = useState({
         id: fish.id,
@@ -41,6 +44,8 @@ const FishCard = ({ fish }) => {
 
             </CardBody>
         </Card>
-    )
+    );
 };
+
+
 export default FishCard;

@@ -21,7 +21,7 @@ const Notes = ({ notes }) => {
                     history.push(`/`);
             })
         }
-    }
+    };
 
     // From the brief preview of a note, a user should see an edit or delete button
     return (

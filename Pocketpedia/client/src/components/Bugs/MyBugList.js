@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import MyBugCard from "./MyBugCard";
 import { getUserBugs } from "../../modules/bugManager";
 
+// The current logged in users Bug list.
 const MyBugList = () => {
 
     const [bugs, setBugs] = useState([]);
 
+    
     const getAllMyBugs = () => {
-        return getUserBugs()
-            .then(bugs => setBugs(bugs))
-    }
+        getUserBugs().then(bugs => setBugs(bugs))
+    };
 
 
     useEffect(() => {
@@ -17,19 +18,19 @@ const MyBugList = () => {
     }, []);
 
 
-        return (
-            <>
-                <h1>My Bugs</h1>
-                <div className="container">
-                    <div className="row justify-content-center">
-                        {bugs.map((bug) => (
-                            <MyBugCard bug={bug} key={bug.id} />
-                        ))}
-                    </div>
+    return (
+        <>
+            <h1>My Bugs</h1>
+            <div className="container">
+                <div className="row justify-content-center">
+                    {bugs.map((bug) => (
+                        <MyBugCard bug={bug} key={bug.id} />
+                    ))}
                 </div>
-            </>
-            );
-        };
-        
+            </div>
+        </>
+    );
+};
+
 
 export default MyBugList;

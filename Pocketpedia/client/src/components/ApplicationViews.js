@@ -84,27 +84,27 @@ export default function ApplicationViews({ isLoggedIn }) {
                     {isLoggedIn ? <VillagerList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/villagers/GetUserVillagers">
+                <Route path="/villagers/GetUserVillagers" exact>
                     {isLoggedIn ? <MyVillagerList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/bugs/GetUserBugs">
+                <Route path="/bugs/GetUserBugs" exact>
                     {isLoggedIn ? <MyBugList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/art/GetUserArt">
+                <Route path="/art/GetUserArt" exact>
                     {isLoggedIn ? <MyArtList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/fish/GetUserFish">
+                <Route path="/fish/GetUserFish" exact>
                     {isLoggedIn ? <MyFishList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/seaCreatures/GetUserSeaCreature">
+                <Route path="/seaCreatures/GetUserSeaCreature" exact>
                     {isLoggedIn ? <MySeaCreatureList /> : <Redirect to="/login" />}
                 </Route>
 
-                <Route path="/fossils/GetUserFossil">
+                <Route path="/fossils/GetUserFossil" exact>
                     {isLoggedIn ? <MyFossilList /> : <Redirect to="/login" />}
                 </Route>
 

@@ -16,7 +16,8 @@ export const getSeaCreaturesFromApi = () => {
             } else {
                 throw new Error("An unknown error occured while trying to get sea creatures.")
             }
-        }))
+        })
+    )
 };
 
 export const addSeaCreature = (seaCreature) => {

@@ -25,12 +25,6 @@ namespace Pocketpedia.Controllers
             _userProfileRepository = userProfileRepository;
         }
 
-        // Get all the notes
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok(_notesRepository.GetAll());
-        }
 
         // Get a user's notes
         [HttpGet("GetByUser")]
@@ -70,7 +64,7 @@ namespace Pocketpedia.Controllers
             notes.CreateDateTime = DateTime.Now;
  
             _notesRepository.Add(notes);
-            return CreatedAtAction(nameof(Get), new { id = notes.Id }, notes);
+            return CreatedAtAction(nameof(GetByUser), new { id = notes.Id }, notes);
         }
 
         // Editting a notes

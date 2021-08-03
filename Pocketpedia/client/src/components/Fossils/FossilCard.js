@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card, CardBody } from "reactstrap";
 import { addFossil, getFossilsFromApi } from "../../modules/fossilManager";
 
+
 const FossilCard = ({ fossils }) => {
 
     const [fossil, setFossil] = useState({
@@ -10,6 +11,7 @@ const FossilCard = ({ fossils }) => {
         imageUrl: fossils.imageUrl,
         discovered: false
     });
+
 
     const handleSaveFossil = (evt) => {
         evt.preventDefault()

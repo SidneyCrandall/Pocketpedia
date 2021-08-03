@@ -36,41 +36,6 @@ namespace Pocketpedia.Repositories
             return desiredResponse;
         }
 
-        public List<Fossil> GetFossils()
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"SELECT fo.Id, fo.Name, fo.ImageUrl, fo.UserProfileId, fo.Discovered
-                                        FROM Fossils fo";
-
-                    var reader = cmd.ExecuteReader();
-
-                    var fossils = new List<Fossil>();
-
-                    while (reader.Read())
-                    {
-                        fossils.Add(new Fossil()
-                        {
-                            Id = DbUtils.GetInt(reader, "Id"),
-                            Name = DbUtils.GetString(reader, "Name"),
-                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
-                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
-                           
-                        });
-                    }
-
-                    reader.Close();
-
-                    return fossils;
-                }
-            }
-        }
-
-
         public List<Fossil> GetFossilsByUserId(string firebaseUserId)
         {
             using (var conn = Connection)

@@ -35,13 +35,6 @@ namespace Pocketpedia.Controllers
             return Ok(bug);
         }
 
-        // GetAllBugs from the local database
-        [HttpGet("GetAllBugs")]
-        public IActionResult GetAllBugs()
-        {
-            return Ok(_bugsRepository.GetAllBugs());
-        }
-
         // Add a bug to the Bug local database
         [HttpPost]
         public IActionResult Create(Bug bug)
@@ -52,7 +45,7 @@ namespace Pocketpedia.Controllers
 
             _bugsRepository.Add(bug);
 
-            return CreatedAtAction(nameof(GetAllBugs), new { id = bug.Id }, bug);
+            return CreatedAtAction(nameof(GetUserBugs), new { id = bug.Id }, bug);
         }
 
         [HttpGet("GetUserBugs")]

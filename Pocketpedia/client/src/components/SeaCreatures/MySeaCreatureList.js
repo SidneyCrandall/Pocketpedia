@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import MySeaCreatureCard from "./MySeaCreatureCard";
 import { getUserSeaCreature } from "../../modules/seaCreatureManager";
 
+// Handling of a user's Sea Creatures that have caught
 const MySeaCreatureList = () => {
 
     const [seacreatures, setSeaCreatures] = useState([]);
 
     const getAllMySeaCreatures = () => {
-         getUserSeaCreature()
-            .then(seacreatures => setSeaCreatures(seacreatures))
+         getUserSeaCreature().then(seacreatures => setSeaCreatures(seacreatures))
     };
 
 

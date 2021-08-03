@@ -16,12 +16,13 @@ const NotesDetails = () => {
     const getNotesDetails = () => {
         getNotesById(id)
             .then(setNotesDetails)
-    }
+    };
 
     // what we want rendered
     useEffect(() => {
         getNotesDetails();
     }, []);
+
 
     return (
         <>

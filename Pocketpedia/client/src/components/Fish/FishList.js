@@ -10,11 +10,11 @@ const FishList = () => {
 
     const getFish = () => {
         getFishFromApi().then(fishs => setFishs(fishs));
-    }
+    };
 
     useEffect(() => {
         getFish();
-    })
+    }, []);
 
     return (
         <>
@@ -30,7 +30,10 @@ const FishList = () => {
                     ))}
                 </div>
             </div>
+            
         </>
-    )
+    );
 };
+
+
 export default FishList;
