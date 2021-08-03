@@ -54,6 +54,21 @@ namespace Pocketpedia.Controllers
             return CreatedAtAction(nameof(GetAllFish), new { id = fish.Id }, fish);
         }
 
+        [HttpGet("GetUserFish")]
+        public IActionResult GetUserFish()
+        {
+            var user = GetCurrentUserProfile();
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            else
+            {
+                var fish = _fishRepository.GetFishByUserId(user.FirebaseUserId);
+                return Ok(fish);
+            }
+        }
+
         // Get the current user
         private UserProfile GetCurrentUserProfile()
         {

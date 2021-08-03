@@ -15,9 +15,11 @@ import ArtList from "./Art/ArtList";
 import FossilList from "./Fossils/FossilList";
 import SeaCreatureList from "./SeaCreatures/SeaCreatureList";
 import VillagerList from "./Villagers/VillagerList";
+
 import MyVillagerList from "./Villagers/MyVillagerList";
 import MyBugList from "./Bugs/MyBugList";
 import MyArtList from "./Art/MyArtList";
+import MyFishList from "./Fish/MyFishList";
 
 
 //EXACT PATH can be used when routes begin the same
@@ -90,6 +92,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/art/GetUserArt">
                     {isLoggedIn ? <MyArtList /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/fish/GetUserFish">
+                    {isLoggedIn ? <MyFishList /> : <Redirect to="/login" />}
                 </Route>
 
             </Switch>

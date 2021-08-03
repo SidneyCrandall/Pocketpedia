@@ -1,27 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ACNHLoFi from '../Images/ACNHLoFi.jpg';
-import { getbyDisplayName } from "../modules/userManager";
-import firebase from "firebase/app";
-import "firebase/auth";
 
-const IslanderWelcome = ({ userProfile }) => {
 
-  // const [currentUser, setCurrentUser] = useState({ DisplayName: "" });
-
-  // const user = firebase.auth().currentUser;
-
-  // const getIslander = () => {
-  //   if (user.displayName == userProfile.displayName) {
-  //     getbyDisplayName (firebase.auth().currentUser.id)
-  //       .then(user => {
-  //         setCurrentUser(user);
-  //       })
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getIslander();
-  // }, [])
+const IslanderWelcome = () => {
 
   return (
     <div className="welcomeContainer">

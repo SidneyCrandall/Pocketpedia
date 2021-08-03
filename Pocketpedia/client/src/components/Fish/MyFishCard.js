@@ -1,16 +1,14 @@
 import React from "react";
 import { Card, CardBody } from "reactstrap";
 
-const MyArtCard = ({ art }) => {
-
+const MyFishCard = ({ fish }) => {
 
     return (
-
         <Card className="m-2 p-2 w-50 mx-auto">
             <CardBody className="m-3">
 
-                <img src={art.imageUrl} alt={art.name} />
-                <p><b>Name: </b>{art.name}</p>
+                <img src={fish.imageUrl} alt={fish.name} />
+                <p><b>Name: </b>{fish.name}</p>
 
             </CardBody>
         </Card>
@@ -18,4 +16,4 @@ const MyArtCard = ({ art }) => {
     );
 };
 
-export default MyArtCard;
+export default MyFishCard;
