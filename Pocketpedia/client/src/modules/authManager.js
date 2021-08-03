@@ -2,7 +2,6 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 
-
 const _apiUrl = "/api/userProfile";
 
 // registering purpose to make sure each user is unique
@@ -117,35 +116,3 @@ export const onLoginStatusChange = (onLoginStatusChangedHandler) => {
   _onLoginStatusChangedHandler = onLoginStatusChangedHandler;
 };
 
-
-// A way to hold on to the logged in the user
-export const getUserProfile = (firebaseUserId) => {
-  return getToken().then((token) => {
-    fetch(`${_apiUrl}/login/${firebaseUserId}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).then(resp => resp.json())
-  })
-};
-
-
-export const getUserById = (id) => {
-  return getToken().then((token) => {
-    return fetch(`${_apiUrl}/GetByUserId/${id}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }).then((resp) => {
-      if (resp.ok) {
-        return resp.json();
-      } else {
-        throw new Error(
-          "An unknown error occurred while trying to get User Profile."
-        );
-      }
-    });
-  });
-};

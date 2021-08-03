@@ -38,23 +38,6 @@ export const addFish = (fish) => {
     });
 };
 
-export const getAllFish = () => {
-    return getToken().then((token) => {
-        return fetch(`${baseUrl}/GetAllFish`, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then(res => {
-            if (res.ok) {
-                return res.json();
-            } else {
-                throw new Error("Something happened while attempting to fetch your fish")
-            }
-        })
-    })
-};
-
 export const getUserFish = () => {
     return getToken().then((token) => {
       return fetch(`${baseUrl}/GetUserFish`, {

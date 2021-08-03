@@ -34,11 +34,6 @@ namespace Pocketpedia.Controllers
             return Ok(seaCreature);
         }
 
-        [HttpGet("GetAll")]
-        public IActionResult GetSeaCreatures()
-        {
-            return Ok(_seaCreaturesRepository.GetSeaCreatures());
-        }
 
         [HttpPost]
         public IActionResult Create(SeaCreature seaCreature)
@@ -49,7 +44,7 @@ namespace Pocketpedia.Controllers
 
             _seaCreaturesRepository.Add(seaCreature);
 
-            return CreatedAtAction(nameof(GetSeaCreatures), new { id = seaCreature.Id }, seaCreature);
+            return CreatedAtAction(nameof(GetUserSeaCreature), new { id = seaCreature.Id }, seaCreature);
         }
 
         [HttpGet("GetUserSeaCreature")]

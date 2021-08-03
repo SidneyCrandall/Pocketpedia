@@ -33,19 +33,13 @@ namespace Pocketpedia.Controllers
             return Ok(villager);
         }
 
-        [HttpGet("GetVillagers")]
-        public IActionResult GetVillagers()
-        {
-            return Ok(_villagersRepository.GetVillagers());
-        }
-
         [HttpPost]
         public IActionResult Create(Villager villager)
         {
             var currentUserProfile = GetCurrentUserProfile();
             villager.UserProfileId = currentUserProfile.Id;
             _villagersRepository.Add(villager);
-            return CreatedAtAction(nameof(GetVillagers), new { id = villager.Id }, villager);
+            return CreatedAtAction(nameof(GetUserVillagers), new { id = villager.Id }, villager);
         }
 
         [HttpGet("GetUserVillagers")]

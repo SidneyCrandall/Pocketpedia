@@ -47,48 +47,6 @@ namespace Pocketpedia.Repositories
             return desiredResponse;
         }
 
-        public List<Bug> GetAllBugs()
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"SELECT b.Id as BugId, b.AcnhApiId, b.Name, b.LocationId, l.Name AS LocationName, b.ImageUrl, b.UserProfileId, b.Caught
-                                        FROM Bugs b
-                                        LEFT JOIN Location l ON b.LocationId = l.id";
-
-                    var reader = cmd.ExecuteReader();
-
-                    var bugs = new List<Bug>();
-
-                    while (reader.Read())
-                    {
-                        bugs.Add(new Bug()
-                        {
-                            Id = DbUtils.GetInt(reader, "BugId"),
-                            AcnhApiId = DbUtils.GetInt(reader, "AcnhApiId"),
-                            Name = DbUtils.GetString(reader, "Name"),
-                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
-                            LocationId = DbUtils.GetInt(reader, "LocationId"),
-                            Location = new Location()
-                            {
-                                Id = DbUtils.GetInt(reader, "LocationId"),
-                                Name = DbUtils.GetString(reader, "LocationName")
-                            },
-                          
-                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
-                        });
-                    }
-
-                    reader.Close();
-
-                    return bugs;
-                }
-            }
-        }
-
         public List<Bug> GetBugsByUserId(string firebaseUserId)
         {
             using (var conn = Connection)

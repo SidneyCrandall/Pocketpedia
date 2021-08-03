@@ -5,7 +5,6 @@ namespace Pocketpedia.Repositories
 {
     public interface INotesRepository
     {
-        List<Notes> GetAll();
         List<Notes> GetUserNotes(string FirebaseUserId);
         Notes GetNotesById(int id);
         void Add(Notes notes);

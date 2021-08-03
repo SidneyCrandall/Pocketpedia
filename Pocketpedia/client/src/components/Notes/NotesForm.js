@@ -22,11 +22,11 @@ const NotesForm = () => {
         const value = evt.target.value;
         // the Notes id 
         const key = evt.target.id;
-
+        // Copy the array of notes so we can add a new note.
         const notesCopy = { ...newNote };
-
+        // Take the key that represents the object of notes and have its value ready 
         notesCopy[key] = value;
-
+        // Set the newly made copy of notes ready for rendering
         setNewNote(notesCopy);
     };
 
@@ -38,6 +38,7 @@ const NotesForm = () => {
             window.alert('The title and message are required.')
 
             setNewNote({
+
                 title: '',
                 message: ''
             })

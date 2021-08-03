@@ -7,6 +7,7 @@ const MyArtList = () => {
 
     const [arts, setArts] = useState([]);
 
+    // This time instead of getting the art from the API, it needs to be pulled for a specific user, 
     const getMyArt = () => {
          getUserArt().then(arts => setArts(arts))
     };

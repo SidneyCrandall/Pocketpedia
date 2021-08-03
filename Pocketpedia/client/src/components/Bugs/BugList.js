@@ -9,11 +9,11 @@ const BugList = () => {
 
     const getBugs = () => {
         getBugsFromApi().then(bugs => setBugs(bugs));
-    }
+    };
 
     useEffect(() => {
         getBugs();
-    })
+    }, []);
 
     return (
         <>

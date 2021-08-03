@@ -30,17 +30,6 @@ namespace Pocketpedia.Controllers
             return Ok(_userProfileRepository.GetAll());
         }
 
-        //[HttpGet("displayName/{displayName}")]
-        //public IActionResult GetByDisplayName(string displayName)
-        //{
-        //    var userProfile = _userProfileRepository.GetByDisplayName(displayName);
-        //    if (userProfile == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(userProfile);
-        //}
-
         // Firebase Authentication. 
         [HttpGet("{firebaseUserId}")]
         public IActionResult GetByFirebaseUserId(string firebaseUserId)

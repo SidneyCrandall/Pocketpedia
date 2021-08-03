@@ -36,12 +36,6 @@ namespace Pocketpedia.Controllers
             return Ok(fish);
         }
 
-        [HttpGet("GetAllFish")]
-        public IActionResult GetAllFish()
-        {
-            return Ok(_fishRepository.GetAllFish());
-        }
-
         [HttpPost]
         public IActionResult Create(Fish fish)
         {
@@ -51,7 +45,7 @@ namespace Pocketpedia.Controllers
 
             _fishRepository.Add(fish);
 
-            return CreatedAtAction(nameof(GetAllFish), new { id = fish.Id }, fish);
+            return CreatedAtAction(nameof(GetUserFish), new { id = fish.Id }, fish);
         }
 
         [HttpGet("GetUserFish")]

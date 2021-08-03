@@ -11,46 +11,6 @@ namespace Pocketpedia.Repositories
     {
         public NotesRepository(IConfiguration configuration) : base(configuration) { }
 
-        // A user will be able to navigate thru a link to see all the notes they have written on their page 
-        public List<Notes> GetAll()
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"SELECT n.Id, n.Title, n.Message, n.CreateDateTime, n.UserProfileId
-                                        FROM Notes n
-                                        ORDER BY n.CreateDateTime Desc";
-
-                    var reader = cmd.ExecuteReader();
-
-                    var notes = new List<Notes>();
-
-                    while (reader.Read())
-                    {
-                        notes.Add(NewNotesFromReader(reader));
-                    }
-
-                    reader.Close();
-
-                    return notes;
-                }
-            }
-        }
-
-        private Notes NewNotesFromReader(SqlDataReader reader)
-        {
-            return new Notes()
-            {
-                Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                Title = reader.GetString(reader.GetOrdinal("Title")),
-                Message = reader.GetString(reader.GetOrdinal("Message")),
-                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
-                UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
-            };
-        }
 
         public List<Notes> GetUserNotes(string FirebaseUserId)
         {
@@ -67,7 +27,7 @@ namespace Pocketpedia.Repositories
                               u.Email
                          FROM Notes n
                               LEFT JOIN UserProfile u ON n.UserProfileId = u.id
-                        WHERE CreateDateTime < SYSDATETIME() AND u.FirebaseUserId = @FirebaseUserId
+                        WHERE u.FirebaseUserId = @FirebaseUserId
                         ORDER BY CreateDateTime DESC";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", FirebaseUserId);
@@ -185,6 +145,18 @@ namespace Pocketpedia.Repositories
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        private Notes NewNotesFromReader(SqlDataReader reader)
+        {
+            return new Notes()
+            {
+                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                Title = reader.GetString(reader.GetOrdinal("Title")),
+                Message = reader.GetString(reader.GetOrdinal("Message")),
+                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
+                UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+            };
         }
     }
 }

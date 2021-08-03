@@ -19,15 +19,15 @@ const NotesList = () => {
     return (
         <>
             <section className="section-content">
-            <Link to={`/notes/add`}>
-                <button className="btn btn-light  m-2">Add a Note</button>
-            </Link>
+                <Link to={`/notes/add`}>
+                    <button className="btn btn-light  m-2">Add a Note</button>
+                </Link>
             </section>
             <div className="m-3">
                 <div className="container">
                     <div className="row m-3 justify-content-center">
                         {notes.map((notes) => (
-                            <Notes notes={notes} key={notes.id}  />
+                            <Notes notes={notes} key={notes.id} />
                         ))}
                     </div>
                 </div>

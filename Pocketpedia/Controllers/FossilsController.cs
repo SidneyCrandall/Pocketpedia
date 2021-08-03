@@ -35,11 +35,6 @@ namespace Pocketpedia.Controllers
             return Ok(fossil);
         }
 
-        [HttpGet("Get")]
-        public IActionResult GetFossils()
-        {
-            return Ok(_fossilsRepository.GetFossils());
-        }
 
         [HttpPost]
         public IActionResult Create(Fossil fossil)
@@ -50,7 +45,7 @@ namespace Pocketpedia.Controllers
 
             _fossilsRepository.Add(fossil);
 
-            return CreatedAtAction(nameof(GetFossils), new { id = fossil.Id }, fossil);
+            return CreatedAtAction(nameof(GetUserFossil), new { id = fossil.Id }, fossil);
         }
 
         [HttpGet("GetUserFossil")]

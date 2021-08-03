@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Card, CardBody } from "reactstrap";
 import { getBugsFromApi, addBug } from "../../modules/bugManager";
 
-
+// This page is responsible for handling the save feature of the app. 
+// And it will also be a representation of how the data will be displayed
 const BugCard = ({ bug }) => {
 
     const [newBug, setNewBug] = useState({
@@ -26,6 +27,7 @@ const BugCard = ({ bug }) => {
             caught: true,
             userProfileId: newBug.userProfileId
         })
+            // I would like the page to stay on the generated API list
             .then(() => { getBugsFromApi() })
     };
 

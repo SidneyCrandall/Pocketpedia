@@ -42,13 +42,7 @@ namespace Pocketpedia.Controllers
 
             _artRepository.Add(art);
 
-            return CreatedAtAction(nameof(GetAllArt), new { id = art.Id }, art);
-        }
-
-        [HttpGet("GetAllArt")]
-        public IActionResult GetAllArt()
-        {
-            return Ok(_artRepository.GetAllArt());
+            return CreatedAtAction(nameof(GetUserArt), new { id = art.Id }, art);
         }
 
         [HttpGet("GetUserArt")]
