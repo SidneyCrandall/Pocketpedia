@@ -1,6 +1,7 @@
 import React, {useState} from "react";
-import { Card, CardBody } from "reactstrap";
+import { CardGroup, CardBody, CardText, CardTitle, Button, CardImg } from "reactstrap";
 import { addFish, getFishFromApi } from "../../modules/fishManager";
+import "./Fish.css";
 
 
 // Styling for cards
@@ -13,7 +14,7 @@ const style = { width: "18rem" };
 const FishCard = ({ fish }) => {
 
 
-    const [newFish, setNewFish] = useState({
+    const [ newFish ] = useState({
         id: fish.id,
         acnhApiId: fish.acnhApiId,
         name: fish.name,
@@ -39,17 +40,16 @@ const FishCard = ({ fish }) => {
     };
 
     return (
-        <Card style={style}>
+        <CardGroup style={style} className="card-deck">
             <CardBody className="m-3">
 
-                <img src={fish.imageUrl} alt={fish.name} />
-                <p><b>Name: </b>{fish.name}</p>
-                <p><b>Location: </b>{fish.locationName}</p>
-
-                <button onClick={handleSaveFish}>Caught</button>
-
+                <CardImg variant="top"  src={fish.imageUrl} alt={fish.name} />
+                <CardTitle><b>Name: </b>{fish.name}</CardTitle>
+                <CardText><b>Location: </b>{fish.locationName}</CardText>
+                <br />
+                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveFish}>Caught</Button>
             </CardBody>
-        </Card>
+        </CardGroup>
     );
 };
 

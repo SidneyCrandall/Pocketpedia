@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getFossilsFromApi } from "../../modules/fossilManager";
 import FossilCard from "./FossilCard";
 import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
+
 
 const FossilList = () => {
 
@@ -9,17 +11,16 @@ const FossilList = () => {
 
     const getFossils = () => {
         getFossilsFromApi().then(fossils => setFossils(fossils));
-    }
+    };
 
     useEffect(() => {
         getFossils();
-    })
+    }, []);
 
     return (
         <>
-
             <Link to={`/fossils/GetUserFossil`}>
-                <button className="btn btn-light  m-2">My Fossils</button>
+                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo">My Fossils</Button>
             </Link>
 
             <div className="container">
@@ -30,7 +31,7 @@ const FossilList = () => {
                 </div>
             </div>
         </>
-    )
+    );
 };
 
 export default FossilList;

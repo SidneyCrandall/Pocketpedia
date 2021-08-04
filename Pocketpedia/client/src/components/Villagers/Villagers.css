@@ -1,9 +1,12 @@
 .card-deck {
-    box-shadow: 0 4px 8px 0 #74e0aa;
+    box-shadow:  8px 10px #74e0aa;
     transition: 0.3s;
     color: #246D82; 
     background-color: #F0F0E6!important;
-    object-fit: cover;
-    width: 18rem;
+    object-fit: fill;
     align-items: center;
+}
+
+card {
+    background-color: antiquewhite;
 }

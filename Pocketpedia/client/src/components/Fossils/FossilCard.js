@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Card, CardBody } from "reactstrap";
+import { CardGroup, CardBody, CardTitle, Button, CardImg } from "reactstrap";
 import { addFossil, getFossilsFromApi } from "../../modules/fossilManager";
+import "./Fossils.css";
 
 // Styling for cards
 const style = { width: "18rem" };
@@ -30,15 +31,16 @@ const FossilCard = ({ fossils }) => {
     };
 
     return (
-        <Card style={style}>
-            <CardBody className="m-3">
 
-                <img src={fossils.imageUrl} alt={fossils.name} />
-                <p><b>Name: </b>{fossils.name}</p>
-                <button onClick={handleSaveFossil} disabled={handleSaveFossil ? false : true}>Discovered!</button>
-                
+        <CardGroup style={style} className="card-deck">
+            <CardBody className="m-3">
+                <CardImg variant="top" src={fossils.imageUrl} alt={fossils.name} />
+                <CardTitle><b>Name: </b>{fossils.name}</CardTitle>
+                <br />
+                <Button onClick={handleSaveFossil}  style={{ backgroundColor: '#BCA4BF' }} href="#pablo">Discovered!</Button>          
             </CardBody>
-        </Card>
+        </CardGroup>
+        
     )
 };
 

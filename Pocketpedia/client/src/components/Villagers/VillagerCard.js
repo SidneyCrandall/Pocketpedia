@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, CardBody, CardGroup } from "reactstrap";
+import { CardImg, CardBody, CardGroup, Button, CardTitle } from "reactstrap";
 import { getVillagersFromApi, addVillager } from "../../modules/villagerManager";
 
 // Styling for cards
@@ -9,7 +9,7 @@ const style = { width: "18rem" };
 // And it will also be a representation of how the data will be displayed
 const VillagerCard = ({ villagers }) => {
 
-    const [villager, setVillager] = useState({
+    const [ villager ] = useState({
         id: villagers.id,
         acnhApiId: villagers.acnhApiId,
         name: villagers.name,
@@ -33,18 +33,17 @@ const VillagerCard = ({ villagers }) => {
     };
 
     return (
-        <Card stlye={style}>
-            <CardGroup className="card-deck">
+     
+            <CardGroup style={style} className="card-deck">
                 <CardBody id="cardContainer" className="m-3">
-                    <img src={villagers.imageUrl} alt={villagers.name} />
-                    <p><b>Name: </b>{villagers.name}</p>
+                    <CardImg variant="top" src={villagers.imageUrl} alt={villagers.name} />
+                    <CardTitle><b>Name: </b>{villagers.name}</CardTitle>
                     <p><b>Birthday: </b>{villagers.birthday}</p>
-
-                    <button onClick={handleSaveVillager}>Residing on my Island</button>
+                    <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveVillager}>My neighbor</Button>
                 </CardBody>
             </CardGroup>
-        </Card>
-    )
+    
+    );
 };
 
 export default VillagerCard;

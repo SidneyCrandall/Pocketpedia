@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getFishFromApi } from "../../modules/fishManager";
 import FishCard from "./FishCard";
 import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
 
 const FishList = () => {
 
@@ -20,7 +21,7 @@ const FishList = () => {
         <>
 
             <Link to={`/fish/GetUserFish`}>
-                <button className="btn btn-light  m-2">My Fish</button>
+                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo">My Fish</Button>
             </Link>
 
             <div className="container">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Card, CardBody, CardImg, CardText, CardTitle, CardGroup } from "reactstrap";
+import { Button, CardBody, CardImg, CardText, CardTitle, CardGroup } from "reactstrap";
 import { addArt, getArtFromApi } from "../../modules/artManager";
 import "./Art.css";
 
@@ -38,9 +38,8 @@ const ArtCard = ({ arts }) => {
     };
 
     return (
-
-        <Card style={style}>
-            <CardGroup className="card-deck">
+       
+            <CardGroup style={style} className="card-deck">
                 <CardBody id="cardContainer" className="m-3">
                     <CardImg variant="top" src={arts.imageUrl} alt={arts.name} ></CardImg>
                     <CardTitle><b>Name: </b>{arts.name.toUpperCase()}</CardTitle>
@@ -49,7 +48,6 @@ const ArtCard = ({ arts }) => {
                     <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveArt}>Purchased</Button>
                 </CardBody>
             </CardGroup>
-        </Card>
        
     );
 };

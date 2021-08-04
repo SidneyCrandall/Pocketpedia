@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, CardBody } from "reactstrap";
+import { CardGroup, CardBody, CardImg, CardTitle, Button } from "reactstrap";
 import { addSeaCreature, getSeaCreaturesFromApi } from "../../modules/seaCreatureManager";
 
 // Styling for cards
@@ -9,7 +9,7 @@ const style = { width: "18rem" };
 // And it will also be a representation of how the data will be displayed
 const SeaCreatureCard = ({ seacreatures }) => {
 
-    const [ newSeacreature, setNewSeacreature ] = useState({
+    const [ newSeacreature ] = useState({
         id: seacreatures.id,
         acnhApiId: seacreatures.acnhApiId,
         name: seacreatures.name,
@@ -32,16 +32,15 @@ const SeaCreatureCard = ({ seacreatures }) => {
 
 
     return (
-        <Card style={style}>
+        <CardGroup style={style} className="card-deck">
             <CardBody className="m-3">
-
-                <img src={seacreatures.imageUrl} alt={seacreatures.name} />
-                <p><b>Name: </b>{seacreatures.name.toString()}</p>
-                <button onClick={handleSaveSeaCreature}>Caught</button>
-
+                <CardImg src={seacreatures.imageUrl} alt={seacreatures.name} />
+                <CardTitle><b>Name: </b>{seacreatures.name.toUpperCase()}</CardTitle>
+                <br />
+                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveSeaCreature}>Caught</Button>
             </CardBody>
-        </Card>
-    )
+        </CardGroup>
+    );
 };
 
 export default SeaCreatureCard;
