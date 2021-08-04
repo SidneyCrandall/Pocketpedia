@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Card, CardBody } from "reactstrap";
 import { getBugsFromApi, addBug } from "../../modules/bugManager";
 
+// Styling for the card container
+const style = { width: "18rem" };
+
 // This page is responsible for handling the save feature of the app. 
 // And it will also be a representation of how the data will be displayed
 const BugCard = ({ bug }) => {
@@ -33,7 +36,7 @@ const BugCard = ({ bug }) => {
 
 
     return (
-        <Card className="m-2 p-2 w-50 mx-auto">
+        <Card style={style}>
             <CardBody className="m-3">
 
                 <img src={bug.imageUrl} alt={bug.name} />

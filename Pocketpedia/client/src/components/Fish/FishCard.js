@@ -3,6 +3,12 @@ import { Card, CardBody } from "reactstrap";
 import { addFish, getFishFromApi } from "../../modules/fishManager";
 
 
+// Styling for cards
+const style = { width: "18rem" };
+
+
+// This page is responsible for handling the save feature of the app. 
+// And it will also be a representation of how the data will be displayed
 // Passing the prop of fish that carries properties of that fish.
 const FishCard = ({ fish }) => {
 
@@ -33,7 +39,7 @@ const FishCard = ({ fish }) => {
     };
 
     return (
-        <Card className="m-2 p-2 w-50 mx-auto">
+        <Card style={style}>
             <CardBody className="m-3">
 
                 <img src={fish.imageUrl} alt={fish.name} />

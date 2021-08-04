@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { addNotes } from '../../modules/notesManager';
+import "./Note.css";
 
 const NotesForm = () => {
 
@@ -55,7 +56,7 @@ const NotesForm = () => {
 
     return (
         
-        <Form className="container w-75">
+        <Form className="noteForm">
             <h2>New Note</h2>
             <br/>
             <FormGroup>
@@ -72,7 +73,7 @@ const NotesForm = () => {
             </FormGroup>
 
             <Button className="btn btn-primary" onClick={handleSave}>Submit</Button>
-    
+            <br/>
             <Button className="btn btn-primary" onClick={() => history.push(`/`)}>Cancel</Button>
 
         </Form>

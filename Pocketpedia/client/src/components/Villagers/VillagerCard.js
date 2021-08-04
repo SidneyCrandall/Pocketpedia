@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { Card, CardBody } from "reactstrap";
+import { Card, CardBody, CardGroup } from "reactstrap";
 import { getVillagersFromApi, addVillager } from "../../modules/villagerManager";
 
+// Styling for cards
+const style = { width: "18rem" };
+
+// This page is responsible for handling the save feature of the app. 
+// And it will also be a representation of how the data will be displayed
 const VillagerCard = ({ villagers }) => {
 
     const [villager, setVillager] = useState({
@@ -28,16 +33,16 @@ const VillagerCard = ({ villagers }) => {
     };
 
     return (
-        <Card className="m-2 p-2 w-50 mx-auto">
-            <CardBody className="m-3">
+        <Card stlye={style}>
+            <CardGroup className="card-deck">
+                <CardBody id="cardContainer" className="m-3">
+                    <img src={villagers.imageUrl} alt={villagers.name} />
+                    <p><b>Name: </b>{villagers.name}</p>
+                    <p><b>Birthday: </b>{villagers.birthday}</p>
 
-                <img src={villagers.imageUrl} alt={villagers.name} />
-                <p><b>Name: </b>{villagers.name}</p>
-                <p><b>Birthday: </b>{villagers.birthday}</p>
-
-                <button onClick={handleSaveVillager}>Residing on my Island</button>
-
-            </CardBody>
+                    <button onClick={handleSaveVillager}>Residing on my Island</button>
+                </CardBody>
+            </CardGroup>
         </Card>
     )
 };

@@ -10,6 +10,7 @@ import {
   NavLink
 } from 'reactstrap';
 import { logout } from '../modules/authManager';
+import marshal from '../Images/marshal.jpg';
 
 export default function Header({ isLoggedIn }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,8 +18,8 @@ export default function Header({ isLoggedIn }) {
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand tag={RRNavLink} to="/">Pocketpedia</NavbarBrand>
+      <Navbar className="navBar" light expand="md" style={{ backgroundColor: '#BCA4BF' }} position="static">
+        <NavbarBrand><img className="marshal" src={marshal} alt="Marshall at night"/></NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>

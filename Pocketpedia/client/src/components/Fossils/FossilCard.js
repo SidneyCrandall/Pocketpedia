@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { Card, CardBody } from "reactstrap";
 import { addFossil, getFossilsFromApi } from "../../modules/fossilManager";
 
+// Styling for cards
+const style = { width: "18rem" };
 
+// This page is responsible for handling the save feature of the app. 
+// And it will also be a representation of how the data will be displayed
 const FossilCard = ({ fossils }) => {
 
-    const [fossil, setFossil] = useState({
+    const [fossil] = useState({
         id: fossils.id,
         name: fossils.name,
         imageUrl: fossils.imageUrl,
@@ -26,7 +30,7 @@ const FossilCard = ({ fossils }) => {
     };
 
     return (
-        <Card className="m-2 p-2 w-50 mx-auto">
+        <Card style={style}>
             <CardBody className="m-3">
 
                 <img src={fossils.imageUrl} alt={fossils.name} />

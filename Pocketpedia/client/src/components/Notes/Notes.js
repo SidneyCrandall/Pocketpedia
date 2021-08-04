@@ -3,6 +3,9 @@ import { Card, CardBody } from "reactstrap";
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router";
 import { deleteNotes } from "../../modules/notesManager";
+import "./Note.css";
+
+
 
 const Notes = ({ notes }) => {
 
@@ -25,7 +28,7 @@ const Notes = ({ notes }) => {
 
     // From the brief preview of a note, a user should see an edit or delete button
     return (
-        <Card className="m-2 p-2 w-50 mx-auto">
+        <Card className="noteContainer">
             <CardBody className="m-3">
                 <Link to={`/notes/details/${notesId}`}>
                     <p><b>Title: </b>{notes.title}</p>

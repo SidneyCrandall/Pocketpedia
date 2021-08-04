@@ -1,0 +1,35 @@
+.noteContainer{
+    padding: 5px!important;
+    margin-top: 17px!important;
+    margin-bottom: 10px;
+    background-color: #F0F0E6!important;
+    width: 50%;
+    color: #246D82 
+}
+
+.noteForm{
+    margin: 50px 80px 50px 80px;
+    padding: 30px;
+    background-color: #F0F0E6;
+    color: #246D82;
+    border: #74e0aa solid 5px;
+    border-radius: 6px;
+    line-height: 2em;
+    opacity: .98;     
+}
+
+.btn {
+    max-width: 9em;
+    padding: .5em;
+    margin: .3em auto;
+    background-color: #BCA4BF;
+    border: none;
+    color: cornsilk;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 2px;
+    width: 100%;
+    cursor: pointer;
+}
