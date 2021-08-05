@@ -1,22 +1,25 @@
 import React from "react";
-import { Card, CardBody } from "reactstrap";
+import { CardBody, CardImg, CardTitle, CardGroup } from "reactstrap";
+import "./Art.css";
 
 
+// Styling for cards
+const style = { width: "18rem" };
+
+
+// This page is responsible for handling the save feature of the app. 
+// And it will also be a representation of how the data will be displayed
 // A user a specific info page that displays that Current logged in user's Art that they have collected.
 const MyArtCard = ({ art }) => {
 
-    
-    return (
 
-        <Card className="m-2 p-2 w-50 mx-auto">
-            <CardBody className="m-3">
-
-                <img src={art.imageUrl} alt={art.name} />
-                <p><b>Name: </b>{art.name}</p>
-
+    return (     
+       <CardGroup style={style} className="card-deck">
+            <CardBody id="cardContainer" className="m-3">
+                <CardImg variant="top" src={art.imageUrl} alt={art.name} ></CardImg>
+                <CardTitle><b>Name: </b>{art.name.toUpperCase()}</CardTitle>
             </CardBody>
-        </Card>
-
+        </CardGroup>   
     );
 };
 

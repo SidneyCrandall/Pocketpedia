@@ -1,13 +1,63 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: antiquewhite;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.navBar {
+  background-color: antiquewhite;
+  display: flex;
+  flex-wrap: row;
+  justify-items: flex-end;
+  font-size: x-large;
+  font-weight: bolder;
+  padding: 0rem;
+}
+
+navItem {
+  flex-basis: 20%;
+  justify-content: space-evenly;
+}
+
+.marshal {
+  height: 80px;
+  width: 80px;
+  object-fit: fill;
+  border-radius: 100%;
+  border: 3px solid black;
+  margin-right: 2;
+}
+
+.hompage{
+  overflow: hidden;
+  overflow-y: hidden;
+}
+
+.welcome{
+ padding: 1rem;
+ font-size: 15px;
+ justify-content: last baseline;
+ margin-top: 3rem;
+}
+
+.lofi{
+  padding: 5rem;
+  margin-top: 100em;
+}
+
+.loginForm, .registerForm {
+  margin: 50px 80px 50px 80px;
+  padding: 30px;
+  background-color: #F0F0E6;
+  color: #246D82;
+  border: #74e0aa solid 5px;
+  border-radius: 6px;
+  line-height: 2em;
+  opacity: .98;
 }

@@ -15,6 +15,8 @@ const MyVillagerList = () => {
     }, []);
 
     return (
+        <>
+        <h1 className="text-center">Villagers who have been on my Island!</h1>
         <div className="container">
                 <div className="row justify-content-center">
                     {villagers.map((villager) => (
@@ -22,6 +24,7 @@ const MyVillagerList = () => {
                     ))}
                 </div>
         </div>
+        </>
     );
 };
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { updateNotes, getNotesById } from '../../modules/notesManager';
+import "./Note.css";
 
 const NotesEdit = () => {
 
@@ -54,26 +55,20 @@ const NotesEdit = () => {
     }, [id]);
 
     return (
-        <Form className="container w-75">
+        <Form className="noteForm">
             <h2 className="text-center">Edit Island Notes</h2>
             <FormGroup>
                 <Label for="title">Title</Label>
-                <Input type="text" name="title" id="title" placeholder="Edit Title"
-                    value={editNotes.title}
-                    onChange={handleInputChange} />
+                <Input type="text" name="title" id="title" placeholder="Edit Title" value={editNotes.title}  onChange={handleInputChange}/>
             </FormGroup>
             <br/>
             <FormGroup>
-                <textarea type="text" name="message" id="message" placeholder="Edit the Message"
-                    value={editNotes.message}
-                    rows="10" cols="145"
-                    onChange={handleInputChange} />
+                <textarea type="text" name="message" id="message" placeholder="Edit the Message" value={editNotes.message} rows="10" cols="145" onChange={handleInputChange} />
             </FormGroup>
             {/* When the user hits submit the details of the newly edited note will render*/}
-            <Button className="btn btn-primary" onClick={handleUpdate}>Submit</Button>
+            <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} onClick={handleUpdate}>Submit</Button>
             {/* When the user hits cancel the notes page will render, taking the user back to their list of notes*/}
-            <Button className="btn btn-primary" onClick={() => history.push(`/notes`)}>Cancel</Button>
-
+            <Button className="btn" onClick={() => history.push(`/notes`)}>Cancel</Button>
         </Form>
     );
 };

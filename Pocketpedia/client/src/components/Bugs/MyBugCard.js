@@ -1,20 +1,22 @@
 import React from "react";
-import { Card, CardBody } from "reactstrap";
+import { CardTitle, CardBody, CardGroup, CardImg } from "reactstrap";
+import "./Bug.css";
 
+// Styling for the card container
+const style = { width: "18rem" };
 
+// This page is responsible for handling the save feature of the app. 
+// And it will also be a representation of how the data will be displayed
 const MyBugCard = ({ bug }) => {
 
 
     return (
-        <Card className="m-2 p-2 w-50 mx-auto">
+        <CardGroup style={style} className="card-deck">
             <CardBody className="m-3">
-
-                <img src={bug.imageUrl} alt={bug.name} />
-                <p><b>Name: </b>{bug.name}</p>
-
+                <CardImg variant="top" src={bug.imageUrl} alt={bug.name} />
+                <CardTitle><b>Name: </b>{bug.name}</CardTitle>
             </CardBody>
-        </Card>
-
+        </CardGroup>
     );
 };
 

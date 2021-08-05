@@ -4,6 +4,7 @@ import "firebase/auth";
 
 const _apiUrl = "/api/userProfile";
 
+
 // registering purpose to make sure each user is unique
 const _doesUserExist = (firebaseUserId) => {
   return getToken().then((token) =>

@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { getSeaCreaturesFromApi } from "../../modules/seaCreatureManager";
 import SeaCreatureCard from "./SeaCreatureCard";
 import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
 
+
+// The program uses an external API in order to pull its data.
+// After we have representation of the data we need to list it to the DOM.  
 const SeaCreatureList = () => {
 
     const [seaCreatures, setSeaCreatures] = useState([]);
@@ -13,12 +17,12 @@ const SeaCreatureList = () => {
 
     useEffect(() => {
         getSeaCreatures();
-    })
+    }, []);
 
     return (
         <>
             <Link to={`/seaCreatures/GetUserSeaCreature`}>
-                <button className="btn btn-light  m-2">My Sea Creatures</button>
+                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo">My Sea Creatures</Button>
             </Link>
 
             <div className="container">

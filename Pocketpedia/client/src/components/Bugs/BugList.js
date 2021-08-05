@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
 import { getBugsFromApi } from "../../modules/bugManager";
 import BugCard from "./BugCard";
 
@@ -18,7 +19,7 @@ const BugList = () => {
     return (
         <>
             <Link to={`/bugs/GetUserBugs`}>
-                <button className="btn btn-light  m-2">My Bugs</button>
+                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" className="btn">My Bugs</Button>
             </Link>
 
             <div className="container">
@@ -29,7 +30,7 @@ const BugList = () => {
                 </div>
             </div>
         </>
-    )
+    );
 };
 
 export default BugList;

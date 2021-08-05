@@ -1,16 +1,23 @@
 import React from "react";
-import { Card, CardBody } from "reactstrap";
+import { CardImg, CardBody, CardGroup, CardTitle, CardText } from "reactstrap";
+import "./Villagers.css";
+
+// Styling for cards
+const style = { width: "18rem" };
 
 const MyVillagerCard = ({ villagers }) => {
 
     return (
-        <Card className="m-2 p-2 w-50 mx-auto">
-        <CardBody className="m-3">
-        <img src={villagers.imageUrl} alt={villagers.name} />
-                <p><b>Name: </b>{villagers.name}</p>
-                <p><b>Birthday: </b>{villagers.birthday}</p>
-        </CardBody>
-        </Card>
+        <>
+        <br />
+        <CardGroup style={style} className="card-deck">
+            <CardBody id="cardContainer" className="m-3">
+                <CardImg variant="top" src={villagers.imageUrl} alt={villagers.name} />
+                <CardTitle><b>Name: </b>{villagers.name}</CardTitle>
+                <CardText><b>Birthday: </b>{villagers.birthday}</CardText>
+            </CardBody>
+        </CardGroup>
+        </>
     );
 };
 

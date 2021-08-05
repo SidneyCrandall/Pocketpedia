@@ -1,13 +1,19 @@
-import React, {useState} from "react";
-import { Card, CardBody } from "reactstrap";
+import React, { useState } from "react";
+import { Button, CardBody, CardImg, CardText, CardTitle, CardGroup } from "reactstrap";
 import { addArt, getArtFromApi } from "../../modules/artManager";
+import "./Art.css";
+
+
+// Styling for cards
+const style = { width: "18rem" };
+
 
 // This page is responsible for handling the save feature of the app. 
 // And it will also be a representation of how the data will be displayed
 const ArtCard = ({ arts }) => {
 
     // We need to render what state the object will be when it is presented to us before we send it to the database.
-    const [ art, setArt ] = useState({
+    const [art] = useState({
         id: arts.id,
         acnhApiId: arts.acnhApiId,
         name: arts.name,
@@ -32,17 +38,17 @@ const ArtCard = ({ arts }) => {
     };
 
     return (
-        <Card className="m-2 p-2 w-50 mx-auto">
-            <CardBody className="m-3">
 
-                <img src={arts.imageUrl} alt={arts.name} />
-                <p><b>Name: </b>{arts.name.toUpperCase()}</p>
-                <p><b>There is a fake: </b>{arts.hasFake.toString()}</p>
-                <br/>
-                <button onClick={handleSaveArt}>Purchased</button>
-
+        <CardGroup style={style} className="card-deck">
+            <CardBody id="cardContainer" className="m-3">
+                <CardImg variant="top" src={arts.imageUrl} alt={arts.name} ></CardImg>
+                <CardTitle><b>Name: </b>{arts.name.toUpperCase()}</CardTitle>
+                <CardText><b>Redd sells a fake: </b>{arts.hasFake.toString()}</CardText>
+                <br />
+                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveArt}>Purchased</Button>
             </CardBody>
-        </Card>
+        </CardGroup>
+
     );
 };
 

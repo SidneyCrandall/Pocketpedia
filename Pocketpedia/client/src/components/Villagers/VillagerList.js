@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getVillagersFromApi } from "../../modules/villagerManager";
 import VillagerCard from "./VillagerCard";
 import { Link } from 'react-router-dom';
+import { Button } from "reactstrap";
 
 const VillagerList = () => {
 
@@ -19,7 +20,7 @@ const VillagerList = () => {
     return (
         <>
             <Link to={`/villagers/GetUserVillagers`}>
-                <button className="btn btn-light  m-2">My Villagers</button>
+                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" className="btn">My Villagers</Button>
             </Link>
             <div className="container">
                 <div className="row justify-content-center">

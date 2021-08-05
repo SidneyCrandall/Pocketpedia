@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import { Card, CardBody } from "reactstrap";
+import { CardTitle, CardBody, CardGroup, Button, CardText, CardImg } from "reactstrap";
 import { getBugsFromApi, addBug } from "../../modules/bugManager";
+
+
+
+// Styling for the card container
+const style = { width: "18rem" };
 
 // This page is responsible for handling the save feature of the app. 
 // And it will also be a representation of how the data will be displayed
 const BugCard = ({ bug }) => {
 
-    const [newBug, setNewBug] = useState({
+    const [newBug] = useState({
         id: bug.id,
         acnhApiId: bug.acnhApiId,
         name: bug.name,
@@ -33,18 +38,20 @@ const BugCard = ({ bug }) => {
 
 
     return (
-        <Card className="m-2 p-2 w-50 mx-auto">
+
+        <CardGroup style={style} className="card-deck">
             <CardBody className="m-3">
 
-                <img src={bug.imageUrl} alt={bug.name} />
-                <p><b>Name: </b>{bug.name}</p>              
-                <p><b>Location: </b>{bug.locationName}</p>    
-                            
-                <button onClick={handleSaveBug}>Caught!</button>
+                <CardImg variant="top"  src={bug.imageUrl} alt={bug.name} />
+                <CardTitle><b>Name: </b>{bug.name}</CardTitle>
+                <CardText><b>Location: </b>{bug.locationName}</CardText>
+                <br />
+                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveBug}>Caught!</Button>
 
             </CardBody>
-        </Card>
-    )
+        </CardGroup>
+
+    );
 };
 
 export default BugCard;

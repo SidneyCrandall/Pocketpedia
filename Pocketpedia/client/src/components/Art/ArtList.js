@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "reactstrap";
 import { getArtFromApi } from "../../modules/artManager";
 import ArtCard from "./ArtCard";
 import { Link } from "react-router-dom";
@@ -25,7 +26,7 @@ const ArtList = () => {
     return (
         <>
             <Link to={`/art/GetUserArt`}>
-                <button className="btn btn-light  m-2">My Art</button>
+                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo">My Art</Button>
             </Link>
 
             <div className="container">

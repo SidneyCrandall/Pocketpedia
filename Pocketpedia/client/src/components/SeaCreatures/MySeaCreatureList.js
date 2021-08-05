@@ -19,7 +19,7 @@ const MySeaCreatureList = () => {
 
         return (
             <>
-                <h1>My Sea Creatures</h1>
+                <h1 className="text-center">My Sea Creatures</h1>
                 <div className="container">
                     <div className="row justify-content-center">
                         {seacreatures.map((seacreature) => (
