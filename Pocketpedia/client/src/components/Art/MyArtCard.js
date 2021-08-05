@@ -17,7 +17,7 @@ const MyArtCard = ({ art }) => {
        <CardGroup style={style} className="card-deck">
             <CardBody id="cardContainer" className="m-3">
                 <CardImg variant="top" src={art.imageUrl} alt={art.name} ></CardImg>
-                <CardTitle><b>Name: </b>{art.name.toUpperCase()}</CardTitle>
+                <CardTitle><b>Name: </b>{art.name}</CardTitle>
             </CardBody>
         </CardGroup>   
     );

@@ -37,18 +37,17 @@ const ArtCard = ({ arts }) => {
             .then(() => { getArtFromApi() })
     };
 
-    return (
 
+    return (
         <CardGroup style={style} className="card-deck">
             <CardBody id="cardContainer" className="m-3">
                 <CardImg variant="top" src={arts.imageUrl} alt={arts.name} ></CardImg>
-                <CardTitle><b>Name: </b>{arts.name.toUpperCase()}</CardTitle>
+                <CardTitle><b>Name: </b>{arts.name}</CardTitle>
                 <CardTitle><b>Redd sells a fake: </b>{arts.hasFake.toString()}</CardTitle>
                 <br />
                 <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg" onClick={handleSaveArt}>Purchased!</Button>
             </CardBody>
         </CardGroup>
-
     );
 };
 
