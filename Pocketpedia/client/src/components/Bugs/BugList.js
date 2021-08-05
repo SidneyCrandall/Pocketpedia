@@ -19,7 +19,7 @@ const BugList = () => {
     return (
         <>
             <Link to={`/bugs/GetUserBugs`}>
-                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" className="btn">My Bugs</Button>
+                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" className="btn" size="lg">My Caught Bugs</Button>
             </Link>
 
             <div className="container">

@@ -20,7 +20,7 @@ const FossilList = () => {
     return (
         <>
             <Link to={`/fossils/GetUserFossil`}>
-                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo">My Fossils</Button>
+                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg">My Discovered Fossils</Button>
             </Link>
 
             <div className="container">

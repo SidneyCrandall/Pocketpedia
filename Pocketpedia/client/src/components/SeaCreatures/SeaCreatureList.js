@@ -22,7 +22,7 @@ const SeaCreatureList = () => {
     return (
         <>
             <Link to={`/seaCreatures/GetUserSeaCreature`}>
-                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo">My Sea Creatures</Button>
+                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg">My Found Sea Creatures</Button>
             </Link>
 
             <div className="container">

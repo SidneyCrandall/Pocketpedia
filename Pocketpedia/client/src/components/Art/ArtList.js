@@ -26,7 +26,7 @@ const ArtList = () => {
     return (
         <>
             <Link to={`/art/GetUserArt`}>
-                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo">My Art</Button>
+                <Button className="btn" size="lg" style={{ backgroundColor: '#BCA4BF' }} href="#pablo">My Art Collection</Button>
             </Link>
 
             <div className="container">

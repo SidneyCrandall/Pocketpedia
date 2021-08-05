@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CardTitle, CardBody, CardGroup, Button, CardText, CardImg } from "reactstrap";
+import { CardTitle, CardBody, CardGroup, Button, CardImg } from "reactstrap";
 import { getBugsFromApi, addBug } from "../../modules/bugManager";
 
 
@@ -41,13 +41,11 @@ const BugCard = ({ bug }) => {
 
         <CardGroup style={style} className="card-deck">
             <CardBody className="m-3">
-
                 <CardImg variant="top"  src={bug.imageUrl} alt={bug.name} />
                 <CardTitle><b>Name: </b>{bug.name}</CardTitle>
-                <CardText><b>Location: </b>{bug.locationName}</CardText>
+                <CardTitle><b>Location: </b>{bug.locationName}</CardTitle>
                 <br />
-                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveBug}>Caught!</Button>
-
+                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveBug} size="lg">Caught!</Button>
             </CardBody>
         </CardGroup>
 

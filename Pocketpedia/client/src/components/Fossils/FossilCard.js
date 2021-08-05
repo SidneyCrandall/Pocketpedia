@@ -37,7 +37,7 @@ const FossilCard = ({ fossils }) => {
                 <CardImg variant="top" src={fossils.imageUrl} alt={fossils.name} />
                 <CardTitle><b>Name: </b>{fossils.name}</CardTitle>
                 <br />
-                <Button onClick={handleSaveFossil}  style={{ backgroundColor: '#BCA4BF' }} href="#pablo">Discovered!</Button>          
+                <Button onClick={handleSaveFossil}  style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg">Discovered!</Button>          
             </CardBody>
         </CardGroup>
         

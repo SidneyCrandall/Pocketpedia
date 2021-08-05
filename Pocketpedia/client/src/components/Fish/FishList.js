@@ -21,7 +21,7 @@ const FishList = () => {
         <>
 
             <Link to={`/fish/GetUserFish`}>
-                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo">My Fish</Button>
+                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg">My Caught Fish</Button>
             </Link>
 
             <div className="container">

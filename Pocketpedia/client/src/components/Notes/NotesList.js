@@ -21,7 +21,7 @@ const NotesList = () => {
         <>
             <section className="section-content">
                 <Link to={`/notes/add`}>
-                    <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo">Add a Note</Button>
+                    <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg">Add a Note</Button>
                 </Link>
             </section>
             <div className="m-3">

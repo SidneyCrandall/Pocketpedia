@@ -40,8 +40,8 @@ const VillagerCard = ({ villagers }) => {
                 <CardBody id="cardContainer" className="m-3">
                     <CardImg variant="top" src={villagers.imageUrl} alt={villagers.name} />
                     <CardTitle><b>Name: </b>{villagers.name}</CardTitle>
-                    <p><b>Birthday: </b>{villagers.birthday}</p>
-                    <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveVillager}>My neighbor</Button>
+                    <CardTitle><b>Birthday: </b>{villagers.birthday}</CardTitle>
+                    <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg" onClick={handleSaveVillager}>My Neighbor!</Button>
                 </CardBody>
             </CardGroup>
     

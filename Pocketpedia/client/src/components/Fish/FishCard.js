@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { CardGroup, CardBody, CardText, CardTitle, Button, CardImg } from "reactstrap";
+import { CardGroup, CardBody, CardTitle, Button, CardImg } from "reactstrap";
 import { addFish, getFishFromApi } from "../../modules/fishManager";
 import "./Fish.css";
 
@@ -45,9 +45,9 @@ const FishCard = ({ fish }) => {
 
                 <CardImg variant="top"  src={fish.imageUrl} alt={fish.name} />
                 <CardTitle><b>Name: </b>{fish.name}</CardTitle>
-                <CardText><b>Location: </b>{fish.locationName}</CardText>
+                <CardTitle><b>Location: </b>{fish.locationName}</CardTitle>
                 <br />
-                <Button className="btn m-3" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveFish}>Caught</Button>
+                <Button className="btn m-3" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveFish} size="lg">Caught!</Button>
             </CardBody>
         </CardGroup>
     );

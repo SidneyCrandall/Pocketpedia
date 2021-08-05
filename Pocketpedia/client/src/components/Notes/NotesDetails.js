@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody, CardText, CardTitle, CardGroup } from "reactstrap";
+import { CardBody, CardText, CardTitle, CardGroup } from "reactstrap";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { getNotesById } from "../../modules/notesManager";

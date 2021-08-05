@@ -39,10 +39,10 @@ const Notes = ({ notes }) => {
                     <CardTitle className="noteTitle"><b>Title: </b>{notes.title}</CardTitle>
                 </Link>
                 <div className="button">
-                <Link to={`/notes/edit/${notesId}`}>
-                    <Button className="btn btn-light">Edit</Button>
-                </Link>
-                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} onClick={() => handleDeleteNote(notes.id)}>Delete</Button>
+                    <Link to={`/notes/edit/${notesId}`}>
+                        <Button className="btn btn-light">Edit</Button>
+                    </Link>
+                    <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} onClick={() => handleDeleteNote(notes.id)}>Delete</Button>
                 </div>
             </CardBody>
         </CardGroup>
