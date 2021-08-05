@@ -13,7 +13,7 @@ const style = { width: "18rem" };
 const ArtCard = ({ arts }) => {
 
     // We need to render what state the object will be when it is presented to us before we send it to the database.
-    const [ art ] = useState({
+    const [art] = useState({
         id: arts.id,
         acnhApiId: arts.acnhApiId,
         name: arts.name,
@@ -38,17 +38,17 @@ const ArtCard = ({ arts }) => {
     };
 
     return (
-       
-            <CardGroup style={style} className="card-deck">
-                <CardBody id="cardContainer" className="m-3">
-                    <CardImg variant="top" src={arts.imageUrl} alt={arts.name} ></CardImg>
-                    <CardTitle><b>Name: </b>{arts.name.toUpperCase()}</CardTitle>
-                    <CardText><b>Redd sales a fake: </b>{arts.hasFake.toString()}</CardText>
-                    <br />
-                    <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveArt}>Purchased</Button>
-                </CardBody>
-            </CardGroup>
-       
+
+        <CardGroup style={style} className="card-deck">
+            <CardBody id="cardContainer" className="m-3">
+                <CardImg variant="top" src={arts.imageUrl} alt={arts.name} ></CardImg>
+                <CardTitle><b>Name: </b>{arts.name.toUpperCase()}</CardTitle>
+                <CardText><b>Redd sales a fake: </b>{arts.hasFake.toString()}</CardText>
+                <br />
+                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveArt}>Purchased</Button>
+            </CardBody>
+        </CardGroup>
+
     );
 };
 

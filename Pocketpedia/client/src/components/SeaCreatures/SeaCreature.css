@@ -1,9 +1,13 @@
 .card-deck {
-    box-shadow: 8px 4px 8px 4px #74e0aa;
+    box-shadow: 1px 3px 3px 3px;
     transition: 0.3s;
     color: #246D82; 
     background-color: #F0F0E6!important;
-    object-fit: cover;
+    object-fit: contain;
     width: 18rem;
     align-items: center;
+    padding: 10px;
+    border-radius: 1rem;
+    border: 5px solid #74e0aa;
+    margin: 1rem;
 }

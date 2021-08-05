@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Notes from './Notes';
 import { getByUser } from "../../modules/notesManager";
 import { Link } from 'react-router-dom';
+import { Button } from "reactstrap";
 
 
 const NotesList = () => {
@@ -20,7 +21,7 @@ const NotesList = () => {
         <>
             <section className="section-content">
                 <Link to={`/notes/add`}>
-                    <button className="btn btn-light  m-2">Add a Note</button>
+                    <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo">Add a Note</Button>
                 </Link>
             </section>
             <div className="m-3">

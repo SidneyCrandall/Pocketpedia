@@ -1,18 +1,21 @@
 import React from "react";
-import { Card, CardBody } from "reactstrap";
+import { CardGroup, CardBody, CardImg, CardTitle } from "reactstrap";
+import "./SeaCreature.css";
+
+
+// Styling for cards
+const style = { width: "18rem" };
 
 
 const MySeaCreatureCard = ({ seacreature }) => {
 
     return (
-        <Card className="m-2 p-2 w-50 mx-auto">
+        <CardGroup style={style} className="card-deck">
             <CardBody className="m-3">
-
-                <img src={seacreature.imageUrl} alt={seacreature.name} />
-                <p><b>Name: </b>{seacreature.name}</p>
-
+                <CardImg src={seacreature.imageUrl} alt={seacreature.name} />
+                <CardTitle><b>Name: </b>{seacreature.name}</CardTitle>
             </CardBody>
-        </Card>
+        </CardGroup>
     );
 };
 

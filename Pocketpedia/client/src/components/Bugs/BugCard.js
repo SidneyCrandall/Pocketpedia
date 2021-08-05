@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { CardTitle, CardBody, CardGroup, Button, CardText, CardImg } from "reactstrap";
 import { getBugsFromApi, addBug } from "../../modules/bugManager";
 
+
+
 // Styling for the card container
 const style = { width: "18rem" };
 
@@ -49,7 +51,7 @@ const BugCard = ({ bug }) => {
             </CardBody>
         </CardGroup>
 
-    )
+    );
 };
 
 export default BugCard;

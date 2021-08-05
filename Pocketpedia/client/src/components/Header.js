@@ -22,7 +22,7 @@ export default function Header({ isLoggedIn }) {
         <NavbarBrand><img className="marshal" src={marshal} alt="Marshall at night"/></NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
+          <Nav className="ml-auto" navbar>
             { /* When isLoggedIn === true, we will render the Home link */}
             {isLoggedIn &&
               <>

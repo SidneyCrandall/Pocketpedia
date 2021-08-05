@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { CardImg, CardBody, CardGroup, Button, CardTitle } from "reactstrap";
 import { getVillagersFromApi, addVillager } from "../../modules/villagerManager";
+import "./Villagers.css";
+
 
 // Styling for cards
 const style = { width: "18rem" };

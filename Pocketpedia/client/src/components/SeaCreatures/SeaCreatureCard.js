@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { CardGroup, CardBody, CardImg, CardTitle, Button } from "reactstrap";
 import { addSeaCreature, getSeaCreaturesFromApi } from "../../modules/seaCreatureManager";
+import "./SeaCreature.css";
+
 
 // Styling for cards
 const style = { width: "18rem" };
@@ -35,7 +37,7 @@ const SeaCreatureCard = ({ seacreatures }) => {
         <CardGroup style={style} className="card-deck">
             <CardBody className="m-3">
                 <CardImg src={seacreatures.imageUrl} alt={seacreatures.name} />
-                <CardTitle><b>Name: </b>{seacreatures.name.toUpperCase()}</CardTitle>
+                <CardTitle><b>Name: </b>{seacreatures.name}</CardTitle>
                 <br />
                 <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveSeaCreature}>Caught</Button>
             </CardBody>

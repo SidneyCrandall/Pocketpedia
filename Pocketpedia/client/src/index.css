@@ -14,14 +14,15 @@ code {
   background-color: antiquewhite;
   display: flex;
   flex-wrap: row;
-  justify-items: flex-start;
-  font-size: large;
+  justify-items: flex-end;
+  font-size: x-large;
   font-weight: bolder;
+  padding: 0rem;
 }
 
 navItem {
   flex-basis: 20%;
-  list-style-type: none;
+  justify-content: space-evenly;
 }
 
 .marshal {
@@ -31,4 +32,22 @@ navItem {
   border-radius: 100%;
   border: 3px solid black;
   margin-right: 2;
+}
+
+.hompage{
+  overflow: hidden;
+  overflow-y: hidden;
+}
+
+.welcome{
+ padding: 1rem;
+ font-size: 20px;
+ justify-content: last baseline;
+ margin-top: 3rem;
+}
+
+.lofi{
+  padding: 5rem;
+  margin-top: 100em;
+  
 }

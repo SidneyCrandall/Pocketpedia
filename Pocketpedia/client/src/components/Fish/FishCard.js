@@ -47,7 +47,7 @@ const FishCard = ({ fish }) => {
                 <CardTitle><b>Name: </b>{fish.name}</CardTitle>
                 <CardText><b>Location: </b>{fish.locationName}</CardText>
                 <br />
-                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveFish}>Caught</Button>
+                <Button className="btn m-3" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveFish}>Caught</Button>
             </CardBody>
         </CardGroup>
     );
