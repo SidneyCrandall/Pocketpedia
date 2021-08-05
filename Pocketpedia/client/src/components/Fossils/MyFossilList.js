@@ -21,7 +21,7 @@ const MyFossilList = () => {
 
     return (
         <>
-            <h1>My Fossils</h1>
+            <h1 className="text-center">My Fossils</h1>
             <div className="container">
                 <div className="row justify-content-center">
                     {fossils.map((fossil) => (

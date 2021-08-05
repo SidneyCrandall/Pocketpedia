@@ -20,7 +20,7 @@ const MyBugList = () => {
 
     return (
         <>
-            <h1>My Bugs</h1>
+            <h1 className="text-center">My Bugs</h1>
             <div className="container">
                 <div className="row justify-content-center">
                     {bugs.map((bug) => (

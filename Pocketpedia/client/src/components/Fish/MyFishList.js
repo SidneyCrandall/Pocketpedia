@@ -20,7 +20,7 @@ const MyFishList = () => {
 
     return (
         <>
-            <h1>My Fish</h1>
+            <h1 className="text-center">My Fish</h1>
             <div className="container">
                 <div className="row justify-content-center">
                     {fishs.map((fish) => (

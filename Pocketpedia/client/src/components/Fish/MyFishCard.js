@@ -12,15 +12,15 @@ const style = { width: "18rem" };
 const MyFishCard = ({ fish }) => {
 
     return (
+        
+       
         <CardGroup style={style} className="card-deck">
             <CardBody className="m-3">
-
                 <CardImg variant="top"  src={fish.imageUrl} alt={fish.name} />
                 <CardTitle><b>Name: </b>{fish.name}</CardTitle>
-                <p><b>Name: </b>{fish.name}</p>
-
                 </CardBody>
         </CardGroup>
+     
     );
 };
 

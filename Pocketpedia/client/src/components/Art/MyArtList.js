@@ -20,7 +20,7 @@ const MyArtList = () => {
 
     return (
         <>
-            <h1>My Art</h1>
+            <h1 className="text-center">My Art</h1>
             <div className="container">
                 <div className="row justify-content-center">
                     {arts.map((art) => (

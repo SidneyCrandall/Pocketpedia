@@ -57,25 +57,20 @@ const NotesForm = () => {
     return (
         
         <Form className="noteForm">
-            <h2>New Note</h2>
+            <h2 className="text-center">New Note</h2>
             <br/>
             <FormGroup>
-                <Label for="title">Title</Label>
-                <Input type="text" name="title" id="title" placeholder="Title of note"
-                    value={newNote.title}
-                    onChange={handleInputChange} />
+                <Label for="title"><b>Title</b></Label>
+                <Input type="text" name="title" id="title" placeholder="Title of note" value={newNote.title} onChange={handleInputChange} size="20"/>
             </FormGroup>
             <br/>
             <FormGroup>        
-                <textarea  type="text" name="message" id="message" placeholder="Your note goes here"
-                    value={newNote.message} 
-                    onChange={handleInputChange} rows="10" cols="145" />                   
+                <textarea  type="text" name="message" id="message" placeholder="Your note goes here" value={newNote.message} onChange={handleInputChange} rows="10" cols="135" />                   
             </FormGroup>
-
-            <Button className="btn btn-primary" onClick={handleSave}>Submit</Button>
-            <br/>
-            <Button className="btn btn-primary" onClick={() => history.push(`/`)}>Cancel</Button>
-
+       
+            <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} onClick={handleSave}>Submit</Button>
+            <Button className="btn" onClick={() => history.push(`/`)}>Cancel</Button>
+    
         </Form>
     );
 };

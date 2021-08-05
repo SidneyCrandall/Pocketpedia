@@ -20,7 +20,7 @@ const VillagerList = () => {
     return (
         <>
             <Link to={`/villagers/GetUserVillagers`}>
-                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" className="btn btn-light  m-2">My Villagers</Button>
+                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" className="btn">My Villagers</Button>
             </Link>
             <div className="container">
                 <div className="row justify-content-center">

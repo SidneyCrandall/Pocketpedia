@@ -26,7 +26,7 @@ export default function Register() {
  };
 
   return (
-    <Form onSubmit={registerClick} className="form">
+    <Form onSubmit={registerClick} className="registerForm">
       <fieldset className="loginform">
         <FormGroup>
           <Label htmlFor="displayName">Display Name</Label>
@@ -37,11 +37,11 @@ export default function Register() {
           <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="islandName">Animal Crossing Island Name</Label>
+          <Label htmlFor="islandName"> Your Animal Crossing Island Name</Label>
           <Input id="islandName" type="text" onChange={e => setIslandName(e.target.value)} />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="islandPhrase">Animal Crossing Island Phrase</Label>
+          <Label htmlFor="islandPhrase"> Your Animal Crossing Island Phrase</Label>
           <Input id="islandPhrase" type="text" onChange={e => setIslandPhrase(e.target.value)} />
         </FormGroup>
         <FormGroup>
@@ -53,7 +53,7 @@ export default function Register() {
           <Input id="confirmPassword" type="password" onChange={e => setConfirmPassword(e.target.value)} />
         </FormGroup>
         <FormGroup>
-          <Button className="loginbutton">Register</Button>
+          <Button className="loginbutton" style={{ backgroundColor: '#BCA4BF' }}>Register</Button>
         </FormGroup>
       </fieldset>
     </Form>

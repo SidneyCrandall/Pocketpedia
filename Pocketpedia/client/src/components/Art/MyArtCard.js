@@ -13,14 +13,13 @@ const style = { width: "18rem" };
 const MyArtCard = ({ art }) => {
 
 
-    return (
-
-        <CardGroup style={style} className="card-deck">
+    return (     
+       <CardGroup style={style} className="card-deck">
             <CardBody id="cardContainer" className="m-3">
                 <CardImg variant="top" src={art.imageUrl} alt={art.name} ></CardImg>
                 <CardTitle><b>Name: </b>{art.name.toUpperCase()}</CardTitle>
             </CardBody>
-        </CardGroup>
+        </CardGroup>   
     );
 };
 

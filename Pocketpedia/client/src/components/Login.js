@@ -17,8 +17,9 @@ export default function Login() {
       .catch(() => alert("Invalid email or password"));
   };
 
+  // All forma and cards are similar across the apllication to show the simplicity and uniformness
   return (
-    <Form onSubmit={loginSubmit} className="form">
+    <Form onSubmit={loginSubmit} className="loginForm">
       <fieldset className="loginform">
         <h3>User Login</h3>
         <FormGroup>
@@ -31,7 +32,7 @@ export default function Login() {
         </FormGroup>
         <br></br>
         <FormGroup>
-          <Button className="loginbutton">Login</Button>
+          <Button className="loginbutton" style={{ backgroundColor: '#BCA4BF' }}>Login</Button>
         </FormGroup>
         <em>
           Don't have an account? <Link to="register">Sign up here</Link>

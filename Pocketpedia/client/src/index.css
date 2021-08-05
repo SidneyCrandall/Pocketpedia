@@ -41,7 +41,7 @@ navItem {
 
 .welcome{
  padding: 1rem;
- font-size: 20px;
+ font-size: 15px;
  justify-content: last baseline;
  margin-top: 3rem;
 }
@@ -49,5 +49,15 @@ navItem {
 .lofi{
   padding: 5rem;
   margin-top: 100em;
-  
+}
+
+.loginForm, .registerForm {
+  margin: 50px 80px 50px 80px;
+  padding: 30px;
+  background-color: #F0F0E6;
+  color: #246D82;
+  border: #74e0aa solid 5px;
+  border-radius: 6px;
+  line-height: 2em;
+  opacity: .98;
 }

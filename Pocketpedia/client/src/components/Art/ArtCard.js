@@ -43,7 +43,7 @@ const ArtCard = ({ arts }) => {
             <CardBody id="cardContainer" className="m-3">
                 <CardImg variant="top" src={arts.imageUrl} alt={arts.name} ></CardImg>
                 <CardTitle><b>Name: </b>{arts.name.toUpperCase()}</CardTitle>
-                <CardText><b>Redd sales a fake: </b>{arts.hasFake.toString()}</CardText>
+                <CardText><b>Redd sells a fake: </b>{arts.hasFake.toString()}</CardText>
                 <br />
                 <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveArt}>Purchased</Button>
             </CardBody>

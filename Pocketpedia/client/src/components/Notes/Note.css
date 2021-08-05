@@ -52,3 +52,9 @@
     display: inline;
     padding: 0em;
 }
+
+.noteTitle{
+    font-weight: bolder;
+    font-size: medium;
+}
+

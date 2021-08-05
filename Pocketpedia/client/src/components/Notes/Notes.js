@@ -1,13 +1,14 @@
 import React from "react";
-import { CardGroup, CardBody, CardTitle } from "reactstrap";
+import { CardGroup, CardBody, CardTitle, Button } from "reactstrap";
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router";
 import { deleteNotes } from "../../modules/notesManager";
 import "./Note.css";
 
 
+
 // Styling for cards
-const style = { width: "18rem" };
+const style = { width: "25rem" };
 
 
 const Notes = ({ notes }) => {
@@ -30,17 +31,18 @@ const Notes = ({ notes }) => {
     };
 
     // From the brief preview of a note, a user should see an edit or delete button
+    // Reactrap used to create a uniformed look acroos the website
     return (
         <CardGroup style={style} className="card-deck">
             <CardBody className="m-3">
                 <Link className="link" to={`/notes/details/${notesId}`}>
-                    <CardTitle><b>Title: </b>{notes.title}</CardTitle>
+                    <CardTitle className="noteTitle"><b>Title: </b>{notes.title}</CardTitle>
                 </Link>
-                <div className="button" >
+                <div className="button">
                 <Link to={`/notes/edit/${notesId}`}>
-                    <button className="btn btn-light">Edit</button>
+                    <Button className="btn btn-light">Edit</Button>
                 </Link>
-                <button className="btn" style={{ backgroundColor: '#BCA4BF' }} onClick={() => handleDeleteNote(notes.id)}>Delete</button>
+                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} onClick={() => handleDeleteNote(notes.id)}>Delete</Button>
                 </div>
             </CardBody>
         </CardGroup>
