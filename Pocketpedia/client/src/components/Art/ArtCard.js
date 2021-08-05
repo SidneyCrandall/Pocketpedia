@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, CardBody, CardImg, CardText, CardTitle, CardGroup } from "reactstrap";
+import { Button, CardBody, CardImg, CardTitle, CardGroup } from "reactstrap";
 import { addArt, getArtFromApi } from "../../modules/artManager";
 import "./Art.css";
 

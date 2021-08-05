@@ -3,6 +3,7 @@ import { CardGroup, CardBody, CardTitle, Button, CardImg } from "reactstrap";
 import { addFossil, getFossilsFromApi } from "../../modules/fossilManager";
 import "./Fossils.css";
 
+
 // Styling for cards
 const style = { width: "18rem" };
 
@@ -37,11 +38,11 @@ const FossilCard = ({ fossils }) => {
                 <CardImg variant="top" src={fossils.imageUrl} alt={fossils.name} />
                 <CardTitle><b>Name: </b>{fossils.name}</CardTitle>
                 <br />
-                <Button onClick={handleSaveFossil}  style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg">Discovered!</Button>          
+                <Button onClick={handleSaveFossil} style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg">Discovered!</Button>
             </CardBody>
         </CardGroup>
-        
-    )
+
+    );
 };
 
 export default FossilCard;

@@ -6,7 +6,7 @@ import { Button } from "reactstrap";
 
 const VillagerList = () => {
 
-    const [ villagers, setVillagers ] = useState([]);
+    const [villagers, setVillagers] = useState([]);
 
 
     const getVillagers = () => {
@@ -19,10 +19,10 @@ const VillagerList = () => {
 
     return (
         <>
-        <div className="row justify-content-center">
-            <Link to={`/villagers/GetUserVillagers`}>
-                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" className="btn" size="lg">My Island Villagers</Button>
-            </Link>
+            <div className="row justify-content-center">
+                <Link to={`/villagers/GetUserVillagers`}>
+                    <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" className="btn" size="lg">My Island Villagers</Button>
+                </Link>
             </div>
             <br />
             <div className="container">
@@ -33,7 +33,7 @@ const VillagerList = () => {
                 </div>
             </div>
         </>
-    )
+    );
 };
 
 export default VillagerList;

@@ -10,8 +10,7 @@ const IslanderWelcome = () => {
       <Row className="justify-content-lg-center">
         <Col md="auto" className="py-2">
         <span className="welcome">
-          <h3>Hello Islander!</h3>
-          <h4>Welcome to Pocketpedia! How would you like to relax today?</h4>
+          <h3>Hello Islander! Welcome to Pocketpedia! How would you like to relax today?</h3>
           </span>
           </Col>
           <Col md="auto" className="py-2">

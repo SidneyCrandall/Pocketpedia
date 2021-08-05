@@ -24,7 +24,7 @@ const SeaCreatureList = () => {
             <Link to={`/seaCreatures/GetUserSeaCreature`}>
                 <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg">My Found Sea Creatures</Button>
             </Link>
-
+            <br />
             <div className="container">
                 <div className="row justify-content-center">
                     {seaCreatures.map((seaCreature) => (

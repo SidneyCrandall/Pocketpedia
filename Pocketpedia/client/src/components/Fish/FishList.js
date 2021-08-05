@@ -23,7 +23,7 @@ const FishList = () => {
             <Link to={`/fish/GetUserFish`}>
                 <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg">My Caught Fish</Button>
             </Link>
-
+            <br />
             <div className="container">
                 <div className="row justify-content-center">
                     {fishs.map((fish) => (

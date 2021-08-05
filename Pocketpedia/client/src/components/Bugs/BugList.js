@@ -21,7 +21,7 @@ const BugList = () => {
             <Link to={`/bugs/GetUserBugs`}>
                 <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" className="btn" size="lg">My Caught Bugs</Button>
             </Link>
-
+            <br />
             <div className="container">
                 <div className="row justify-content-center">
                     {bugs.map((bug) => (

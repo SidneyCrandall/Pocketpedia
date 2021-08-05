@@ -28,7 +28,7 @@ const ArtList = () => {
             <Link to={`/art/GetUserArt`}>
                 <Button className="btn" size="lg" style={{ backgroundColor: '#BCA4BF' }} href="#pablo">My Art Collection</Button>
             </Link>
-
+            <br />
             <div className="container">
                 <div className="row justify-content-center">
                     {arts.map((art) => (

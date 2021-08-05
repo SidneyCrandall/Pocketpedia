@@ -63,7 +63,7 @@ const NotesEdit = () => {
             </FormGroup>
             <br/>
             <FormGroup>
-                <textarea type="text" name="message" id="message" placeholder="Edit the Message" value={editNotes.message} rows="10" cols="145" onChange={handleInputChange} />
+                <textarea type="text" name="message" id="message" placeholder="Edit the Message" value={editNotes.message} rows="10" cols="135" onChange={handleInputChange} />
             </FormGroup>
             {/* When the user hits submit the details of the newly edited note will render*/}
             <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} onClick={handleUpdate}>Submit</Button>

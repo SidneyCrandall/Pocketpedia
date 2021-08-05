@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pocketpedia.Models;
 using Pocketpedia.Repositories;
-
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Pocketpedia.Controllers
 {

@@ -24,6 +24,7 @@ const NotesList = () => {
                     <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg">Add a Note</Button>
                 </Link>
             </section>
+            <br />
             <div className="m-3">
                 <div className="container">
                     <div className="row m-3 justify-content-center">
