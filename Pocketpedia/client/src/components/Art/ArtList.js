@@ -25,9 +25,12 @@ const ArtList = () => {
     // Take the card created on ARTCARD and iterate over the array to display them the way the program asks
     return (
         <>
+          <br />
             <Link to={`/art/GetUserArt`}>
                 <Button className="btn" size="lg" style={{ backgroundColor: '#BCA4BF' }} href="#pablo">My Art Collection</Button>
             </Link>
+            <br />
+            <h1 className="text-center">Art List</h1>
             <br />
             <div className="container">
                 <div className="row justify-content-center">

@@ -19,11 +19,13 @@ const VillagerList = () => {
 
     return (
         <>
-            <div className="row justify-content-center">
-                <Link to={`/villagers/GetUserVillagers`}>
-                    <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" className="btn" size="lg">My Island Villagers</Button>
-                </Link>
-            </div>
+          <br />
+            <Link to={`/villagers/GetUserVillagers`}>
+                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" className="btn" size="lg">My Island Villagers</Button>
+            </Link>
+
+            <br />
+            <h1 className="text-center">Villager List</h1>
             <br />
             <div className="container">
                 <div className="row justify-content-center">

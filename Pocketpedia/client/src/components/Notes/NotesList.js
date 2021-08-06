@@ -19,11 +19,12 @@ const NotesList = () => {
 
     return (
         <>
-            <section className="section-content">
-                <Link to={`/notes/add`}>
-                    <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg">Add a Note</Button>
-                </Link>
-            </section>
+          <br />
+            <Link to={`/notes/add`}>
+                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg">Add a Note</Button>
+            </Link>
+            <br />
+            <h1 className="text-center">Island Notes!</h1>
             <br />
             <div className="m-3">
                 <div className="container">

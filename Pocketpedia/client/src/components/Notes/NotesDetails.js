@@ -32,7 +32,9 @@ const NotesDetails = () => {
 
     return (
         <>
+        <br />
         <h2 className="text-center">Island Note Details</h2>
+        <br />
         <CardGroup style={style} className="card-deck">
             <CardBody>               
             <CardTitle className="noteTitle"><b>Title: </b>{notesDetails.title}</CardTitle>

@@ -21,7 +21,9 @@ const MyFossilList = () => {
 
     return (
         <>
-            <h1 className="text-center">My Fossils</h1>
+          <br />
+            <h1 className="text-center">Unearthed Fossils</h1>
+            <br />
             <div className="container">
                 <div className="row justify-content-center">
                     {fossils.map((fossil) => (

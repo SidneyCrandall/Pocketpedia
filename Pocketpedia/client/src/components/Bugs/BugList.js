@@ -18,9 +18,12 @@ const BugList = () => {
 
     return (
         <>
+          <br />
             <Link to={`/bugs/GetUserBugs`}>
                 <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" className="btn" size="lg">My Caught Bugs</Button>
             </Link>
+            <br />
+            <h1 className="text-center">Bug List</h1>
             <br />
             <div className="container">
                 <div className="row justify-content-center">

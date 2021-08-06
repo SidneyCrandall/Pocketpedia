@@ -19,9 +19,12 @@ const FossilList = () => {
 
     return (
         <>
+          <br />
             <Link to={`/fossils/GetUserFossil`}>
                 <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg">My Discovered Fossils</Button>
             </Link>
+            <br />
+            <h1 className="text-center">Fossil List</h1>
             <br />
             <div className="container">
                 <div className="row justify-content-center">

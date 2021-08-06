@@ -4,7 +4,7 @@ import MyVillagerCard from "./MyVillagerCard";
 
 const MyVillagerList = () => {
 
-    const [ villagers, setVillagers ] = useState([]);
+    const [villagers, setVillagers] = useState([]);
 
     const getMyVillagers = () => {
         getUserVillagers().then(villagers => setVillagers(villagers));
@@ -16,14 +16,16 @@ const MyVillagerList = () => {
 
     return (
         <>
-        <h1 className="text-center">Villagers who have been on my Island!</h1>
-        <div className="container">
+            <br />
+            <h1 className="text-center">Villagers on my island!</h1>
+            <br />
+            <div className="container">
                 <div className="row justify-content-center">
                     {villagers.map((villager) => (
                         <MyVillagerCard villagers={villager} key={villager.acnhApiId} />
                     ))}
                 </div>
-        </div>
+            </div>
         </>
     );
 };
