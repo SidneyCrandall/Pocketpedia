@@ -29,7 +29,7 @@ export default function Register() {
     <Form onSubmit={registerClick} className="registerForm">
       <fieldset className="loginform">
         <FormGroup>
-          <Label htmlFor="displayName">Display Name</Label>
+          <Label htmlFor="displayName">User Name</Label>
           <Input id="displayName" type="text" onChange={e => setDisplayName(e.target.value)} />
         </FormGroup>
         <FormGroup>
@@ -41,7 +41,7 @@ export default function Register() {
           <Input id="islandName" type="text" onChange={e => setIslandName(e.target.value)} />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="islandPhrase"> Your Animal Crossing Island Phrase</Label>
+          <Label htmlFor="islandPhrase"> Your Animal Crossing Island Title</Label>
           <Input id="islandPhrase" type="text" onChange={e => setIslandPhrase(e.target.value)} />
         </FormGroup>
         <FormGroup>

@@ -39,7 +39,7 @@ const SeaCreatureCard = ({ seacreatures }) => {
                 <CardImg src={seacreatures.imageUrl} alt={seacreatures.name} />
                 <CardTitle><b>Name: </b>{seacreatures.name}</CardTitle>
                 <br />
-                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveSeaCreature}>Caught</Button>
+                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveSeaCreature} size="lg">Caught!</Button>
             </CardBody>
         </CardGroup>
     );

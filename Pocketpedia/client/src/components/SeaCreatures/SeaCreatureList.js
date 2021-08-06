@@ -21,10 +21,13 @@ const SeaCreatureList = () => {
 
     return (
         <>
+          <br />
             <Link to={`/seaCreatures/GetUserSeaCreature`}>
-                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo">My Sea Creatures</Button>
+                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg">My Found Sea Creatures</Button>
             </Link>
-
+            <br />
+            <h1 className="text-center">Sea Creatures to Catch</h1>
+            <br />
             <div className="container">
                 <div className="row justify-content-center">
                     {seaCreatures.map((seaCreature) => (

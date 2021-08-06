@@ -25,21 +25,22 @@
     opacity: .98;
 }
 
-.btn {
-    max-width: 6em;
+ .btn {
+     /* max-width: 6em; */
     padding: .5em;
-    margin: .3em auto;
+    margin: .3em auto; 
     background-color: #BCA4BF;
     border: none;
     text-align: center;
     text-decoration: none;
-    /* display: inline-block; */
+    display: inline-block; 
     font-size: 14px;
     border-radius: 2px;
     cursor: pointer;
     align-items: center;
     flex-wrap: wrap;
-}
+    justify-content: center;
+} 
 
 .link {
     text-decoration: none;

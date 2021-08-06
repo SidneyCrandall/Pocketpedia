@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, CardBody, CardImg, CardText, CardTitle, CardGroup } from "reactstrap";
+import { Button, CardBody, CardImg, CardTitle, CardGroup } from "reactstrap";
 import { addArt, getArtFromApi } from "../../modules/artManager";
 import "./Art.css";
 
@@ -37,18 +37,17 @@ const ArtCard = ({ arts }) => {
             .then(() => { getArtFromApi() })
     };
 
-    return (
 
+    return (
         <CardGroup style={style} className="card-deck">
             <CardBody id="cardContainer" className="m-3">
                 <CardImg variant="top" src={arts.imageUrl} alt={arts.name} ></CardImg>
-                <CardTitle><b>Name: </b>{arts.name.toUpperCase()}</CardTitle>
-                <CardText><b>Redd sells a fake: </b>{arts.hasFake.toString()}</CardText>
+                <CardTitle><b>Name: </b>{arts.name}</CardTitle>
+                <CardTitle><b>Redd sells a fake: </b>{arts.hasFake.toString()}</CardTitle>
                 <br />
-                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" onClick={handleSaveArt}>Purchased</Button>
+                <Button style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg" onClick={handleSaveArt}>Purchased!</Button>
             </CardBody>
         </CardGroup>
-
     );
 };
 

@@ -15,20 +15,26 @@ namespace Pocketpedia.Repositories
     {
         public ArtRepository(IConfiguration configuration) : base(configuration) { }
 
+
+        //HttpClient is used to send an HTTP request, using a URL.HttpClient can be used to make Web API requests.
         private static readonly HttpClient client = new HttpClient();
 
         public async Task<List<Art>> ArtsFromApi()
         {
+            // Afterwards, we have set the base URL for the HTTP request and set the Accept header.
+            // Set Accept header to "application/json" that tells the Server to send the data into JSON format.
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
+            // Send a GET request
+            // If the response contains success code as response, it means the response body contains the data in the form of JSON.
+            // ReadAsAsync method is used to deserialize the JSON object.
             var response = await client.GetStreamAsync($"http://acnhapi.com/v1/art");
             var apiArts = await JsonSerializer.DeserializeAsync<Dictionary<string, ApiArt>>(response);
 
             var desiredResponse = apiArts.Values.Select(apiArt => new Art()
             {
-
                 AcnhApiId = apiArt.id,
                 Name = apiArt.name.nameUSen,
                 ImageUrl = apiArt.image_uri,

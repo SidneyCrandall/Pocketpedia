@@ -19,11 +19,13 @@ const FishList = () => {
 
     return (
         <>
-
+          <br />
             <Link to={`/fish/GetUserFish`}>
-                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo">My Fish</Button>
+                <Button className="btn" style={{ backgroundColor: '#BCA4BF' }} href="#pablo" size="lg">My Caught Fish</Button>
             </Link>
-
+            <br />
+            <h1 className="text-center">Fish to Catch</h1>
+            <br />
             <div className="container">
                 <div className="row justify-content-center">
                     {fishs.map((fish) => (
